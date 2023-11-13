@@ -1,0 +1,107 @@
+/* ============= GLOBAL CSS =============== */
+
+*,
+::after,
+::before {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     transition: all 0.2s ease-in-out;
+     border: none;
+}
+
+html {
+     font-size: 100%;
+} /*16px*/
+
+:root {
+     /* GREY */
+     --primary-gray-50: #f9fafb;
+     --primary-gray-100: #f3f4f6;
+     --primary-gray-200: #e5e7eb;
+     --primary-gray-300: #d1d5db;
+     --secondary-gray-400: #9ca3af;
+     --secondary-gray-500: #6b7280;
+     --secondary-gray-600: #4b5563;
+     --secondary-gray-700: #374151;
+     --tertiary-gray-800: #1f2937;
+     --tertiary-gray-900: #111827;
+     --tertiary-gray-950: #030712;
+
+     /* BLUE */
+     --primary-blue-50: #eff6ff;
+     --primary-blue-100: #dbeafe;
+     --primary-blue-200: #bfdbfe;
+     --primary-blue-300: #93c5fd;
+     --secondary-blue-400: #60a5fa;
+     --secondary-blue-500: #3b82f6;
+     --secondary-blue-600: #2563eb;
+     --secondary-blue-700: #1d4ed8;
+     --tertiary-blue-800: #1e40af;
+     --tertiary-blue-900: #1e3a8a;
+     --tertiary-blue-950: #172554;
+
+     /* rest of the colors */
+     --black: #222;
+     --white: #eeeeee;
+     --red-light: #f8d7da;
+     --red-dark: #842029;
+
+     /* FONT SIZE */
+     --extra-small-text: 0.75rem;
+     --small-text: 0.875rem;
+     --large-text: 1.125rem;
+
+     /* rest of the vars */
+     --border-radius: 0.25rem;
+     --letter-spacing: 1px;
+     --transition: 0.3s ease-in-out all;
+
+     /* box shadow*/
+     --shadow-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+     --shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+     --shadow-3: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+     --shadow-4: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+body {
+     background: var(--tertiary-blue-950);
+     color: var(--white);
+     font-family: 'Roboto', sans-serif;
+     font-weight: 400;
+     line-height: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+     font-weight: 400;
+     line-height: 1;
+     text-transform: capitalize;
+     letter-spacing: var(--letter-spacing);
+}
+
+h1 {
+     font-size: clamp(2rem, 5vw, 5rem); /* Large heading */
+}
+
+h2 {
+     font-size: clamp(1.5rem, 3vw, 3rem); /* Medium heading */
+}
+
+h3 {
+     font-size: clamp(1.25rem, 2.5vw, 2.5rem); /* Small heading */
+}
+
+h4 {
+     font-size: clamp(1rem, 2vw, 2rem); /* Extra small heading */
+}
+
+h5 {
+     font-size: clamp(0.875rem, 1.5vw, 1.5rem); /* Tiny heading */
+}
