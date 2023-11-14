@@ -15,7 +15,7 @@ const StyledLogo = styled.h1`
           background-clip: text;
           -moz-background-clip: text;
           -webkit-background-clip: text;
-          color: rgba(0, 0, 0, 0.2);
+          color: #00000033;
      }
 
      .go {
@@ -28,7 +28,7 @@ const StyledLogo = styled.h1`
           background-clip: text;
           -moz-background-clip: text;
           -webkit-background-clip: text;
-          color: rgba(0, 0, 0, 0.2);
+          color: #00000033;
      }
 
      .transit {
@@ -41,7 +41,7 @@ const StyledLogo = styled.h1`
           background-clip: text;
           -moz-background-clip: text;
           -webkit-background-clip: text;
-          color: rgba(0, 0, 0, 0.2);
+          color: #00000033;
      }
 `;
 

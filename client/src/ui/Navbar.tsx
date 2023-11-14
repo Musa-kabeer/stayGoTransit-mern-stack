@@ -4,6 +4,7 @@ import { FaRegUserCircle } from 'react-icons/fa';
 import Modal from '../context/ModalContext';
 import AuthSlider from './AuthSlider';
 import Logo from './Logo';
+import { useAsideContext } from '../helpers/utils';
 
 const NavWrapper = styled.nav`
      height: 10vh;
@@ -29,6 +30,7 @@ const NavWrapper = styled.nav`
           justify-content: center;
           align-items: center;
           border-radius: var(--border-radius);
+          color: var(--primary-gray-100);
 
           &:hover {
                background-color: var(--tertiary-blue-900);
@@ -50,7 +52,7 @@ const NavWrapper = styled.nav`
           background: none;
           border: 0.5px solid var(--tertiary-blue-900);
           border-radius: var(--border-radius);
-          color: var(--secondary-blue-600);
+          color: var(--primary-gray-300);
 
           &:hover {
                border: none;
@@ -61,10 +63,16 @@ const NavWrapper = styled.nav`
 `;
 
 const Navbar = () => {
+     const { changeMode } = useAsideContext();
+
+     function onToggle() {
+          changeMode();
+     }
+
      return (
           <NavWrapper>
                <div className='left_section'>
-                    <span className='left_section--icon'>
+                    <span className='left_section--icon' onClick={onToggle}>
                          <AiOutlineMenu />
                     </span>
 

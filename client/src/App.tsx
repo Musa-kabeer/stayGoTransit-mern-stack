@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { AsideContextProvider } from './context/AsideContext';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const Error = lazy(() => import('./pages/Error'));
@@ -22,7 +23,9 @@ const router = createBrowserRouter([
 const App = () => {
      return (
           <>
-               <RouterProvider router={router} />
+               <AsideContextProvider>
+                    <RouterProvider router={router} />
+               </AsideContextProvider>
           </>
      );
 };

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-interface outSideCLickProps {
+interface outSideClickProps {
      handler: () => void;
      listenCapturing?: boolean;
 }
@@ -8,7 +8,7 @@ interface outSideCLickProps {
 export const useOutSideclick = ({
      handler,
      listenCapturing = true,
-}: outSideCLickProps) => {
+}: outSideClickProps) => {
      const clickRef = useRef<HTMLDivElement>(null);
 
      useEffect(() => {
