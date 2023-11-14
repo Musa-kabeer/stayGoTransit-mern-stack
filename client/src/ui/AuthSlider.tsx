@@ -3,7 +3,7 @@ import { LiaTimesSolid } from 'react-icons/lia';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Logo from './Logo';
-import { useEffect, useRef } from 'react';
+import { useOutSideclick } from '../hooks/useOutSideclick';
 
 const Overlay = styled.div`
      position: fixed;
@@ -125,30 +125,14 @@ const Slider = styled.div`
 `;
 
 interface SliderProps {
-     onCloseTab: () => void;
+     onCloseTab?: () => void;
 }
 
 const AuthSlider: React.FC<SliderProps> = ({ onCloseTab }) => {
-     const clickRef = useRef<HTMLDivElement>(null);
-
-     useEffect(() => {
-          function handleClick(e: MouseEvent) {
-               const overlay = e.target?.dataset?.overlay;
-
-               if (overlay) {
-                    onCloseTab();
-               }
-          }
-
-          document.addEventListener('click', handleClick, true);
-
-          return () => {
-               document.removeEventListener('click', handleClick, true);
-          };
-     }, [clickRef, onCloseTab]);
+     const clickRef = useOutSideclick({ handler: () => onCloseTab?.() });
 
      return (
-          <Overlay ref={clickRef} data-overlay='overlay'>
+          <Overlay ref={clickRef} data-overlay='true'>
                <motion.div
                     initial={{ opacity: 0, y: 900 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -158,7 +142,7 @@ const AuthSlider: React.FC<SliderProps> = ({ onCloseTab }) => {
                          <nav>
                               <Logo />
 
-                              <span onClick={() => onCloseTab()}>
+                              <span onClick={() => onCloseTab?.()}>
                                    <LiaTimesSolid />
                               </span>
                          </nav>

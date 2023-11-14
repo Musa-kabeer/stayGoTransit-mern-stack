@@ -29,7 +29,10 @@ interface BodyProps {
 
 const AuthContext = createContext<contextValue | undefined>(undefined);
 
-const Modal: React.FC<AuthProviderProps> = ({ children }) => {
+const Modal: React.FC<AuthProviderProps> & {
+     Button: React.FC<ButtonProps>;
+     Body: React.FC<BodyProps>;
+} = ({ children }) => {
      const [open, setOpen] = useState('');
 
      const close = () => setOpen('');
@@ -48,19 +51,33 @@ const Modal: React.FC<AuthProviderProps> = ({ children }) => {
 };
 
 const Button: React.FC<ButtonProps> = ({ children, name }) => {
-     const { setOpen } = useContext(AuthContext);
+     /* 
+     "!"
+     is used to typescript 
+     that to treat the value as 
+     non-nullable because it will 
+     never be undefined.
+     */
+     const { setOpen } = useContext(AuthContext)!;
 
      const handleClick = () => {
           setOpen(name);
      };
 
-     return cloneElement(children, {
+     return cloneElement(children as React.ReactElement, {
           onClick: handleClick,
      });
 };
 
 const Body: React.FC<BodyProps> = ({ children, windowName }) => {
-     const { open, close } = useContext(AuthContext);
+     /* 
+     "!"
+     is used to typescript 
+     that to treat the value as 
+     non-nullable because it will 
+     never be undefined.
+     */
+     const { open, close } = useContext(AuthContext)!;
 
      if (open !== windowName || open === '') return null;
 
