@@ -11,6 +11,7 @@ import { AppWrapper } from './AppWrapper';
 import Navbar from './Navbar';
 import { MainWrapper } from './MainWrapper';
 import { AsideWrapper } from './AsideWrapper';
+// import Modal from '../context/ModalContext';
 
 const AppLayout: React.FC = () => {
      return (
@@ -19,12 +20,19 @@ const AppLayout: React.FC = () => {
 
                <MainWrapper>
                     <AsideWrapper>
-                         <div className='item'>
-                              <NavLink to='/' className='item_content'>
-                                   <FaRegUserCircle className='item_content--icons' />{' '}
-                                   <span>Sign in</span>
-                              </NavLink>
-                         </div>
+                         {/* <Modal>
+                              <Modal.Button name='authTab'>
+                                   <div className='item'>
+                                        <NavLink
+                                             to='/'
+                                             className='item_content'
+                                        >
+                                             <FaRegUserCircle className='item_content--icons' />{' '}
+                                             <span>Sign in</span>
+                                        </NavLink>
+                                   </div>
+                              </Modal.Button>
+                         </Modal> */}
 
                          <div className='item'>
                               <ul className='items__lists'>

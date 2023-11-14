@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { FaRegUserCircle } from 'react-icons/fa';
+import Modal from '../context/ModalContext';
+import AuthSlider from './AuthSlider';
+import Logo from './Logo';
 
 const NavWrapper = styled.nav`
      height: 10vh;
@@ -36,51 +39,6 @@ const NavWrapper = styled.nav`
           }
      }
 
-     h1 {
-          font-size: 1.2rem;
-          font-weight: 800;
-          text-transform: uppercase;
-     }
-
-     .stay {
-          background: linear-gradient(
-               45deg,
-               var(--secondary-blue-400),
-               var(--tertiary-blue-800)
-          );
-          -webkit-background-clip: text;
-          background-clip: text;
-          -moz-background-clip: text;
-          -webkit-background-clip: text;
-          color: rgba(0, 0, 0, 0.2);
-     }
-
-     .go {
-          background: linear-gradient(
-               45deg,
-               var(--secondary-blue-400),
-               var(--tertiary-blue-800)
-          );
-          -webkit-background-clip: text;
-          background-clip: text;
-          -moz-background-clip: text;
-          -webkit-background-clip: text;
-          color: rgba(0, 0, 0, 0.2);
-     }
-
-     .transit {
-          background: linear-gradient(
-               45deg,
-               var(--secondary-blue-400),
-               var(--tertiary-blue-800)
-          );
-          -webkit-background-clip: text;
-          background-clip: text;
-          -moz-background-clip: text;
-          -webkit-background-clip: text;
-          color: rgba(0, 0, 0, 0.2);
-     }
-
      .right_section > button {
           padding: 10px 15px;
           display: flex;
@@ -110,18 +68,22 @@ const Navbar = () => {
                          <AiOutlineMenu />
                     </span>
 
-                    <h1>
-                         <span className='stay'>Stay</span>
-                         <span className='go'>Go</span>
-                         <span className='transit'>Transit</span>
-                    </h1>
+                    <Logo />
                </div>
 
                <div className='right_section'>
-                    <button>
-                         <FaRegUserCircle className='item_content--icons' />
-                         Sign in
-                    </button>
+                    <Modal>
+                         <Modal.Button name='authTab'>
+                              <button>
+                                   <FaRegUserCircle className='item_content--icons' />
+                                   Sign in
+                              </button>
+                         </Modal.Button>
+
+                         <Modal.Body windowName='authTab'>
+                              <AuthSlider />
+                         </Modal.Body>
+                    </Modal>
                </div>
           </NavWrapper>
      );
