@@ -1,9 +1,15 @@
-import { Link } from 'react-router-dom';
 import { LiaTimesSolid } from 'react-icons/lia';
+import { FaAngleLeft } from 'react-icons/fa6';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+
 import Logo from './Logo';
 import { useOutSideclick } from '../hooks/useOutSideclick';
+import { useState } from 'react';
+import ContinueWithEmail from './ContinueWithEmail';
+import CreateEmailAccountConsent from './CreateEmailAccountConsent';
+import RegisterAndLogin from './RegisterAndLogin';
+import OTPConfirmation from './OTPConfirmation';
 
 const Overlay = styled.div`
      position: fixed;
@@ -22,13 +28,12 @@ const Overlay = styled.div`
 
 const Slider = styled.div`
      width: 500px;
-     height: 75vh;
      background-color: var(--primary-gray-100);
      border-radius: var(--border-radius);
 
      display: flex;
      flex-direction: column;
-     justify-content: space-between;
+     gap: 25px;
 
      padding: 30px 17px;
 
@@ -130,6 +135,19 @@ interface SliderProps {
 
 const AuthSlider: React.FC<SliderProps> = ({ onCloseTab }) => {
      const clickRef = useOutSideclick({ handler: () => onCloseTab?.() });
+     const [current, setCurrent] = useState<number>(1);
+
+     function handleContinueWithEmail() {
+          setCurrent((current) => current + 1);
+     }
+
+     function handleContinueToConsent() {
+          setCurrent((current) => current + 1);
+     }
+
+     function handleContinueToOTPConfirmation() {
+          setCurrent((current) => current + 1);
+     }
 
      return (
           <Overlay ref={clickRef} data-overlay='true'>
@@ -140,47 +158,47 @@ const AuthSlider: React.FC<SliderProps> = ({ onCloseTab }) => {
                >
                     <Slider>
                          <nav>
-                              <Logo />
+                              {current !== 1 ? (
+                                   <button
+                                        onClick={() =>
+                                             setCurrent(
+                                                  (current) => current - 1
+                                             )
+                                        }
+                                        style={{
+                                             display: 'flex',
+                                             alignItems: 'center',
+                                             cursor: 'pointer',
+                                             gap: '2px',
+                                             color: 'var(--secondary-gray-600)',
+                                        }}
+                                   >
+                                        <FaAngleLeft /> Back
+                                   </button>
+                              ) : (
+                                   <Logo />
+                              )}
 
                               <span onClick={() => onCloseTab?.()}>
                                    <LiaTimesSolid />
                               </span>
                          </nav>
 
-                         <img src='/auth-slider-image.jpeg' alt='Night Image' />
-
-                         <div className='auth-1'>
-                              <h1>Sign in or create an account</h1>
-                              <p>
-                                   Track prices, organize travel plans and
-                                   access member-only deals with your
-                                   staygotransit account.
-                              </p>
-                              <button>Continue with email</button>
-                         </div>
-
-                         <div className='divide'>
-                              <div className='line'></div>
-                              <span>or</span>
-                              <div className='line'></div>
-                         </div>
-
-                         <div className='auth-2'>
-                              <button>Continue with google</button>
-                              <button>Continue with facebook</button>
-                         </div>
-
-                         <footer>
-                              By signing up you accept our{' '}
-                              <Link className='link' to='/'>
-                                   terms of use
-                              </Link>{' '}
-                              and{' '}
-                              <Link className='link' to='/'>
-                                   privacy policy
-                              </Link>
-                              .
-                         </footer>
+                         {current === 1 ? (
+                              <RegisterAndLogin
+                                   onClick={handleContinueWithEmail}
+                              />
+                         ) : current === 2 ? (
+                              <ContinueWithEmail
+                                   onClick={handleContinueToConsent}
+                              />
+                         ) : current === 3 ? (
+                              <CreateEmailAccountConsent
+                                   onClick={handleContinueToOTPConfirmation}
+                              />
+                         ) : (
+                              <OTPConfirmation />
+                         )}
                     </Slider>
                </motion.div>
           </Overlay>

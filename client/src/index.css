@@ -10,6 +10,10 @@
      border: none;
 }
 
+::selection {
+     background: transparent;
+}
+
 html {
      font-size: 100%;
 } /*16px*/
@@ -69,7 +73,7 @@ html {
 
 body {
      overflow-y: hidden;
-     background: var(--tertiary-blue-950);
+     background: var(--tertiary-blue-900);
      color: var(--black);
      font-family: 'Roboto', sans-serif;
      font-weight: 400;

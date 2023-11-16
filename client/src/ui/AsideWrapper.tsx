@@ -25,11 +25,11 @@ const StyledAside = styled.aside<StyledAsideProps>`
      padding: 0 10px;
      display: flex;
      flex-direction: column;
-     border-right: 1px solid var(--tertiary-blue-900);
+     border-right: 1px solid var(--tertiary-blue-950);
      width: ${(props) => (props.$mode ? '75px' : '250px')};
 
      .item {
-          border-bottom: 0.5px solid var(--tertiary-blue-900);
+          border-bottom: 0.5px solid var(--tertiary-blue-950);
      }
 
      .item_content {
@@ -40,7 +40,7 @@ const StyledAside = styled.aside<StyledAsideProps>`
           display: flex;
           align-items: center;
           gap: 25px;
-          color: var(--secondary-blue-400);
+          color: var(--primary-blue-300);
           padding: 1rem;
           border-radius: var(--border-radius);
 
@@ -55,12 +55,12 @@ const StyledAside = styled.aside<StyledAsideProps>`
           width: 22px;
           height: 22px;
           font-weight: 200;
-          color: var(--tertiary-blue-800);
+          color: var(--tertiary-blue-950);
      }
 
-     span {
+     h1 {
           font-size: 14px;
-          display: ${(props) => (props.$mode ? 'none' : 'flex')};
+          display: ${(props) => (props.$mode ? 'none' : 'block')};
           animation: ${fadeIn} 1.5s ease-in-out;
      }
 `;
@@ -75,21 +75,21 @@ const AsideWrapper = () => {
                          <li>
                               <NavLink to='/' className='item_content'>
                                    <LiaBedSolid className='item_content--icons' />{' '}
-                                   <span>Stays</span>
+                                   <h1>Stays</h1>
                               </NavLink>
                          </li>
 
                          <li>
                               <NavLink to='/' className='item_content'>
                                    <IoCarOutline className='item_content--icons' />
-                                   <span>Car Rentals</span>
+                                   <h1>Car Rentals</h1>
                               </NavLink>
                          </li>
 
                          <li>
                               <NavLink to='/' className='item_content'>
                                    <PiTrain className='item_content--icons' />
-                                   <span>Trains and Buses</span>
+                                   <h1>Trains and Buses</h1>
                               </NavLink>
                          </li>
                     </ul>
@@ -98,21 +98,21 @@ const AsideWrapper = () => {
                <div className='item'>
                     <NavLink to='/' className='item_content'>
                          <BiWorld className='item_content--icons' />{' '}
-                         <span>Explore</span>
+                         <h1>Explore</h1>
                     </NavLink>
                </div>
 
                <div className='item'>
                     <NavLink to='/' className='item_content'>
                          <RiFeedbackLine className='item_content--icons' />{' '}
-                         <span>Feedback</span>
+                         <h1>Feedback</h1>
                     </NavLink>
                </div>
 
                <div className='item'>
                     <NavLink to='/' className='item_content'>
                          <AiOutlineHeart className='item_content--icons' />{' '}
-                         <span>Trips</span>
+                         <h1>Trips</h1>
                     </NavLink>
                </div>
           </StyledAside>

@@ -11,7 +11,7 @@ const NavWrapper = styled.nav`
      display: flex;
      justify-content: space-between;
      align-items: center;
-     border-bottom: 0.5px solid var(--tertiary-blue-900);
+     border-bottom: 0.5px solid var(--tertiary-blue-950);
      padding: 0 2rem;
 
      .left_section {
@@ -33,11 +33,11 @@ const NavWrapper = styled.nav`
           color: var(--primary-gray-100);
 
           &:hover {
-               background-color: var(--tertiary-blue-900);
+               background-color: var(--tertiary-blue-800);
           }
 
           &:focus {
-               background-color: var(--tertiary-blue-900);
+               background-color: var(--tertiary-blue-800);
           }
      }
 
@@ -50,7 +50,7 @@ const NavWrapper = styled.nav`
           font-family: 300;
           cursor: pointer;
           background: none;
-          border: 0.5px solid var(--tertiary-blue-900);
+          border: 0.5px solid var(--tertiary-blue-950);
           border-radius: var(--border-radius);
           color: var(--primary-gray-300);
 

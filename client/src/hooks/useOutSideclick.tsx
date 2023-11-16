@@ -13,10 +13,10 @@ export const useOutSideclick = ({
 
      useEffect(() => {
           function handleClick(e: MouseEvent) {
-               const overlay = (e.target as HTMLElement)?.dataset?.overlay;
-
-               if (overlay) {
+               if ((e.target as HTMLElement)?.dataset?.overlay) {
                     handler();
+
+                    return;
                }
           }
 

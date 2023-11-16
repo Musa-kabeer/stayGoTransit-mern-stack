@@ -8,8 +8,8 @@ const StyledLogo = styled.h1`
      .stay {
           background: linear-gradient(
                45deg,
-               var(--secondary-blue-400),
-               var(--tertiary-blue-800)
+               var(--primary-blue-300),
+               var(--secondary-blue-600)
           );
           -webkit-background-clip: text;
           background-clip: text;
@@ -21,8 +21,8 @@ const StyledLogo = styled.h1`
      .go {
           background: linear-gradient(
                45deg,
-               var(--secondary-blue-400),
-               var(--tertiary-blue-800)
+               var(--primary-blue-300),
+               var(--secondary-blue-600)
           );
           -webkit-background-clip: text;
           background-clip: text;
@@ -34,8 +34,8 @@ const StyledLogo = styled.h1`
      .transit {
           background: linear-gradient(
                45deg,
-               var(--secondary-blue-400),
-               var(--tertiary-blue-800)
+               var(--primary-blue-300),
+               var(--secondary-blue-600)
           );
           -webkit-background-clip: text;
           background-clip: text;
