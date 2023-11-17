@@ -90,7 +90,7 @@ const AsideWrapper = () => {
                                    to='/stays'
                                    className={({ isActive }) =>
                                         (isActive ? 'active' : 'inactive') +
-                                        'item_content'
+                                        ' item_content'
                                    }
                               >
                                    <LiaBedSolid className='item_content--icons' />{' '}
