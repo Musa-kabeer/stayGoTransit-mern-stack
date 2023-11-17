@@ -1,5 +1,9 @@
 import { lazy } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+     createBrowserRouter,
+     Navigate,
+     RouterProvider,
+} from 'react-router-dom';
 import { AsideContextProvider } from './context/AsideContext';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
@@ -13,8 +17,38 @@ const router = createBrowserRouter([
           errorElement: <Error />,
           children: [
                {
-                    index: true,
+                    path: '/',
+                    element: <Navigate to='/stays' />,
+               },
+
+               {
+                    path: '/stays',
                     element: <Homepage />,
+               },
+
+               {
+                    path: 'car-rental',
+                    element: <h1>Car Rental</h1>,
+               },
+
+               {
+                    path: 'trains-buses',
+                    element: <h1>Trains And Buses</h1>,
+               },
+
+               {
+                    path: 'explore',
+                    element: <h1>Explore</h1>,
+               },
+
+               {
+                    path: 'feedback',
+                    element: <h1>Feedback</h1>,
+               },
+
+               {
+                    path: 'trips',
+                    element: <h1>Trips</h1>,
                },
           ],
      },

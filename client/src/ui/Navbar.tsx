@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { FaRegUserCircle } from 'react-icons/fa';
+
+/**
+ * Manual components
+ */
+import { useAsideContext } from '../helpers/utils';
 import Modal from '../context/ModalContext';
 import AuthSlider from './AuthSlider';
 import Logo from './Logo';
-import { useAsideContext } from '../helpers/utils';
+import NavForm from './NavForm';
 
 const NavWrapper = styled.nav`
      height: 10vh;
@@ -78,6 +83,8 @@ const Navbar = () => {
 
                     <Logo />
                </div>
+
+               <NavForm />
 
                <div className='right_section'>
                     <Modal>

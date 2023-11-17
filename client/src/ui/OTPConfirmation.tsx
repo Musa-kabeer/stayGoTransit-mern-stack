@@ -33,10 +33,6 @@ const StyledOTPConfirmation = styled.div`
 const OTPConfirmation = () => {
      const [otp, setOtp] = useState<string>('');
 
-     console.log(Number(otp));
-     console.log(parseFloat(otp));
-     console.log(+otp);
-
      return (
           <StyledOTPConfirmation>
                <img

@@ -1,14 +1,15 @@
 require('dotenv').config();
-import express, { Request, Response } from 'express';
+import { app } from './app';
+import { connectDB } from './util/db';
+import { connectRedis } from './util/redis';
 
-const app = express();
+// CONNECT TO OUR DATABASE
+connectDB();
 
-app.get('/', (req: Request, res: Response) => {
-     res.send(`
-         <h1>Welcome to Stay Go Transit</h1>
-    `);
-});
+// CONNECT TO OUR REDis DATABASE
+connectRedis;
 
+// CREATE SERVER
 app.listen(process.env.PORT, () => {
      console.log(`Server running on port ${process.env.PORT}`);
 });

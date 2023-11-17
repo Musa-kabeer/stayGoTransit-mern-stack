@@ -39,9 +39,10 @@ const StyledAside = styled.aside<StyledAsideProps>`
 
           display: flex;
           align-items: center;
+          justify-content: ${(props) => (props.$mode ? 'center' : '')};
           gap: 25px;
           color: var(--primary-blue-300);
-          padding: 1rem;
+          padding: 0.5rem;
           border-radius: var(--border-radius);
 
           &:hover {
@@ -52,9 +53,8 @@ const StyledAside = styled.aside<StyledAsideProps>`
      }
 
      .item_content--icons {
-          width: 22px;
-          height: 22px;
-          font-weight: 200;
+          width: 20px;
+          height: 20px;
           color: var(--tertiary-blue-950);
      }
 
@@ -62,6 +62,19 @@ const StyledAside = styled.aside<StyledAsideProps>`
           font-size: 14px;
           display: ${(props) => (props.$mode ? 'none' : 'block')};
           animation: ${fadeIn} 1.5s ease-in-out;
+     }
+
+     .active {
+          width: 100%;
+          text-decoration: none;
+          margin: 10px 0;
+
+          display: flex;
+          align-items: center;
+          gap: 25px;
+          color: var(--tertiary-blue-950);
+          border-radius: var(--border-radius);
+          background-color: var(--primary-blue-50);
      }
 `;
 
@@ -73,21 +86,33 @@ const AsideWrapper = () => {
                <div className='item'>
                     <ul className='items__lists'>
                          <li>
-                              <NavLink to='/' className='item_content'>
+                              <NavLink
+                                   to='/stays'
+                                   className={({ isActive }) =>
+                                        (isActive ? 'active' : 'inactive') +
+                                        'item_content'
+                                   }
+                              >
                                    <LiaBedSolid className='item_content--icons' />{' '}
                                    <h1>Stays</h1>
                               </NavLink>
                          </li>
 
                          <li>
-                              <NavLink to='/' className='item_content'>
+                              <NavLink
+                                   to='/car-rental'
+                                   className='item_content'
+                              >
                                    <IoCarOutline className='item_content--icons' />
                                    <h1>Car Rentals</h1>
                               </NavLink>
                          </li>
 
                          <li>
-                              <NavLink to='/' className='item_content'>
+                              <NavLink
+                                   to='/trains-buses'
+                                   className='item_content'
+                              >
                                    <PiTrain className='item_content--icons' />
                                    <h1>Trains and Buses</h1>
                               </NavLink>
@@ -96,21 +121,21 @@ const AsideWrapper = () => {
                </div>
 
                <div className='item'>
-                    <NavLink to='/' className='item_content'>
+                    <NavLink to='/explore' className='item_content'>
                          <BiWorld className='item_content--icons' />{' '}
                          <h1>Explore</h1>
                     </NavLink>
                </div>
 
                <div className='item'>
-                    <NavLink to='/' className='item_content'>
+                    <NavLink to='/feedback' className='item_content'>
                          <RiFeedbackLine className='item_content--icons' />{' '}
                          <h1>Feedback</h1>
                     </NavLink>
                </div>
 
                <div className='item'>
-                    <NavLink to='/' className='item_content'>
+                    <NavLink to='/trips' className='item_content'>
                          <AiOutlineHeart className='item_content--icons' />{' '}
                          <h1>Trips</h1>
                     </NavLink>

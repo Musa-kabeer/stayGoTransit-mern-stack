@@ -149,6 +149,24 @@ const AuthSlider: React.FC<SliderProps> = ({ onCloseTab }) => {
           setCurrent((current) => current + 1);
      }
 
+     // ISTODAY FUNCTION
+     // function isToday(date: string): boolean {
+     //      const year = new Date().getFullYear();
+     //      const month = new Date().getMonth();
+     //      const day = new Date().getDate();
+
+     //      return `${year} ${month + 1} ${day}` === date;
+     // }
+     // isToday('2023 11 16');
+
+     // ISTHURSDAY FUNCTION
+     // function isThursday(date: Date): boolean {
+     //      const providedDate = date.getDay() + 1;
+
+     //      return providedDate === 5;
+     // }
+     // isThursday(new Date('2023 11 14'));
+
      return (
           <Overlay ref={clickRef} data-overlay='true'>
                <motion.div
