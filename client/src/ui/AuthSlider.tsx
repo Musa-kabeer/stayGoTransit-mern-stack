@@ -30,12 +30,19 @@ const Slider = styled.div`
      width: 500px;
      background-color: var(--primary-gray-100);
      border-radius: var(--border-radius);
+     height: 75vh;
 
      display: flex;
      flex-direction: column;
      gap: 25px;
-
      padding: 30px 17px;
+
+     @media screen and (max-width: 560px) {
+          padding: 14px 17px;
+          width: 90%;
+          justify-self: center;
+          margin: auto;
+     }
 
      nav {
           display: flex;

@@ -49,11 +49,16 @@ const StyledLogo = styled.h1`
      }
 `;
 
-const StyledSmallLogo = styled.img`
+const StyledSmallLogo = styled.span`
      display: none;
 
      @media screen and (max-width: 1024px) {
           display: block;
+
+          .logo {
+               width: 25px;
+               height: 25px;
+          }
      }
 `;
 
@@ -66,7 +71,13 @@ const Logo = () => {
                     <span className='transit'>Transit</span>
                </StyledLogo>
 
-               <StyledSmallLogo src='/favicon-32x32.png' alt='LOGO' />
+               <StyledSmallLogo>
+                    <img
+                         src='/android-chrome-512x512.png'
+                         alt='LOGO'
+                         className='logo'
+                    />
+               </StyledSmallLogo>
           </>
      );
 };
