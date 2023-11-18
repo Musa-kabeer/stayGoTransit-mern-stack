@@ -65,6 +65,22 @@ const NavWrapper = styled.nav`
                color: var(--secondary-gray-700);
           }
      }
+
+     .right_section .replace_btn {
+          display: none;
+     }
+
+     @media screen and (max-width: 1024px) {
+          padding: 0 1rem;
+
+          .right_section .btn {
+               display: none;
+          }
+
+          .right_section .replace_btn {
+               display: block;
+          }
+     }
 `;
 
 const Navbar = () => {
@@ -89,9 +105,21 @@ const Navbar = () => {
                <div className='right_section'>
                     <Modal>
                          <Modal.Button name='authTab'>
-                              <button>
+                              <button className='btn'>
                                    <FaRegUserCircle className='item_content--icons' />
                                    Sign in
+                              </button>
+                         </Modal.Button>
+
+                         <Modal.Body windowName='authTab'>
+                              <AuthSlider />
+                         </Modal.Body>
+                    </Modal>
+
+                    <Modal>
+                         <Modal.Button name='authTab'>
+                              <button className='replace_btn'>
+                                   <FaRegUserCircle className='item_content--icons' />
                               </button>
                          </Modal.Button>
 

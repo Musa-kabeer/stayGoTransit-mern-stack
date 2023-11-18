@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom';
-
 import { AppWrapper } from './AppWrapper';
 import Navbar from './Navbar';
 import { MainWrapper } from './MainWrapper';

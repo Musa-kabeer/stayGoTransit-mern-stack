@@ -43,15 +43,31 @@ const StyledLogo = styled.h1`
           -webkit-background-clip: text;
           color: #00000033;
      }
+
+     @media screen and (max-width: 1024px) {
+          display: none;
+     }
+`;
+
+const StyledSmallLogo = styled.img`
+     display: none;
+
+     @media screen and (max-width: 1024px) {
+          display: block;
+     }
 `;
 
 const Logo = () => {
      return (
-          <StyledLogo>
-               <span className='stay'>Stay</span>
-               <span className='go'>Go</span>
-               <span className='transit'>Transit</span>
-          </StyledLogo>
+          <>
+               <StyledLogo>
+                    <span className='stay'>Stay</span>
+                    <span className='go'>Go</span>
+                    <span className='transit'>Transit</span>
+               </StyledLogo>
+
+               <StyledSmallLogo src='/favicon-32x32.png' alt='LOGO' />
+          </>
      );
 };
 

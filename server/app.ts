@@ -1,9 +1,18 @@
 import express, { NextFunction, Request, Response } from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import morgan from 'morgan';
+import { nanoid } from 'nanoid';
 import { ErrorMiddleware } from './middleware/error';
 
 const app = express();
+
+console.log(nanoid());
+/**
+ *
+ * LISTS MIDDLEWARE
+ *
+ */
 
 // CROSS-ORIGIN
 const corsOptions = {
@@ -17,6 +26,11 @@ const corsOptions = {
      credentials: true,
 };
 app.use(cors(corsOptions));
+
+// MORGAN
+if (process.env.NODE_ENV === 'development') {
+     app.use(morgan('dev'));
+}
 
 // COOKIE-PARSER INITIALIZATION
 app.use(cookieParser());

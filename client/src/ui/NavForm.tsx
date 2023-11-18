@@ -1,23 +1,31 @@
 import { useState } from 'react';
-import { DatePicker } from 'rsuite';
-import 'rsuite/dist/rsuite-no-reset.min.css';
 import styled from 'styled-components';
 import { LiaBedSolid } from 'react-icons/lia';
 import { CiSearch } from 'react-icons/ci';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import {
+     dayOfTomorrow,
+     dayOfWeek,
+     month,
+     today,
+     // tomorrow,
+} from '../helpers/utils';
+import { addDays } from 'date-fns';
 
 const StyledForm = styled.form`
      background-color: var(--tertiary-blue-950);
-     padding: 10px 15px;
+     padding: 7px 10px;
      border-radius: var(--border-radius);
 
      display: flex;
-     column-gap: 8px;
+     column-gap: 5px;
 
      .input_container {
-          width: 300px;
+          width: 220px;
           display: flex;
           align-items: center;
-          column-gap: 10px;
+          column-gap: 7px;
           padding: 0 10px;
           background-color: var(--primary-gray-50);
           border-radius: var(--border-radius);
@@ -30,9 +38,16 @@ const StyledForm = styled.form`
                width: 100%;
                height: 100%;
                outline: none;
-
+               font-size: 15px;
+               font-weight: 100;
                transition: all 0.4s ease-in-out;
-               font-size: var(--small-text);
+               background-color: var(--primary-gray-50);
+
+               &::placeholder {
+                    font-size: 13px;
+                    color: var(--secondary-gray-500);
+                    font-style: italic;
+               }
           }
      }
 
@@ -41,6 +56,7 @@ const StyledForm = styled.form`
           color: var(--tertiary-gray-900);
           background: var(--primary-gray-50);
           border-radius: var(--border-radius);
+          cursor: pointer;
 
           .item_content--icons {
                font-size: 20px;
@@ -51,20 +67,77 @@ const StyledForm = styled.form`
                background: var(--primary-gray-200);
           }
      }
+
+     .date_container {
+          position: relative;
+
+          .date_btns {
+               display: flex;
+               align-items: center;
+               column-gap: 0.5px;
+               background: var(--primary-gray-50);
+               border-radius: var(--border-radius);
+
+               .stick {
+                    height: 10px;
+                    width: 1px;
+                    background-color: var(--primary-gray-300);
+               }
+
+               .date_btn {
+                    padding: 0.7rem 0.6rem;
+                    font-size: 12px;
+                    font-weight: 300;
+                    height: 100%;
+                    cursor: pointer;
+                    letter-spacing: var(--letter-spacing);
+
+                    &:hover {
+                         background: var(--primary-gray-200);
+                         border-radius: var(--border-radius);
+                    }
+               }
+          }
+
+          .date_picker {
+               position: absolute;
+               top: 3rem;
+          }
+     }
+
+     @media screen and (max-width: 764px) {
+          display: none;
+     }
 `;
 
-const year = new Date().getFullYear();
-const month = new Date().getMonth() + 1;
-const day = new Date().getDate() + 1;
-
 const NavForm = () => {
-     const [startDate, setStartDate] = useState<Date | null>(new Date());
-     const [endDate, setEndDate] = useState<Date | null>(
-          new Date(`${year} ${month} ${day}`)
-     );
+     const [startDate, setStartDate] = useState<Date>(new Date());
+     const [endDate, setEndDate] = useState<Date>();
+     const [dateShow, setDateShow] = useState<boolean>(false);
+
+     const onChange = (dates: [Date | null, Date | null]): void => {
+          const [start, end] = dates;
+
+          if (start) {
+               setStartDate(start);
+          }
+
+          if (end) {
+               setEndDate(end);
+          }
+     };
+
+     const handleDateFormClicked = () => {
+          setDateShow((date) => !date);
+     };
+
+     // TO SELECTED DATE
+     const toDate = endDate ? endDate : addDays(new Date(), 1);
+     const toMonth = endDate ? endDate : new Date();
+     const toDay = endDate ? endDate : addDays(new Date(), 1);
 
      return (
-          <StyledForm className='date_parameter'>
+          <StyledForm>
                <div className='input_container'>
                     <LiaBedSolid className='item_content--icons' />{' '}
                     <input
@@ -73,16 +146,38 @@ const NavForm = () => {
                          placeholder='Enter a city, hotel'
                     />
                </div>
-               <DatePicker
-                    value={startDate}
-                    onChange={setStartDate}
-                    className='start_picker'
-               />
-               <DatePicker
-                    value={endDate}
-                    onChange={setEndDate}
-                    className='end_picker'
-               />
+
+               <div className='date_container'>
+                    <div className='date_btns' onClick={handleDateFormClicked}>
+                         <div className='date_btn'>
+                              <span>{dayOfWeek(startDate)}</span>{' '}
+                              <span>{month(startDate)}</span>/
+                              <span>{today(startDate)}</span>
+                         </div>
+
+                         <span className='stick'></span>
+
+                         <div className='date_btn'>
+                              <span>{dayOfTomorrow(toDate)}</span>{' '}
+                              <span>{month(toMonth)}</span>/
+                              <span>{today(toDay)}</span>
+                         </div>
+                    </div>
+
+                    {dateShow && (
+                         <div className='date_picker'>
+                              <DatePicker
+                                   selected={startDate}
+                                   onChange={onChange}
+                                   startDate={startDate}
+                                   endDate={endDate}
+                                   selectsRange
+                                   inline
+                              />
+                         </div>
+                    )}
+               </div>
+
                <button>
                     <CiSearch className='item_content--icons' />
                </button>
