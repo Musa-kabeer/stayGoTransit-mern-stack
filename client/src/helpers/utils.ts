@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { addDays, format, getMonth } from 'date-fns';
+import { format, getMonth } from 'date-fns';
 import { AsideContext } from '../context/AsideContext';
 
 const useAsideContext = () => {
