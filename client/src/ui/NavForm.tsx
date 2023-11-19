@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import styled from 'styled-components';
+// Date picker
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import styled from 'styled-components';
+// icons
 import { LiaBedSolid } from 'react-icons/lia';
 import { CiSearch } from 'react-icons/ci';
+// date
 import { addDays } from 'date-fns';
 import { dayOfTomorrow, dayOfWeek, month, today } from '../helpers/utils';
 
@@ -97,6 +100,10 @@ const StyledForm = styled.form`
                position: absolute;
                top: 3rem;
                z-index: 99;
+
+               > div {
+                    box-shadow: var(--date-shadow-1);
+               }
           }
      }
 
@@ -136,7 +143,6 @@ const NavForm = () => {
                          placeholder='Enter a city, hotel'
                     />
                </div>
-
                <div className='date_container'>
                     <div className='date_btns' onClick={handleDateFormClicked}>
                          <div className='date_btn'>
@@ -163,11 +169,11 @@ const NavForm = () => {
                                    endDate={endDate}
                                    selectsRange
                                    inline
+                                   minDate={new Date()}
                               />
                          </div>
                     )}
                </div>
-
                <button>
                     <CiSearch className='item_content--icons' />
                </button>
