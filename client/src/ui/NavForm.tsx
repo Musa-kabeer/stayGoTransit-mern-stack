@@ -1,17 +1,11 @@
 import { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import styled from 'styled-components';
 import { LiaBedSolid } from 'react-icons/lia';
 import { CiSearch } from 'react-icons/ci';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import {
-     dayOfTomorrow,
-     dayOfWeek,
-     month,
-     today,
-     // tomorrow,
-} from '../helpers/utils';
 import { addDays } from 'date-fns';
+import { dayOfTomorrow, dayOfWeek, month, today } from '../helpers/utils';
 
 const StyledForm = styled.form`
      background-color: var(--tertiary-blue-950);
@@ -102,6 +96,7 @@ const StyledForm = styled.form`
           .date_picker {
                position: absolute;
                top: 3rem;
+               z-index: 99;
           }
      }
 
@@ -111,24 +106,19 @@ const StyledForm = styled.form`
 `;
 
 const NavForm = () => {
+     const [dateShow, setDateShow] = useState(false);
      const [startDate, setStartDate] = useState<Date>(new Date());
-     const [endDate, setEndDate] = useState<Date>();
-     const [dateShow, setDateShow] = useState<boolean>(false);
-
-     const onChange = (dates: [Date | null, Date | null]): void => {
-          const [start, end] = dates;
-
-          if (start) {
-               setStartDate(start);
-          }
-
-          if (end) {
-               setEndDate(end);
-          }
-     };
+     const [endDate, setEndDate] = useState<Date | null>(null);
 
      const handleDateFormClicked = () => {
           setDateShow((date) => !date);
+     };
+
+     const onChange = (dates: [Date, Date]) => {
+          const [start, end] = dates;
+
+          setStartDate(start);
+          setEndDate(end);
      };
 
      // TO SELECTED DATE
