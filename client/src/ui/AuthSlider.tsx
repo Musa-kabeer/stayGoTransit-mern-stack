@@ -20,28 +20,34 @@ const Overlay = styled.div`
      backdrop-filter: blur(1px);
      z-index: 1000;
      transition: all 0.5s;
-
-     display: flex;
-     justify-content: center;
-     align-items: center;
 `;
 
 const Slider = styled.div`
-     width: 500px;
+     width: 50%;
      background-color: var(--primary-gray-100);
      border-radius: var(--border-radius);
      height: 75vh;
+     margin: 0 auto;
+     margin-top: 100px;
 
      display: flex;
      flex-direction: column;
      gap: 25px;
      padding: 30px 17px;
 
+     @media screen and (max-width: 1024px) {
+          height: 70vh;
+          width: 60%;
+          gap: 20px;
+          padding: 20px 17px;
+     }
+
+     @media screen and (max-width: 764px) {
+          gap: 10px;
+     }
+
      @media screen and (max-width: 560px) {
-          padding: 14px 17px;
-          width: 90%;
-          justify-self: center;
-          margin: auto;
+          width: 95%;
      }
 
      nav {
@@ -71,12 +77,20 @@ const Slider = styled.div`
           h1 {
                font-size: var(--large-text);
                font-weight: 600;
+
+               @media screen and (max-width: 764px) {
+                    font-size: var(--small-text);
+               }
           }
 
           p {
                font-size: var(--small-text);
                line-height: 1.2rem;
-               letter-spacing: var(--letter-spacing);
+
+               @media screen and (max-width: 764px) {
+                    font-size: var(--extra-small-text);
+                    line-height: 1rem;
+               }
           }
 
           button {
@@ -89,6 +103,10 @@ const Slider = styled.div`
                &:hover {
                     background: var(--primary-gray-300);
                }
+
+               @media screen and (max-width: 1024px) {
+                    font-size: 12px;
+               }
           }
      }
 
@@ -97,7 +115,7 @@ const Slider = styled.div`
           align-items: center;
           gap: 6px;
           color: var(--secondary-gray-500);
-          font-size: 15px;
+          font-size: var(--small-text);
 
           .line {
                background: var(--primary-gray-300);
@@ -117,17 +135,27 @@ const Slider = styled.div`
                font-size: 15px;
                padding: 10px;
                border-radius: var(--border-radius);
+               cursor: pointer;
 
                &:hover {
                     background: var(--primary-gray-300);
+               }
+
+               @media screen and (max-width: 1024px) {
+                    font-size: 12px;
                }
           }
      }
 
      footer {
-          font-size: 11px;
+          font-size: var(--extra-small-text);
           color: var(--secondary-gray-500);
           letter-spacing: 1px;
+          line-height: 18px;
+
+          @media screen and (max-width: 764px) {
+               font-size: 10px;
+          }
 
           .link {
                color: var(--secondary-gray-500);

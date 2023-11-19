@@ -10,6 +10,10 @@ const StyledWrapper = styled.div`
      justify-content: space-between;
      flex-direction: column;
      height: 60vh;
+
+     @media screen and (max-width: 560px) {
+          width: 100%;
+     }
 `;
 
 const RegisterAndLogin: React.FC<RegisterAndLoginProp> = ({ onClick }) => {

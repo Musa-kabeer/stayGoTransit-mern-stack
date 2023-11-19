@@ -6,6 +6,8 @@ interface LoginFormProps {
 }
 
 const StyledLoginForm = styled.div`
+     width: 100%;
+
      h1 {
           font-size: var(--small-text);
           font-weight: 600;
