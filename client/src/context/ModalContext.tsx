@@ -1,4 +1,5 @@
 import {
+     ReactElement,
      ReactNode,
      cloneElement,
      createContext,
@@ -37,14 +38,14 @@ const Modal: React.FC<AuthProviderProps> & {
 
      const close = () => setOpen('');
 
-     const initialContextValue: contextValue = {
-          open,
-          close,
-          setOpen,
-     };
-
      return (
-          <AuthContext.Provider value={initialContextValue}>
+          <AuthContext.Provider
+               value={{
+                    open,
+                    close,
+                    setOpen,
+               }}
+          >
                {children}
           </AuthContext.Provider>
      );
@@ -82,7 +83,7 @@ const Body: React.FC<BodyProps> = ({ children, windowName }) => {
      if (open !== windowName || open === '') return null;
 
      return createPortal(
-          cloneElement(children as React.ReactElement, {
+          cloneElement(children as ReactElement, {
                onCloseTab: () => close(),
           }),
           document.body

@@ -9,11 +9,6 @@ interface AsideProps {
      changeMode: () => void;
 }
 
-interface AsideValue {
-     mode: boolean;
-     changeMode: () => void;
-}
-
 export const AsideContext = createContext<AsideProps | undefined>(undefined);
 
 export const AsideContextProvider: React.FC<AsideProviderProps> = ({
@@ -23,13 +18,13 @@ export const AsideContextProvider: React.FC<AsideProviderProps> = ({
 
      const changeMode = () => setMode((mode) => !mode);
 
-     const parseValue: AsideValue = {
-          mode,
-          changeMode,
-     };
-
      return (
-          <AsideContext.Provider value={parseValue}>
+          <AsideContext.Provider
+               value={{
+                    mode,
+                    changeMode,
+               }}
+          >
                {children}
           </AsideContext.Provider>
      );

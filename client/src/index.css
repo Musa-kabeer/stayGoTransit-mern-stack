@@ -8,6 +8,8 @@
      box-sizing: border-box;
      transition: all 0.2s ease-in-out;
      border: none;
+     list-style-type: none;
+     text-decoration: none;
 }
 
 ::selection {
@@ -71,7 +73,7 @@ html {
 
 body {
      overflow-y: hidden;
-     background: var(--tertiary-blue-900);
+     background: var(--tertiary-blue-900) !important;
      color: var(--black);
      font-family: 'Poppins', sans-serif;
      font-weight: 400;

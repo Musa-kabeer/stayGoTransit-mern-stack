@@ -48,6 +48,10 @@ const StyledAside = styled.aside<StyledAsideProps>`
           .item {
                border-bottom: 0.5px solid var(--tertiary-blue-950);
 
+               .items__lists {
+                    padding-left: 0;
+               }
+
                @media screen and (max-width: 764px) {
                     border-bottom: 0.5px solid var(--tertiary-blue-800);
                }
@@ -67,9 +71,12 @@ const StyledAside = styled.aside<StyledAsideProps>`
                border-radius: var(--border-radius);
 
                &:hover {
+                    h1 {
+                         color: var(--tertiary-blue-900) !important;
+                    }
+
                     background-color: var(--primary-blue-50);
                     cursor: pointer;
-                    color: var(--tertiary-blue-950);
                }
 
                @media screen and (max-width: 764px) {
@@ -88,7 +95,7 @@ const StyledAside = styled.aside<StyledAsideProps>`
           }
 
           h1 {
-               font-size: 14px;
+               font-size: 12px;
                display: ${(props) => (props.$mode ? 'none' : 'block')};
                animation: ${fadeIn} 1.5s ease-in-out;
 
@@ -109,6 +116,10 @@ const StyledAside = styled.aside<StyledAsideProps>`
                color: var(--tertiary-blue-950);
                border-radius: var(--border-radius);
                background-color: var(--primary-blue-50);
+
+               h1 {
+                    color: var(--tertiary-blue-900) !important;
+               }
           }
      }
 `;

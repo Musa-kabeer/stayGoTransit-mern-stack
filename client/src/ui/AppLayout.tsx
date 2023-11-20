@@ -9,7 +9,7 @@ import AsideWrapper from './AsideWrapper';
 const StyledContentOutlets = styled.div`
      overflow-y: scroll;
      width: 100%;
-     padding: 30px 20px;
+     height: 100%;
 `;
 
 const AppLayout: React.FC = () => {

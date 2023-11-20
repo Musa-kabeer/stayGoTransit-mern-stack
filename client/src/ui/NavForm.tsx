@@ -11,15 +11,17 @@ import { addDays } from 'date-fns';
 import { dayOfTomorrow, dayOfWeek, month, today } from '../helpers/utils';
 
 const StyledForm = styled.form`
-     background-color: var(--tertiary-blue-950);
+     display: flex;
+     justify-content: space-between;
+     column-gap: 5px;
      padding: 7px 10px;
+     margin: 0 3rem;
+     background-color: var(--tertiary-blue-950);
      border-radius: var(--border-radius);
 
-     display: flex;
-     column-gap: 5px;
-
      .input_container {
-          width: 220px;
+          /* width: 220px; */
+          width: 100%;
           display: flex;
           align-items: center;
           column-gap: 7px;
@@ -49,7 +51,7 @@ const StyledForm = styled.form`
      }
 
      button {
-          width: 40px;
+          width: 80px;
           color: var(--tertiary-gray-900);
           background: var(--primary-gray-50);
           border-radius: var(--border-radius);
@@ -66,6 +68,7 @@ const StyledForm = styled.form`
      }
 
      .date_container {
+          width: 190px;
           position: relative;
 
           .date_btns {
@@ -82,12 +85,14 @@ const StyledForm = styled.form`
                }
 
                .date_btn {
+                    width: 100px;
                     padding: 0.7rem 0.6rem;
                     font-size: 12px;
                     font-weight: 300;
                     height: 100%;
                     cursor: pointer;
                     letter-spacing: var(--letter-spacing);
+                    text-align: center;
 
                     &:hover {
                          background: var(--primary-gray-200);
@@ -143,6 +148,7 @@ const NavForm = () => {
                          placeholder='Enter a city, hotel'
                     />
                </div>
+
                <div className='date_container'>
                     <div className='date_btns' onClick={handleDateFormClicked}>
                          <div className='date_btn'>
@@ -174,6 +180,7 @@ const NavForm = () => {
                          </div>
                     )}
                </div>
+
                <button>
                     <CiSearch className='item_content--icons' />
                </button>
