@@ -50,6 +50,41 @@ const router = createBrowserRouter([
                     path: 'trips',
                     element: <h1>Trips</h1>,
                },
+
+               {
+                    path: 'hotels-search/:searchName',
+                    element: <h1>Hotel Search</h1>,
+               },
+
+               {
+                    path: 'hotels/:hotelName',
+                    element: <h1>Hotel Details</h1>,
+               },
+
+               {
+                    path: 'hotels/bookings',
+                    element: <h1>Hotel Details</h1>,
+               },
+
+               {
+                    path: 'about-us',
+                    element: <h1>About Us</h1>,
+               },
+
+               {
+                    path: 'blogs',
+                    element: <h1>BLOG</h1>,
+               },
+
+               {
+                    path: 'faqs',
+                    element: <h1>FAQs</h1>,
+               },
+
+               {
+                    path: 'privacy-policy',
+                    element: <h1>Privacy & Policy </h1>,
+               },
           ],
      },
 ]);

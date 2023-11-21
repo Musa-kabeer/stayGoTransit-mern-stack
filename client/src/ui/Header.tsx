@@ -5,7 +5,7 @@ interface IHeader {
 }
 
 const StyledHeader = styled.h1`
-     font-size: 30px;
+     font-size: 25px;
      font-weight: 500;
 `;
 

@@ -65,7 +65,7 @@ const StyledAside = styled.aside<StyledAsideProps>`
                display: flex;
                align-items: center;
                justify-content: ${(props) => (props.$mode ? 'center' : '')};
-               gap: 25px;
+               gap: 10px;
                color: var(--primary-blue-300);
                padding: 0.5rem;
                border-radius: var(--border-radius);
@@ -95,7 +95,7 @@ const StyledAside = styled.aside<StyledAsideProps>`
           }
 
           h1 {
-               font-size: 12px;
+               font-size: 11px;
                display: ${(props) => (props.$mode ? 'none' : 'block')};
                animation: ${fadeIn} 1.5s ease-in-out;
 
@@ -112,7 +112,7 @@ const StyledAside = styled.aside<StyledAsideProps>`
 
                display: flex;
                align-items: center;
-               gap: 25px;
+               gap: 20px;
                color: var(--tertiary-blue-950);
                border-radius: var(--border-radius);
                background-color: var(--primary-blue-50);

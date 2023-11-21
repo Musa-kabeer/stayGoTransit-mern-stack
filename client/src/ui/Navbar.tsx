@@ -9,7 +9,7 @@ import { useAsideContext } from '../helpers/utils';
 import Modal from '../context/ModalContext';
 import AuthSlider from './AuthSlider';
 import Logo from './Logo';
-import NavForm from './NavForm';
+// import NavForm from './NavForm';
 
 const NavWrapper = styled.nav`
      height: 10vh;
@@ -100,7 +100,7 @@ const Navbar = () => {
                     <Logo />
                </div>
 
-               <NavForm />
+               {/* <NavForm /> */}
 
                <div className='right_section'>
                     <Modal>

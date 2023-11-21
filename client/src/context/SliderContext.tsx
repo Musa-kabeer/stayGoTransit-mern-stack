@@ -3,6 +3,7 @@ import {
      ReactNode,
      cloneElement,
      createContext,
+     isValidElement,
      useContext,
      useState,
 } from 'react';
@@ -30,7 +31,7 @@ interface IContent {
 }
 
 interface IValue {
-     slider: number;
+     slider: number | undefined;
      increase: () => void;
      decrease: () => void;
 }
@@ -46,33 +47,40 @@ const Slider: React.FC<IProvider> & {
      const increase = () => setSlider((slider) => slider + 1);
      const decrease = () => setSlider((slider) => slider - 1);
 
+     const contextValue: IValue = {
+          slider,
+          increase,
+          decrease,
+     };
+
      return (
-          <SliderContext.Provider
-               value={{
-                    slider,
-                    increase,
-                    decrease,
-               }}
-          >
+          <SliderContext.Provider value={contextValue}>
                {children}
           </SliderContext.Provider>
      );
 };
 
 const Button: React.FC<IButton> = ({ children, type }) => {
-     const { increase, decrease } = useContext(SliderContext)!;
-
+     const { slider, increase, decrease } = useContext(SliderContext)!;
+     console.log(slider);
      const handlechange = () => {
-          if (type === 'increase') {
-               return increase();
+          if (type === 'increase' && slider !== 3) {
+               increase();
           }
 
-          decrease();
+          if (type === 'decrease' && slider !== 1) {
+               decrease();
+          }
      };
 
-     return cloneElement(children as ReactElement, {
-          onClick: handlechange,
-     });
+     if (isValidElement(children)) {
+          const cloneEl = cloneElement(children as ReactElement, {
+               onClick: handlechange,
+               currentNumber: slider,
+          });
+
+          return cloneEl;
+     }
 };
 
 const Content: React.FC<IContent> = ({ children, position }) => {
