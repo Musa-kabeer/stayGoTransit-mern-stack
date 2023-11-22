@@ -3,7 +3,6 @@ import {
      ReactNode,
      cloneElement,
      createContext,
-     isValidElement,
      useContext,
      useState,
 } from 'react';
@@ -62,7 +61,7 @@ const Slider: React.FC<IProvider> & {
 
 const Button: React.FC<IButton> = ({ children, type }) => {
      const { slider, increase, decrease } = useContext(SliderContext)!;
-     console.log(slider);
+
      const handlechange = () => {
           if (type === 'increase' && slider !== 3) {
                increase();
@@ -73,14 +72,10 @@ const Button: React.FC<IButton> = ({ children, type }) => {
           }
      };
 
-     if (isValidElement(children)) {
-          const cloneEl = cloneElement(children as ReactElement, {
-               onClick: handlechange,
-               currentNumber: slider,
-          });
-
-          return cloneEl;
-     }
+     return cloneElement(children as ReactElement, {
+          onClick: handlechange,
+          currentNumber: slider,
+     });
 };
 
 const Content: React.FC<IContent> = ({ children, position }) => {

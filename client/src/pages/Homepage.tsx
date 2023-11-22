@@ -2,7 +2,6 @@ import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Header from '../ui/Header';
-// import NavForm from '../ui/NavForm';
 import OfferBox from '../ui/OfferBox';
 import HotelBox from '../ui/HotelBox';
 import TrendingItems from '../ui/TrendingItems';
@@ -17,17 +16,6 @@ const StyledHome = styled.div`
      row-gap: 60px;
      height: 100%;
      padding: 20px 0;
-     /* 
-     .stay_search {
-          display: grid;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-          row-gap: 30px;
-          padding: 0 20px;
-
-          @media screen and (max-width: 764px) {
-               padding: 0px 50px;
-          }
-     } */
 
      .offers {
           display: flex;

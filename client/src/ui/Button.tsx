@@ -1,10 +1,10 @@
 import { FC, ReactNode } from 'react';
 
 interface IButton {
-     onClick: () => void;
+     onClick?: () => void;
      children: ReactNode;
      cl: string;
-     currentNumber: number;
+     currentNumber?: number;
      length: number;
 }
 
@@ -16,6 +16,8 @@ const Button: FC<IButton> = ({
      length,
 }) => {
      if (currentNumber === length) return null;
+
+     if (cl === 'arrow_btn-left' && currentNumber === 1) return null;
 
      return (
           <button className={cl} onClick={onClick}>
