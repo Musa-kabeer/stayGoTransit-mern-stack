@@ -64,14 +64,26 @@ const StyledAside = styled.aside<StyledAsideProps>`
 
                display: flex;
                align-items: center;
-               justify-content: ${(props) => (props.$mode ? 'center' : '')};
+               /* justify-content: ${(props) =>
+                    props.$mode ? 'center' : ''}; */
                gap: 10px;
                color: var(--primary-blue-300);
                padding: 0.5rem;
                border-radius: var(--border-radius);
 
+               span {
+                    font-size: 12px;
+                    display: ${(props) => (props.$mode ? 'none' : 'block')};
+                    animation: ${fadeIn} 1.5s ease-in-out;
+
+                    @media screen and (max-width: 764px) {
+                         display: block;
+                         animation: ${fadeIn} 1.5s ease-in-out;
+                    }
+               }
+
                &:hover {
-                    h1 {
+                    span {
                          color: var(--tertiary-blue-900) !important;
                     }
 
@@ -94,7 +106,7 @@ const StyledAside = styled.aside<StyledAsideProps>`
                }
           }
 
-          h1 {
+          /* h1 {
                font-size: 11px;
                display: ${(props) => (props.$mode ? 'none' : 'block')};
                animation: ${fadeIn} 1.5s ease-in-out;
@@ -103,7 +115,7 @@ const StyledAside = styled.aside<StyledAsideProps>`
                     display: block;
                     animation: ${fadeIn} 1.5s ease-in-out;
                }
-          }
+          } */
 
           .active {
                width: 100%;
@@ -143,7 +155,7 @@ const AsideWrapper = () => {
                                         }
                                    >
                                         <LiaBedSolid className='item_content--icons' />{' '}
-                                        <h1>Stays</h1>
+                                        <span>Stays</span>
                                    </NavLink>
                               </li>
 
@@ -153,7 +165,7 @@ const AsideWrapper = () => {
                                         className='item_content'
                                    >
                                         <IoCarOutline className='item_content--icons' />
-                                        <h1>Car Rentals</h1>
+                                        <span>Car Rentals</span>
                                    </NavLink>
                               </li>
 
@@ -163,7 +175,7 @@ const AsideWrapper = () => {
                                         className='item_content'
                                    >
                                         <PiTrain className='item_content--icons' />
-                                        <h1>Trains and Buses</h1>
+                                        <span>Trains and Buses</span>
                                    </NavLink>
                               </li>
                          </ul>
@@ -172,21 +184,21 @@ const AsideWrapper = () => {
                     <div className='item'>
                          <NavLink to='/explore' className='item_content'>
                               <BiWorld className='item_content--icons' />{' '}
-                              <h1>Explore</h1>
+                              <span>Explore</span>
                          </NavLink>
                     </div>
 
                     <div className='item'>
                          <NavLink to='/feedback' className='item_content'>
                               <RiFeedbackLine className='item_content--icons' />{' '}
-                              <h1>Feedback</h1>
+                              <span>Feedback</span>
                          </NavLink>
                     </div>
 
                     <div className='item'>
                          <NavLink to='/trips' className='item_content'>
                               <AiOutlineHeart className='item_content--icons' />{' '}
-                              <h1>Trips</h1>
+                              <span>Trips</span>
                          </NavLink>
                     </div>
                </div>

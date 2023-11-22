@@ -5,6 +5,7 @@ import {
      RouterProvider,
 } from 'react-router-dom';
 import { AsideContextProvider } from './context/AsideContext';
+import CarRental from './pages/CarRental';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const Error = lazy(() => import('./pages/Error'));
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
 
                {
                     path: 'car-rental',
-                    element: <h1>Car Rental</h1>,
+                    element: <CarRental />,
                },
 
                {

@@ -7,6 +7,7 @@ const emailRegexPattern: RegExp = /^[^\s@]+ @[^\s@]+\.[^\s@]+$/;
 export interface IUser extends Document {
      name: string;
      username: string;
+     user_id: string;
      email: string;
      isVerified: boolean;
      avatar: {
@@ -26,6 +27,11 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
           username: {
                type: String,
                unique: true,
+          },
+
+          user_id: {
+               type: String,
+               required: [true, 'A user must have id'],
           },
 
           email: {
