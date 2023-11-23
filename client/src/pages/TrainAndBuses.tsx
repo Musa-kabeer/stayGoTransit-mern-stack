@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import { sliderData, stayOfferData } from '../helpers/data';
-
 import Footer from '../ui/Footer';
 import Welcome from '../ui/Welcome';
+import { carOfferData, sliderData } from '../helpers/data';
 import SliderComponent from '../ui/SliderComponent';
 import TrendingLists from '../ui/TrendingLists';
 
-const StyledHome = styled.div`
+const StyledTrainAndBuses = styled.div`
      display: flex;
      flex-direction: column;
      row-gap: 60px;
@@ -14,16 +13,14 @@ const StyledHome = styled.div`
      padding: 20px 0;
 `;
 
-const Homepage = () => {
+const TrainAndBuses = () => {
      return (
-          <StyledHome>
-               {/* WELCOME SECTION */}
+          <StyledTrainAndBuses>
                <Welcome
                     welcome="Find the stay that's right for you."
-                    data={stayOfferData}
+                    data={carOfferData}
                />
 
-               {/* HOTEL SCROLL */}
                <SliderComponent
                     header='Best hotels in Nigeria'
                     data={sliderData}
@@ -31,14 +28,19 @@ const Homepage = () => {
 
                {/* TRENDING */}
                <TrendingLists
-                    header='Trending hotels in Nigeria'
-                    paragraph='The most searched for hotel destinations on staygotransit'
+                    header='Trending Cities'
+                    paragraph='The most searched cities on staygotransit'
                />
 
-               {/* FOOTER */}
+               {/* TRENDING */}
+               <TrendingLists
+                    header='Trending States'
+                    paragraph='The most searched states on staygotransit'
+               />
+
                <Footer />
-          </StyledHome>
+          </StyledTrainAndBuses>
      );
 };
 
-export default Homepage;
+export default TrainAndBuses;

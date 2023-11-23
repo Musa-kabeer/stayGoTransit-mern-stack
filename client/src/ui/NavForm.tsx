@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 // icons
-import { LiaBedSolid } from 'react-icons/lia';
 import { CiSearch } from 'react-icons/ci';
 // date
 import { addDays } from 'date-fns';
@@ -18,37 +17,6 @@ const StyledForm = styled.form`
      margin: 0 3rem;
      background-color: var(--tertiary-blue-950);
      border-radius: var(--border-radius);
-
-     .input_container {
-          /* width: 220px; */
-          width: 100%;
-          display: flex;
-          align-items: center;
-          column-gap: 7px;
-          padding: 0 10px;
-          background-color: var(--primary-gray-50);
-          border-radius: var(--border-radius);
-
-          .item_content--icons {
-               font-size: var(--large-text);
-          }
-
-          input {
-               width: 100%;
-               height: 100%;
-               outline: none;
-               font-size: 15px;
-               font-weight: 100;
-               transition: all 0.4s ease-in-out;
-               background-color: var(--primary-gray-50);
-
-               &::placeholder {
-                    font-size: 13px;
-                    color: var(--secondary-gray-500);
-                    font-style: italic;
-               }
-          }
-     }
 
      button {
           width: 80px;
@@ -140,15 +108,6 @@ const NavForm = () => {
 
      return (
           <StyledForm>
-               <div className='input_container'>
-                    <LiaBedSolid className='item_content--icons' />{' '}
-                    <input
-                         type='text'
-                         defaultValue='Abuja, Nigeria'
-                         placeholder='Enter a city, hotel'
-                    />
-               </div>
-
                <div className='date_container'>
                     <div className='date_btns' onClick={handleDateFormClicked}>
                          <div className='date_btn'>

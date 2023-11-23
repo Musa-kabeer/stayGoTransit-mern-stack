@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import Footer from '../ui/Footer';
 import Welcome from '../ui/Welcome';
-import { carOfferData } from '../helpers/data';
+import { carOfferData, sliderData } from '../helpers/data';
+import SliderComponent from '../ui/SliderComponent';
+import TrendingLists from '../ui/TrendingLists';
 
 const StyledCarRental = styled.div`
      display: flex;
@@ -17,6 +19,23 @@ const CarRental = () => {
                <Welcome
                     welcome="Find the stay that's right for you."
                     data={carOfferData}
+               />
+
+               <SliderComponent
+                    header='Best hotels in Nigeria'
+                    data={sliderData}
+               />
+
+               {/* TRENDING */}
+               <TrendingLists
+                    header='Trending Cities'
+                    paragraph='The most searched cities on staygotransit'
+               />
+
+               {/* TRENDING */}
+               <TrendingLists
+                    header='Trending States'
+                    paragraph='The most searched states on staygotransit'
                />
 
                <Footer />

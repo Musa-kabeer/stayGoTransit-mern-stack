@@ -9,6 +9,7 @@ import { useAsideContext } from '../helpers/utils';
 import Modal from '../context/ModalContext';
 import AuthSlider from './AuthSlider';
 import Logo from './Logo';
+import SearchComponent from './SearchComponent';
 // import NavForm from './NavForm';
 
 const NavWrapper = styled.nav`
@@ -23,6 +24,13 @@ const NavWrapper = styled.nav`
           display: flex;
           align-items: center;
           gap: 10px;
+     }
+
+     .search_container {
+          width: 60%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
      }
 
      .left_section--icon {
@@ -101,6 +109,10 @@ const Navbar = () => {
                </div>
 
                {/* <NavForm /> */}
+
+               <div className='search_container'>
+                    <SearchComponent />
+               </div>
 
                <div className='right_section'>
                     <Modal>

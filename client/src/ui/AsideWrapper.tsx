@@ -3,10 +3,13 @@ import { NavLink } from 'react-router-dom';
 import { LiaBedSolid } from 'react-icons/lia';
 import { IoCarOutline } from 'react-icons/io5';
 import { PiTrain } from 'react-icons/pi';
-import { AiOutlineHeart } from 'react-icons/ai';
+import { FaRegUserCircle } from 'react-icons/fa';
+// import { AiOutlineHeart } from 'react-icons/ai';
 import { BiWorld } from 'react-icons/bi';
-import { RiFeedbackLine } from 'react-icons/ri';
+// import { RiFeedbackLine } from 'react-icons/ri';
 import { useAsideContext } from '../helpers/utils';
+import Modal from '../context/ModalContext';
+import AuthSlider from './AuthSlider';
 
 interface StyledAsideProps {
      $mode?: boolean;
@@ -64,8 +67,7 @@ const StyledAside = styled.aside<StyledAsideProps>`
 
                display: flex;
                align-items: center;
-               /* justify-content: ${(props) =>
-                    props.$mode ? 'center' : ''}; */
+               justify-content: ${(props) => (props.$mode ? 'center' : '')};
                gap: 10px;
                color: var(--primary-blue-300);
                padding: 0.5rem;
@@ -105,17 +107,6 @@ const StyledAside = styled.aside<StyledAsideProps>`
                     color: var(--tertiary-blue-800);
                }
           }
-
-          /* h1 {
-               font-size: 11px;
-               display: ${(props) => (props.$mode ? 'none' : 'block')};
-               animation: ${fadeIn} 1.5s ease-in-out;
-
-               @media screen and (max-width: 764px) {
-                    display: block;
-                    animation: ${fadeIn} 1.5s ease-in-out;
-               }
-          } */
 
           .active {
                width: 100%;
@@ -189,18 +180,32 @@ const AsideWrapper = () => {
                     </div>
 
                     <div className='item'>
+                         <Modal>
+                              <Modal.Button name='authTab'>
+                                   <button className='item_content'>
+                                        <FaRegUserCircle className='item_content--icons' />
+                                        <span>Sign in</span>
+                                   </button>
+                              </Modal.Button>
+
+                              <Modal.Body windowName='authTab'>
+                                   <AuthSlider />
+                              </Modal.Body>
+                         </Modal>
+                    </div>
+                    {/* <div className='item'>
                          <NavLink to='/feedback' className='item_content'>
                               <RiFeedbackLine className='item_content--icons' />{' '}
                               <span>Feedback</span>
                          </NavLink>
-                    </div>
+                    </div> */}
 
-                    <div className='item'>
+                    {/* <div className='item'>
                          <NavLink to='/trips' className='item_content'>
                               <AiOutlineHeart className='item_content--icons' />{' '}
                               <span>Trips</span>
                          </NavLink>
-                    </div>
+                    </div> */}
                </div>
           </StyledAside>
      );

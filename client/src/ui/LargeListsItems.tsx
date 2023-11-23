@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledTrending = styled.div`
+const StyledList = styled.div`
      display: flex;
      background: var(--primary-gray-100);
      height: 110px;
@@ -33,9 +33,9 @@ const StyledTrending = styled.div`
      }
 `;
 
-const TrendingItems = () => {
+const LargeListsItems = () => {
      return (
-          <StyledTrending>
+          <StyledList>
                <img
                     src='https://www.momondo.com/rimg/himg/51/a6/97/ice-136690-71847437_3XL-805582.jpg?width=968&height=968&crop=true'
                     alt=''
@@ -48,8 +48,8 @@ const TrendingItems = () => {
                          NEW YORK
                     </h1>
                </div>
-          </StyledTrending>
+          </StyledList>
      );
 };
 
-export default TrendingItems;
+export default LargeListsItems;

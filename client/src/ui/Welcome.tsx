@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Header from '../ui/Header';
 import OfferBox from '../ui/OfferBox';
 import { FC } from 'react';
+import SearchComponent from './SearchComponent';
 
 interface IOffer {
      image: string;
@@ -22,6 +23,12 @@ const StyledWelcome = styled.section`
 
      @media screen and (max-width: 764px) {
           padding: 0px 50px;
+     }
+
+     .search_container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
      }
 
      .welcome_text {
@@ -53,11 +60,15 @@ const Welcome: FC<IWelcome> = ({ welcome, data }) => {
           <StyledWelcome className='offers'>
                <Header>{welcome}</Header>
 
+               <div className='search_container'>
+                    <SearchComponent />
+               </div>
+
                <p className='welcome_text'>What we offers.</p>
 
                <div className='welcome_grid'>
-                    {data.map((d) => (
-                         <OfferBox header={d.header} icon={d.image}>
+                    {data.map((d, i) => (
+                         <OfferBox key={i + 1} header={d.header} icon={d.image}>
                               {d.text}
                          </OfferBox>
                     ))}

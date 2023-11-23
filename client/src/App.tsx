@@ -1,15 +1,17 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import {
      createBrowserRouter,
      Navigate,
      RouterProvider,
 } from 'react-router-dom';
 import { AsideContextProvider } from './context/AsideContext';
-import CarRental from './pages/CarRental';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
+const SuspenseFallback = lazy(() => import('./ui/SuspenseFallback'));
 const Error = lazy(() => import('./pages/Error'));
 const Homepage = lazy(() => import('./pages/Homepage'));
+const CarRental = lazy(() => import('./pages/CarRental'));
+const TrainAndBuses = lazy(() => import('./pages/TrainAndBuses'));
 
 const router = createBrowserRouter([
      {
@@ -19,42 +21,74 @@ const router = createBrowserRouter([
           children: [
                {
                     path: '/',
-                    element: <Navigate to='/stays' />,
+                    element: (
+                         <Suspense fallback={<SuspenseFallback />}>
+                              <Navigate to='/stays' />,
+                         </Suspense>
+                    ),
                },
 
                {
                     path: '/stays',
-                    element: <Homepage />,
+                    element: (
+                         <Suspense fallback={<SuspenseFallback />}>
+                              <Homepage />,
+                         </Suspense>
+                    ),
                },
 
                {
                     path: 'car-rental',
-                    element: <CarRental />,
+                    element: (
+                         <Suspense fallback={<SuspenseFallback />}>
+                              <CarRental />,
+                         </Suspense>
+                    ),
                },
 
                {
                     path: 'trains-buses',
-                    element: <h1>Trains And Buses</h1>,
+                    element: (
+                         <Suspense fallback={<SuspenseFallback />}>
+                              <TrainAndBuses />,
+                         </Suspense>
+                    ),
                },
 
                {
                     path: 'explore',
-                    element: <h1>Explore</h1>,
+                    element: (
+                         <Suspense fallback={<SuspenseFallback />}>
+                              <h1>Explore</h1>,
+                         </Suspense>
+                    ),
                },
 
                {
                     path: 'feedback',
-                    element: <h1>Feedback</h1>,
+                    element: (
+                         <Suspense fallback={<SuspenseFallback />}>
+                              <h1>Feedback</h1>,
+                         </Suspense>
+                    ),
                },
 
                {
                     path: 'trips',
-                    element: <h1>Trips</h1>,
+                    element: (
+                         <Suspense fallback={<SuspenseFallback />}>
+                              <h1>Trips</h1>,
+                         </Suspense>
+                    ),
                },
 
                {
                     path: 'hotels-search/:searchName',
-                    element: <h1>Hotel Search</h1>,
+                    element: (
+                         <Suspense fallback={<SuspenseFallback />}>
+                              <h1>Hotel Search</h1>,
+                         </Suspense>
+                    ),
                },
 
                {
