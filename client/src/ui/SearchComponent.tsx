@@ -1,11 +1,13 @@
-import styled from 'styled-components';
-
-import { LiaBedSolid } from 'react-icons/lia';
-import { CiSearch } from 'react-icons/ci';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import styled from 'styled-components';
+import { LiaBedSolid } from 'react-icons/lia';
+import { IoCarOutline } from 'react-icons/io5';
+import { PiTrain } from 'react-icons/pi';
+import { CiSearch } from 'react-icons/ci';
 
 interface IState {
-     state: boolean;
+     $state: boolean;
 }
 
 const StyledSearch = styled.form<IState>`
@@ -21,7 +23,7 @@ const StyledSearch = styled.form<IState>`
           column-gap: 2px;
           padding: 6px;
           background-color: ${(props) =>
-               props.state
+               props.$state
                     ? 'var(--primary-gray-200)'
                     : 'var(--primary-gray-50)'};
           border-radius: 6px;
@@ -61,7 +63,8 @@ const StyledSearch = styled.form<IState>`
 `;
 
 const SearchComponent = () => {
-     const [state, setState] = useState(false);
+     const [state, setState] = useState<boolean>(false);
+     const { pathname } = useLocation();
 
      function handleClick() {
           setState(true);
@@ -72,13 +75,23 @@ const SearchComponent = () => {
      }
 
      return (
-          <StyledSearch state={state}>
+          <StyledSearch $state={state}>
                <div
                     className='form_group'
                     onClick={handleClick}
                     onBlur={handleBlur}
                >
-                    <LiaBedSolid className='form_group-icon' />
+                    {pathname === '/stays' && (
+                         <LiaBedSolid className='form_group-icon' />
+                    )}
+
+                    {pathname === '/car-rental' && (
+                         <IoCarOutline className='form_group-icon' />
+                    )}
+
+                    {pathname === '/trains-buses' && (
+                         <PiTrain className='form_group-icon' />
+                    )}
 
                     <span></span>
                     <input

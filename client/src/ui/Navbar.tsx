@@ -108,8 +108,6 @@ const Navbar = () => {
                     <Logo />
                </div>
 
-               {/* <NavForm /> */}
-
                <div className='search_container'>
                     <SearchComponent />
                </div>
