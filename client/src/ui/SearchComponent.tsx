@@ -96,8 +96,11 @@ const SearchComponent = () => {
                     <span></span>
                     <input
                          type='text'
-                         defaultValue='Abuja, Nigeria'
-                         placeholder='Enter a city, hotel'
+                         placeholder={
+                              pathname === '/stays'
+                                   ? 'Enter name of hotel or country you wanted!'
+                                   : ''
+                         }
                     />
                </div>
 

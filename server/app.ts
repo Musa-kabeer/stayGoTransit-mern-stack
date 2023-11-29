@@ -5,9 +5,10 @@ import morgan from 'morgan';
 import { nanoid } from 'nanoid';
 import { ErrorMiddleware } from './middleware/error';
 
+import { userRoutes } from './routes/auth';
+
 const app = express();
 
-console.log(nanoid());
 /**
  *
  * LISTS MIDDLEWARE
@@ -37,12 +38,17 @@ app.use(cookieParser());
 
 // BODY-PARSER
 app.use(express.json({ limit: '50mb' }));
+app.use(express.static(`${__dirname}`));
 
 app.get('/', (req: Request, res: Response) => {
      res.send(`
          <h1>Welcome to Stay Go Transit</h1>
     `);
 });
+
+console.log(__dirname);
+
+app.use('/api/v1/users', userRoutes);
 
 // UNKNOWN ROUTE
 app.all('*', (req: Request, res: Response, next: NextFunction) => {

@@ -1,0 +1,50 @@
+<html lang='en'>
+     <head>
+          <meta charset='UTF-8' />
+          <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+          <meta
+               name='viewport'
+               content='width=device-width, initial-scale=1.0'
+          />
+          {{! GOOGLE FONT CDN }}
+          <link rel='preconnect' href='https://fonts.googleapis.com' />
+          <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+          <link
+               href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap'
+               rel='stylesheet'
+          />
+
+          {{! TEMPLATE STYLES }}
+          <style>
+               body { font-family: 'Poppins', sans-serif; background-color:
+               #f4f4f4; color: #333; } .container { max-width: 600px; margin: 0
+               auto; padding: 20px; background-color: #fff; box-shadow: 0 0 10px
+               #0000001a; }
+          </style>
+     </head>
+
+     <body>
+          <div class='container'>
+               <p>Thank you for signing up on staygotransit. To complete your
+                    registration, please verify your email address by entering
+                    the following OTP:
+               </p>
+
+               <p><strong>{{otp}}</strong></p>
+
+               <p>
+                    This OTP is valid for a short period, so please verify your
+                    email promptly.
+               </p>
+
+               <p>
+                    If you didn't sign up for Your App, you can safely ignore
+                    this email.
+               </p>
+
+               <p>Thank you,</p>
+
+               <p>From </p>
+          </div>
+     </body>
+</html>

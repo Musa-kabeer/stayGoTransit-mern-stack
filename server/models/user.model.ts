@@ -1,21 +1,24 @@
-import mongoose, { Document, Model, Schema, mongo } from 'mongoose';
-
+import mongoose, { Document, Schema, model } from 'mongoose';
 import * as argon2 from 'argon2';
+import * as crypto from 'crypto';
 
 const emailRegexPattern: RegExp = /^[^\s@]+ @[^\s@]+\.[^\s@]+$/;
 
-export interface IUser extends Document {
+interface IUser extends Document {
      name: string;
      username: string;
      user_id: string;
      email: string;
      isVerified: boolean;
+     otp: string;
      avatar: {
           public_id: string;
           url: string;
      };
      role: string;
      password: string;
+
+     createOTPCode(): Promise<number>;
 }
 
 const userSchema: Schema<IUser> = new mongoose.Schema(
@@ -23,6 +26,8 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
           name: {
                type: String,
           },
+
+          otp: String,
 
           username: {
                type: String,
@@ -89,4 +94,22 @@ userSchema.methods.comparePassword = async (
      return await argon2.verify(plainPassword, hashedPassword);
 };
 
-export const User: Model<IUser> = mongoose.model('User', userSchema);
+// create otp token
+userSchema.methods.createOTPCode = async function () {
+     const buffer = crypto.randomBytes(2);
+
+     const randomInt = buffer.readUInt16BE(0);
+
+     const randomDigit: number = 1000 + (randomInt % 9000);
+
+     console.log(randomDigit);
+
+     // generate hashed token to database
+     this.otp = await argon2.hash(`${randomDigit}`);
+
+     return randomDigit;
+};
+
+const User = model<IUser>('User', userSchema);
+
+export { User };
