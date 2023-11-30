@@ -2,7 +2,6 @@ import express, { NextFunction, Request, Response } from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import morgan from 'morgan';
-import { nanoid } from 'nanoid';
 import { ErrorMiddleware } from './middleware/error';
 
 import { userRoutes } from './routes/auth';

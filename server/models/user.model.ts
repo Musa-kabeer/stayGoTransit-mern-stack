@@ -1,115 +1,69 @@
 import mongoose, { Document, Schema, model } from 'mongoose';
 import * as argon2 from 'argon2';
 import * as crypto from 'crypto';
-
-const emailRegexPattern: RegExp = /^[^\s@]+ @[^\s@]+\.[^\s@]+$/;
+import { nanoid } from 'nanoid';
 
 interface IUser extends Document {
-     name: string;
-     username: string;
      user_id: string;
      email: string;
      isVerified: boolean;
      otp: string;
-     avatar: {
-          public_id: string;
-          url: string;
-     };
-     role: string;
-     password: string;
-
+     otpCreatedDuration: Date;
      createOTPCode(): Promise<number>;
+     comparePassword(arg0: string, arg1: string): Boolean;
+     verifyOTPToken(arg0: string, arg1: string): Boolean;
 }
 
 const userSchema: Schema<IUser> = new mongoose.Schema(
      {
-          name: {
-               type: String,
-          },
-
           otp: String,
 
-          username: {
-               type: String,
-               unique: true,
-          },
+          otpCreatedDuration: Date,
 
-          user_id: {
-               type: String,
-               required: [true, 'A user must have id'],
-          },
+          user_id: String,
 
           email: {
                type: String,
                unique: true,
                required: [true, 'Email is required'],
-               validate: {
-                    validator: (val: string) => emailRegexPattern.test(val),
-                    message: 'Email must be a valid email',
-               },
-          },
-
-          avatar: {
-               public_id: String,
-               url: String,
-          },
-
-          role: {
-               type: String,
-               enum: ['user', 'admin'],
-               default: 'user',
           },
 
           isVerified: {
                type: Boolean,
                default: false,
           },
-
-          password: {
-               type: String,
-               minlength: [
-                    8,
-                    'User password must be minimum length of 8 characters',
-               ],
-               select: false,
-          },
      },
      { timestamps: true }
 );
 
-// HASH USER PASSWORD ON SAVE
-userSchema.pre<IUser>('save', async function (next) {
-     if (!this.isModified('password')) return next();
-
-     this.password = await argon2.hash(this.password);
+userSchema.pre('save', function (next) {
+     this.user_id = nanoid();
 
      next();
 });
 
-// COMPARE USER PASSWORD
-userSchema.methods.comparePassword = async (
-     plainPassword: string,
-     hashedPassword: string
-): Promise<boolean> => {
-     return await argon2.verify(plainPassword, hashedPassword);
-};
-
 // create otp token
-userSchema.methods.createOTPCode = async function () {
+userSchema.methods.createOTPCode = async function (): Promise<number> {
      const buffer = crypto.randomBytes(2);
 
      const randomInt = buffer.readUInt16BE(0);
 
      const randomDigit: number = 1000 + (randomInt % 9000);
 
-     console.log(randomDigit);
-
      // generate hashed token to database
      this.otp = await argon2.hash(`${randomDigit}`);
+
+     this.otpCreatedDuration = Date();
 
      return randomDigit;
 };
 
-const User = model<IUser>('User', userSchema);
+// verify otp
+userSchema.methods.verifyOTPToken = async (
+     plainOTP: string,
+     hashedOTP: string
+): Promise<Boolean> => {
+     return await argon2.verify(plainOTP, hashedOTP);
+};
 
-export { User };
+export const User = model<IUser>('User', userSchema);

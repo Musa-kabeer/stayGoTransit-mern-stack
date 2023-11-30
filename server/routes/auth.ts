@@ -1,9 +1,11 @@
-import { Router } from 'express';
-import { login, signup } from '../controllers/auth.controller';
+import express from 'express';
+const router = express.Router();
+import { signup, login, otpVerification } from '../controllers/auth.controller';
+import { protect } from '../middleware/protected';
 
-const router = Router();
-
-// router.post('/signup', signup);
-// router.post('/login', login);
+// Authentications
+router.post('/signup', signup);
+router.post('/login', login);
+router.post('/otp-verification', protect, otpVerification);
 
 export { router as userRoutes };
