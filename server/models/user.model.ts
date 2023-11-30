@@ -7,8 +7,8 @@ interface IUser extends Document {
      user_id: string;
      email: string;
      isVerified: boolean;
-     otp: string;
-     otpCreatedDuration: Date;
+     otp: string | undefined;
+     otpCreatedDate: Date | undefined;
      createOTPCode(): Promise<number>;
      comparePassword(arg0: string, arg1: string): Boolean;
      verifyOTPToken(arg0: string, arg1: string): Boolean;
@@ -18,7 +18,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
      {
           otp: String,
 
-          otpCreatedDuration: Date,
+          otpCreatedDate: Date,
 
           user_id: String,
 
@@ -33,8 +33,25 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
                default: false,
           },
      },
-     { timestamps: true }
+     {
+          timestamps: true,
+          toJSON: {
+               virtuals: true,
+               versionKey: false,
+               transform: function (doc, ret) {
+                    delete ret.__v;
+                    delete ret.createdAt;
+                    delete ret.updatedAt;
+               },
+          },
+     }
 );
+
+// userSchema.pre(/^find/, function (next) {
+//      this.select('-__v -createdAt - updatedAt');
+
+//      next();
+// });
 
 userSchema.pre('save', function (next) {
      this.user_id = nanoid();
@@ -53,7 +70,7 @@ userSchema.methods.createOTPCode = async function (): Promise<number> {
      // generate hashed token to database
      this.otp = await argon2.hash(`${randomDigit}`);
 
-     this.otpCreatedDuration = Date();
+     this.otpCreatedDate = Date();
 
      return randomDigit;
 };
@@ -63,7 +80,7 @@ userSchema.methods.verifyOTPToken = async (
      plainOTP: string,
      hashedOTP: string
 ): Promise<Boolean> => {
-     return await argon2.verify(plainOTP, hashedOTP);
+     return await argon2.verify(hashedOTP, plainOTP);
 };
 
 export const User = model<IUser>('User', userSchema);

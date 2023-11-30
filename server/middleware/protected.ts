@@ -14,7 +14,7 @@ export const protect = async (
      next: NextFunction
 ) => {
      try {
-          const token = req.cookies.staygotoken;
+          const { staygotransit: token } = req.cookies;
 
           //  return error if there is no token
           if (!token) {
@@ -27,12 +27,12 @@ export const protect = async (
           jwt.verify(
                token,
                process.env.JWT_SECRET as string,
-               (err: any, decoded: any) => {
+               (err: any, decode: any) => {
                     if (err) {
                          return next(new AppError(err.message, 400));
                     }
 
-                    decoded = decoded;
+                    decoded = decode;
                }
           );
 

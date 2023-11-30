@@ -6,7 +6,6 @@ import { User } from '../models/user.model';
 import { catchAsyncError } from '../utils/catchAsyncError';
 import { AppError } from '../utils/errorHandler';
 import { SendEmail } from '../utils/email';
-import moment from 'moment';
 
 /**
  * signup normal user using email only
@@ -18,13 +17,31 @@ interface ICreateUserToken {
 }
 
 interface AuthRequest extends Request {
-     user: Document;
+     user?: Document;
 }
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+interface ICookie {
+     httpOnly: boolean;
+     maxAge: number;
+     domain?: string;
+     path?: string;
+     secure?: boolean;
+     sameSite?: boolean | 'lax' | 'strict' | 'none' | undefined;
+}
 
-function isValidEmail(email: string) {
+// Email validation
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+function isValidEmail(email: string): boolean {
      return emailRegex.test(email);
+}
+
+// is that 5 minute ago or greater
+function isDate5MinutesAgoOrGreater(otpCreatedDate: Date): Boolean {
+     const fiveMinutesLater = new Date(
+          otpCreatedDate.getTime() + 5 * 60 * 1000
+     );
+
+     return new Date() >= fiveMinutesLater;
 }
 
 // creating response token
@@ -35,14 +52,33 @@ const createToken = (
      message?: string
 ) => {
      // Generate a random string some length for JWT secret
+     const token = jwt.sign(
+          { id: user._id },
+          process.env.JWT_SECRET as string,
+          {
+               expiresIn: '30 days',
+          }
+     );
 
-     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET as string);
+     const cookieOptions: ICookie = {
+          maxAge: 30 * 24 * 60 * 60 * 1000,
+          httpOnly: true,
+          path: '/',
+     };
 
-     return res.status(statusCode).json({
-          status: 'success',
-          token,
-          message,
-     });
+     if (process.env.NODE_ENV === 'production') {
+          cookieOptions.secure = true;
+          cookieOptions.sameSite = 'none';
+     }
+
+     return res
+          .status(statusCode)
+          .cookie('staygotransit', token, cookieOptions)
+          .json({
+               status: 'success',
+               token,
+               message,
+          });
 };
 
 // signup
@@ -71,6 +107,7 @@ export const signup = async (
           const otp: number = await user.createOTPCode();
 
           await user.save();
+
           // send verification email 💬
           await new SendEmail(user.email).otpVerification(otp);
 
@@ -88,38 +125,65 @@ export const otpVerification = async (
      next: NextFunction
 ) => {
      try {
-          const user = await User.findById(req.user.id);
+          // there is user object on request, that is when the implemention should work 👹😭
+          if (req.user) {
+               const user = await User.findById(req.user.id);
 
-          if (!user) {
-               return next(new AppError('Unauthorized request', 401));
+               if (!user) {
+                    return next(new AppError('Unauthorized request', 401));
+               }
+
+               if (!user.otp && user.isVerified === true) {
+                    return next(
+                         new AppError(
+                              'Your account has already been verified',
+                              200
+                         )
+                    );
+               }
+
+               // Check if createdDate is within the last 5 minutes
+               if (user.otpCreatedDate && user.otp) {
+                    console.log(
+                         isDate5MinutesAgoOrGreater(user.otpCreatedDate)
+                    );
+                    // check if user created is greater than 5 minutes ago
+                    if (isDate5MinutesAgoOrGreater(user.otpCreatedDate)) {
+                         user.otp = undefined;
+                         user.otpCreatedDate = undefined;
+
+                         await user.save();
+
+                         return next(
+                              new AppError(
+                                   'Please request for new otp. 5 minutes as passed! 🙃',
+                                   400
+                              )
+                         );
+                    }
+
+                    const otpChecked = user.verifyOTPToken(
+                         String(req.body.otp),
+                         user.otp
+                    );
+
+                    if (!otpChecked) {
+                         return next(new AppError('Incorrect otp sent', 400));
+                    }
+
+                    user.isVerified = true;
+                    user.otp = undefined;
+                    user.otpCreatedDate = undefined;
+
+                    await user.save();
+
+                    const message = `user ${user.email} has been successfully verified!`;
+
+                    return createToken(res, user, 201, message);
+               }
+
+               return next(new AppError('Unauthorized', 401));
           }
-
-          if (!user.otp) {
-               return next(
-                    new AppError('Your account has already been verified', 200)
-               );
-          }
-
-          // checking if 5 minutes as passed
-          const now = moment();
-          if (!now.isAfter(user.otpCreatedDuration)) {
-               return next(
-                    new AppError(
-                         'Please request for new otp. 5 minutes as passed! 🙃',
-                         400
-                    )
-               );
-          }
-
-          const otpChecked = await user.verifyOTPToken(req.body.otp, user.otp);
-
-          if (!otpChecked) {
-               return next(new AppError('Incorrect otp sent', 400));
-          }
-
-          const message = `user ${user.email} has been successfully verified!`;
-
-          return createToken(res, user, 201, message);
      } catch (err: any) {
           return next(new AppError(err.message, 500));
      }
@@ -132,21 +196,25 @@ export const login = async (
      next: NextFunction
 ) => {
      try {
-          const { email } = req.body;
-
           // if there is no email or password
-          if (!email) {
-               return next(new AppError('Email  is required! 😡', 400));
+          if (!req.body.email) {
+               return next(new AppError('Email  is required! 😡.', 400));
           }
 
-          const user = await User.findOne({ email: email });
+          const user = await User.findOne({ email: req.body.email });
 
           // if there is no user
           if (!user) {
-               return next(new AppError('User does not exist 😡', 400));
+               return next(new AppError('User does not exist 😡.', 400));
           }
 
-          console.log(req.ip);
+          // check if user has been validated
+          if (!user.isVerified) {
+               return next(
+                    new AppError('Please verify you email first 👿.', 400)
+               );
+          }
+
           // send verification email
           await new SendEmail(user.email).loginEmail();
 

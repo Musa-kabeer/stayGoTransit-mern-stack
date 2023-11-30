@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import morgan from 'morgan';
+import helmet from 'helmet';
 import { ErrorMiddleware } from './middleware/error';
 
 import { userRoutes } from './routes/auth';
@@ -27,15 +28,24 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// MORGAN
+// helmet
+app.use(helmet());
+
+// morgan
 if (process.env.NODE_ENV === 'development') {
      app.use(morgan('dev'));
 }
 
-// COOKIE-PARSER INITIALIZATION
+const now: any = new Date();
+
+const target: any = new Date('2023-11-30T15:27:30.000+00:00');
+
+console.log(now > target);
+
+// cookie-parser initialization
 app.use(cookieParser());
 
-// BODY-PARSER
+// body parser & static files
 app.use(express.json({ limit: '50mb' }));
 app.use(express.static(`${__dirname}`));
 
@@ -44,8 +54,6 @@ app.get('/', (req: Request, res: Response) => {
          <h1>Welcome to Stay Go Transit</h1>
     `);
 });
-
-console.log(__dirname);
 
 app.use('/api/v1/users', userRoutes);
 
