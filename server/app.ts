@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import cookieParser from 'cookie-parser';
-import cors from 'cors';
+import cors, { CorsOptions } from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import { ErrorMiddleware } from './middleware/error';
@@ -16,13 +16,10 @@ const app = express();
  */
 
 // CROSS-ORIGIN
-const corsOptions = {
-     origin:
-          process.env.NODE_ENV === 'production'
-               ? process.env.PROD_ORIGIN
-               : process.env.DEV_ORIGIN,
+const corsOptions: CorsOptions = {
+     origin: [process.env.PROD_ORIGIN!, process.env.DEV_ORIGIN!],
      methods: ['GET', 'POST', 'DELETE', 'PATCH'],
-     optionSuccessStatus: 200,
+     optionsSuccessStatus: 200,
      allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token'],
      credentials: true,
 };
@@ -35,12 +32,6 @@ app.use(helmet());
 if (process.env.NODE_ENV === 'development') {
      app.use(morgan('dev'));
 }
-
-const now: any = new Date();
-
-const target: any = new Date('2023-11-30T15:27:30.000+00:00');
-
-console.log(now > target);
 
 // cookie-parser initialization
 app.use(cookieParser());
