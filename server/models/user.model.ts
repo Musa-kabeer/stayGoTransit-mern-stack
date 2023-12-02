@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema, model } from 'mongoose';
+import mongoose, { Document, Schema, model, Query } from 'mongoose';
 import * as argon2 from 'argon2';
 import * as crypto from 'crypto';
 import { nanoid } from 'nanoid';
@@ -47,11 +47,14 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
      }
 );
 
-// userSchema.pre(/^find/, function (next) {
-//      this.select('-__v -createdAt - updatedAt');
+// removing some field from user returned data
+userSchema.pre(/^find/, function (next) {
+     const query = this as Query<any, any, {}, any>;
 
-//      next();
-// });
+     query.find({}).select('-__v -createdAt -updatedAt');
+
+     next();
+});
 
 userSchema.pre('save', function (next) {
      this.user_id = nanoid();
@@ -83,4 +86,4 @@ userSchema.methods.verifyOTPToken = async (
      return await argon2.verify(hashedOTP, plainOTP);
 };
 
-export const User = model<IUser>('User', userSchema);
+export const User = model<IUser & Document>('User', userSchema);

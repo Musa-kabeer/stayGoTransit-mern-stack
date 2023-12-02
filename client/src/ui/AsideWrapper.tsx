@@ -7,7 +7,7 @@ import { FaRegUserCircle } from 'react-icons/fa';
 // import { AiOutlineHeart } from 'react-icons/ai';
 import { BiWorld } from 'react-icons/bi';
 // import { RiFeedbackLine } from 'react-icons/ri';
-import { useAsideContext } from '../helpers/utils';
+import { useAsideContext } from '../hooks/useAsideContext';
 import Modal from '../context/ModalContext';
 import AuthSlider from './AuthSlider';
 

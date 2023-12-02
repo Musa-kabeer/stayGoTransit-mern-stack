@@ -3,14 +3,12 @@ import * as jwt from 'jsonwebtoken';
 import { Document } from 'mongoose';
 
 import { User } from '../models/user.model';
-import { catchAsyncError } from '../utils/catchAsyncError';
 import { AppError } from '../utils/errorHandler';
 import { SendEmail } from '../utils/email';
 
 /**
  * signup normal user using email only
  */
-
 interface ICreateUserToken {
      email: string;
      _id: string;
@@ -49,7 +47,8 @@ const createToken = (
      res: Response,
      user: ICreateUserToken,
      statusCode: number,
-     message?: string
+     message?: string,
+     navigation?: string
 ) => {
      // Generate a random string some length for JWT secret
      const token = jwt.sign(
@@ -78,45 +77,97 @@ const createToken = (
                status: 'success',
                token,
                message,
+               navigation,
           });
 };
 
-// signup
+export const signupAndLogin = async (
+     req: Request,
+     res: Response,
+     next: NextFunction
+) => {
+     try {
+          const { email } = req.body;
+          // there must be an email before condering user want to login or signup
+          if (!email) {
+               return next(new AppError('Email is required! 😡', 400));
+          }
+
+          // check if the user exist
+          const user = await User.findOne({ email });
+
+          ////////////
+          ////////
+          //////
+          ////
+          ///
+
+          // if there is user that means that user want to login
+          if (user) {
+               if (!user.isVerified) {
+                    return;
+               }
+
+               // create user login otp
+               const otp: number = await user.createOTPCode();
+
+               await user.save();
+
+               // send verification email
+               await new SendEmail(user.email).loginEmail(otp);
+
+               // log user in
+               const navigation = 'verify-otp';
+               return createToken(res, user, 200, '', navigation);
+          }
+
+          ///////////////
+          /////////////
+          //////////////
+          ///////
+
+          return res.status(200).json({
+               status: 'success',
+               navigation: 'consent-screen',
+               email,
+          });
+     } catch (err: any) {
+          console.log(err);
+          return next(new AppError(err.message, 500));
+     }
+};
+
 export const signup = async (
      req: Request,
      res: Response,
      next: NextFunction
 ) => {
      try {
-          const userExist = await User.findOne({ email: req.body.email });
+          const { email } = req.body;
 
-          // if user already registered! 😭
-          if (userExist) {
-               return next(new AppError('Email already existed! 😡', 400));
-          }
-
-          // check for email validity
-          if (!isValidEmail(req.body.email)) {
-               return next(new AppError('Email provided must be valid', 400));
+          // 1) check for email validity 🕵️‍♀️
+          if (!isValidEmail(email)) {
+               return next(
+                    new AppError('Please provide valid email address', 400)
+               );
           }
 
           // create user then 🚀
-          const user = await User.create({ email: req.body.email });
+          const newUser = await User.create({ email: req.body.email });
 
           // create user otp code 🕵🏻‍♂️
-          const otp: number = await user.createOTPCode();
+          const otp: number = await newUser.createOTPCode();
 
-          await user.save();
+          // save otp created in our database
+          await newUser.save();
 
           // send verification email 💬
-          await new SendEmail(user.email).otpVerification(otp);
+          await new SendEmail(newUser.email).otpVerification(otp);
 
-          const message = `Please check your email (${user.email}), for email verification`;
+          const message = `Please check your email (${newUser.email}), for email verification`;
 
-          return createToken(res, user, 201, message);
-     } catch (err: any) {
-          return next(new AppError(err.message, 500));
-     }
+          return createToken(res, newUser, 201, message);
+     } catch (error) {}
 };
 
 export const otpVerification = async (
@@ -144,9 +195,6 @@ export const otpVerification = async (
 
                // Check if createdDate is within the last 5 minutes
                if (user.otpCreatedDate && user.otp) {
-                    console.log(
-                         isDate5MinutesAgoOrGreater(user.otpCreatedDate)
-                    );
                     // check if user created is greater than 5 minutes ago
                     if (isDate5MinutesAgoOrGreater(user.otpCreatedDate)) {
                          user.otp = undefined;
@@ -179,47 +227,11 @@ export const otpVerification = async (
 
                     const message = `user ${user.email} has been successfully verified!`;
 
-                    return createToken(res, user, 201, message);
+                    return createToken(res, user, 200, message);
                }
 
                return next(new AppError('Unauthorized', 401));
           }
-     } catch (err: any) {
-          return next(new AppError(err.message, 500));
-     }
-};
-
-// login
-export const login = async (
-     req: Request,
-     res: Response,
-     next: NextFunction
-) => {
-     try {
-          // if there is no email or password
-          if (!req.body.email) {
-               return next(new AppError('Email  is required! 😡.', 400));
-          }
-
-          const user = await User.findOne({ email: req.body.email });
-
-          // if there is no user
-          if (!user) {
-               return next(new AppError('User does not exist 😡.', 400));
-          }
-
-          // check if user has been validated
-          if (!user.isVerified) {
-               return next(
-                    new AppError('Please verify you email first 👿.', 400)
-               );
-          }
-
-          // send verification email
-          await new SendEmail(user.email).loginEmail();
-
-          // log user in
-          return createToken(res, user, 200);
      } catch (err: any) {
           return next(new AppError(err.message, 500));
      }
@@ -233,17 +245,17 @@ export const login = async (
  * USERNAME
  * AND PASSWORD
  */
-const registerAdmin = catchAsyncError(
-     async (req: Request, res: Response, next: NextFunction) => {
-          try {
-               // Validate for username required manually
-               const user = await User.findOne({ email: req.body.email });
-               return res.status(200).json({
-                    status: 'success',
-                    data: user,
-               });
-          } catch (err: any) {
-               return next(new AppError(err.message, 500));
-          }
-     }
-);
+// const registerAdmin = catchAsyncError(
+//      async (req: Request, res: Response, next: NextFunction) => {
+//           try {
+//                // Validate for username required manually
+//                const user = await User.findOne({ email: req.body.email });
+//                return res.status(200).json({
+//                     status: 'success',
+//                     data: user,
+//                });
+//           } catch (err: any) {
+//                return next(new AppError(err.message, 500));
+//           }
+//      }
+// );

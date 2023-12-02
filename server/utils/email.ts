@@ -1,6 +1,5 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { dirname } from 'path';
 import * as nodemailer from 'nodemailer';
 import * as handlebar from 'handlebars';
 
@@ -59,12 +58,22 @@ export class SendEmail {
      async otpVerification(otp: number) {
           await this.send(
                'otpVerification',
-               'Welcome to StayGoTransit - Verify Your Email',
+               'Welcome to StayGoTransit - Verify Your bEmail',
                { otp }
           );
      }
 
-     async loginEmail() {
+     async loginEmail(otp: number) {
+          await this.send(
+               'loginOTP',
+               `${otp} is your staygotransit verification code`,
+               {
+                    otp,
+               }
+          );
+     }
+
+     async loginNotification() {
           const username: string = this.email.split('@')[0];
 
           await this.send('login', 'Login Notification', {

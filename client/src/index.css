@@ -16,8 +16,12 @@
      background: transparent;
 }
 
+a {
+     text-decoration: none;
+}
+
 html {
-     font-size: 100%;
+     font-size: 74.5%;
 }
 
 :root {
@@ -89,7 +93,7 @@ h5 {
      line-height: 1;
      /* text-transform: capitalize; */
      letter-spacing: var(--letter-spacing);
-     color: var(--primary-gray-200);
+     color: var(--secondary-gray-600);
 }
 
 h1 {

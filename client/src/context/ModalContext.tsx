@@ -86,7 +86,7 @@ const Body: React.FC<BodyProps> = ({ children, windowName }) => {
           cloneElement(children as ReactElement, {
                onCloseTab: () => close(),
           }),
-          document.body
+          document.querySelector('section') as HTMLElement
      );
 };
 

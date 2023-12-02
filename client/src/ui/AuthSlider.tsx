@@ -1,15 +1,17 @@
 import { LiaTimesSolid } from 'react-icons/lia';
-import { FaAngleLeft } from 'react-icons/fa6';
+// import { FaAngleLeft } from 'react-icons/fa6';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 import Logo from './Logo';
 import { useOutSideclick } from '../hooks/useOutSideclick';
-import { useState } from 'react';
-import ContinueWithEmail from './ContinueWithEmail';
-import CreateEmailAccountConsent from './CreateEmailAccountConsent';
-import RegisterAndLogin from './RegisterAndLogin';
-import OTPConfirmation from './OTPConfirmation';
+import ContinueWithEmail from '../features/authentication/ContinueWithEmail';
+import CreateEmailAccountConsent from '../features/authentication/CreateEmailAccountConsent';
+import RegisterOrLoginHome from './RegisterOrLoginHome';
+import OTPConfirmation from '../features/authentication/OTPConfirmation';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+// import { useNavigate } from 'react-router-dom';
 
 const Overlay = styled.div`
      position: fixed;
@@ -18,21 +20,21 @@ const Overlay = styled.div`
      width: 100%;
      height: 100vh;
      backdrop-filter: blur(1px);
-     z-index: 1000;
+     z-index: 2000;
      transition: all 0.5s;
 `;
 
 const Slider = styled.div`
-     width: 50%;
+     width: 40%;
      background-color: var(--primary-gray-100);
      border-radius: var(--border-radius);
-     height: 75vh;
+     height: 100%;
      margin: 0 auto;
-     margin-top: 100px;
+     margin-top: 140px;
 
      display: flex;
      flex-direction: column;
-     gap: 25px;
+     gap: 15px;
      padding: 30px 17px;
 
      @media screen and (max-width: 1024px) {
@@ -61,107 +63,6 @@ const Slider = styled.div`
                font-weight: 600;
           }
      }
-
-     img {
-          width: 100%;
-          height: 200px;
-          border-radius: var(--border-radius);
-          object-fit: cover;
-     }
-
-     .auth-1 {
-          display: flex;
-          flex-direction: column;
-          gap: 18px;
-
-          h1 {
-               font-size: var(--large-text);
-               font-weight: 600;
-
-               @media screen and (max-width: 764px) {
-                    font-size: var(--small-text);
-               }
-          }
-
-          p {
-               font-size: var(--small-text);
-               line-height: 1.2rem;
-
-               @media screen and (max-width: 764px) {
-                    font-size: var(--extra-small-text);
-                    line-height: 1rem;
-               }
-          }
-
-          button {
-               border-radius: var(--border-radius);
-               padding: 10px 0;
-               border: 1.5px solid var(--primary-gray-300);
-               font-size: var(--small-text);
-               cursor: pointer;
-
-               &:hover {
-                    background: var(--primary-gray-300);
-               }
-
-               @media screen and (max-width: 1024px) {
-                    font-size: 12px;
-               }
-          }
-     }
-
-     .divide {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          color: var(--secondary-gray-500);
-          font-size: var(--small-text);
-
-          .line {
-               background: var(--primary-gray-300);
-               width: 100%;
-               height: 1px;
-          }
-     }
-
-     .auth-2 {
-          display: flex;
-          justify-content: space-between;
-          gap: 10px;
-
-          button {
-               width: 100%;
-               border: 1.5px solid var(--primary-gray-300);
-               font-size: 15px;
-               padding: 10px;
-               border-radius: var(--border-radius);
-               cursor: pointer;
-
-               &:hover {
-                    background: var(--primary-gray-300);
-               }
-
-               @media screen and (max-width: 1024px) {
-                    font-size: 12px;
-               }
-          }
-     }
-
-     footer {
-          font-size: var(--extra-small-text);
-          color: var(--secondary-gray-500);
-          letter-spacing: 1px;
-          line-height: 18px;
-
-          @media screen and (max-width: 764px) {
-               font-size: 10px;
-          }
-
-          .link {
-               color: var(--secondary-gray-500);
-               text-decoration: underline;
-          }
-     }
 `;
 
 interface SliderProps {
@@ -170,19 +71,7 @@ interface SliderProps {
 
 const AuthSlider: React.FC<SliderProps> = ({ onCloseTab }) => {
      const clickRef = useOutSideclick({ handler: () => onCloseTab?.() });
-     const [current, setCurrent] = useState<number>(1);
-
-     function handleContinueWithEmail() {
-          setCurrent((current) => current + 1);
-     }
-
-     function handleContinueToConsent() {
-          setCurrent((current) => current + 1);
-     }
-
-     function handleContinueToOTPConfirmation() {
-          setCurrent((current) => current + 1);
-     }
+     const { currentPage } = useContext(AuthContext)!;
 
      return (
           <Overlay ref={clickRef} data-overlay='true'>
@@ -193,46 +82,21 @@ const AuthSlider: React.FC<SliderProps> = ({ onCloseTab }) => {
                >
                     <Slider>
                          <nav>
-                              {current !== 1 ? (
-                                   <button
-                                        onClick={() =>
-                                             setCurrent(
-                                                  (current) => current - 1
-                                             )
-                                        }
-                                        style={{
-                                             display: 'flex',
-                                             alignItems: 'center',
-                                             cursor: 'pointer',
-                                             gap: '2px',
-                                             color: 'var(--secondary-gray-600)',
-                                        }}
-                                   >
-                                        <FaAngleLeft /> Back
-                                   </button>
-                              ) : (
-                                   <Logo />
-                              )}
+                              <Logo />
 
                               <span onClick={() => onCloseTab?.()}>
                                    <LiaTimesSolid />
                               </span>
                          </nav>
 
-                         {current === 1 ? (
-                              <RegisterAndLogin
-                                   onClick={handleContinueWithEmail}
-                              />
-                         ) : current === 2 ? (
-                              <ContinueWithEmail
-                                   onClick={handleContinueToConsent}
-                              />
-                         ) : current === 3 ? (
-                              <CreateEmailAccountConsent
-                                   onClick={handleContinueToOTPConfirmation}
-                              />
-                         ) : (
+                         {currentPage === 'sign-in' ? (
+                              <ContinueWithEmail />
+                         ) : currentPage === 'consent-screen' ? (
+                              <CreateEmailAccountConsent />
+                         ) : currentPage === 'verify-otp' ? (
                               <OTPConfirmation />
+                         ) : (
+                              <RegisterOrLoginHome />
                          )}
                     </Slider>
                </motion.div>

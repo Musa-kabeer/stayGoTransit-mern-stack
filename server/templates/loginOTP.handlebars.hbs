@@ -1,0 +1,47 @@
+<html lang='en'>
+     <head>
+          <meta charset='UTF-8' />
+          <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+          <meta
+               name='viewport'
+               content='width=device-width, initial-scale=1.0'
+          />
+          {{! GOOGLE FONT CDN }}
+          <link rel='preconnect' href='https://fonts.googleapis.com' />
+          <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+          <link
+               href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap'
+               rel='stylesheet'
+          />
+
+          {{! TEMPLATE STYLES }}
+          <style>
+               body { font-family: 'Poppins', sans-serif; background-color:
+               #f4f4f4; color: #333; } .container { max-width: 600px; margin: 0
+               auto; padding: 20px; background-color: #eeeeeebc; box-shadow: 0 0
+               10px #0000001a; } strong{ font-size: 19px; font-weight: 800; }
+               .thanks{ font-style: italic; }
+          </style>
+
+          <title>{{otp}} is your staygotransit verification code</title>
+     </head>
+
+     <body>
+          <div class='container'>
+               <p>
+                    Please copy and enter the 4-digit verification code below to
+                    the momondo sign in page:
+
+               </p>
+
+               <h1>{{otp}}</h1>
+
+               <p>
+                    The code will expire in 5 minutes. If you don’t verify by
+                    then you’ll need to request a new code on momondo.
+               </p>
+
+               <p>🚀 From staygotransit 🚀</p>
+          </div>
+     </body>
+</html>

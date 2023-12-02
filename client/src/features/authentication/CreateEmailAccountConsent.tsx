@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import RegisterAndLoginButton from './RegisterAndLoginButton';
+import AuthenticationButton from '../../ui/AuthenticationButton';
+import { useCreateAccount } from './useCreateAccount';
 
 interface AccountConsentProps {
      onClick?: () => void;
@@ -27,9 +28,14 @@ const StyledSignupForm = styled.div`
      }
 `;
 
-const CreateEmailAccountConsent: React.FC<AccountConsentProps> = ({
-     onClick,
-}) => {
+const CreateEmailAccountConsent: React.FC<AccountConsentProps> = () => {
+     const email = localStorage.getItem('staygotransitemail')!;
+     const { status, createAccount } = useCreateAccount();
+
+     const onClick = () => {
+          createAccount({ email });
+     };
+
      return (
           <StyledSignupForm>
                <img
@@ -40,14 +46,19 @@ const CreateEmailAccountConsent: React.FC<AccountConsentProps> = ({
                          height: '90px',
                     }}
                />
+
                <h1>Let's get you set up.</h1>
+
                <p>
-                    We'll create an account for{' '}
-                    <strong>musaabdulkabeer19@gmail.com</strong>
+                    We'll create an account for <strong>{email}</strong>
                </p>
-               <RegisterAndLoginButton onClick={onClick}>
-                    Create your account
-               </RegisterAndLoginButton>
+
+               <AuthenticationButton onClick={onClick}>
+                    {status === 'pending'
+                         ? 'Loading...'
+                         : 'Create your account'}
+               </AuthenticationButton>
+
                <footer>
                     By signing up you accept our{' '}
                     <Link className='link' to='/'>

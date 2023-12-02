@@ -46,7 +46,7 @@ app.get('/', (req: Request, res: Response) => {
     `);
 });
 
-app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/auth', userRoutes);
 
 // UNKNOWN ROUTE
 app.all('*', (req: Request, res: Response, next: NextFunction) => {

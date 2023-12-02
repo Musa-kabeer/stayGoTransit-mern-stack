@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from 'react';
+import { FC, ReactNode, createContext, useState } from 'react';
 
 interface AsideProviderProps {
      children: ReactNode;
@@ -11,9 +11,7 @@ interface AsideProps {
 
 export const AsideContext = createContext<AsideProps | undefined>(undefined);
 
-export const AsideContextProvider: React.FC<AsideProviderProps> = ({
-     children,
-}) => {
+export const AsideContextProvider: FC<AsideProviderProps> = ({ children }) => {
      const [mode, setMode] = useState<boolean>(false);
 
      const changeMode = () => setMode((mode) => !mode);

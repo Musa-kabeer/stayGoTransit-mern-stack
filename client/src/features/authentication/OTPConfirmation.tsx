@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import OTPInput from 'react-otp-input';
+import { useOTPVerification } from './useOTPConfirmation';
 
 const StyledOTPConfirmation = styled.div`
      display: flex;
@@ -32,6 +33,14 @@ const StyledOTPConfirmation = styled.div`
 
 const OTPConfirmation = () => {
      const [otp, setOtp] = useState<string>('');
+     const email = localStorage.getItem('staygotransitemail');
+     const { status, verifyOTP } = useOTPVerification();
+
+     useEffect(() => {
+          if (otp.length === 4) {
+               verifyOTP({ otp });
+          }
+     }, [verifyOTP, otp]);
 
      return (
           <StyledOTPConfirmation>
@@ -47,9 +56,8 @@ const OTPConfirmation = () => {
                <h1>Please verify you email address</h1>
 
                <p>
-                    We just send a 6-digit verification code to your email:{' '}
-                    <strong>musaabdulkabeer19@gmail.com</strong>. Please enter
-                    the code below:
+                    We just send a 4-digit verification code to your email:{' '}
+                    <strong>{email}</strong>. Please enter the code below:
                </p>
 
                <div className='otp'>

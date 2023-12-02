@@ -5,6 +5,8 @@ import {
      RouterProvider,
 } from 'react-router-dom';
 import { AsideContextProvider } from './context/AsideContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'react-hot-toast';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const SuspenseFallback = lazy(() => import('./ui/SuspenseFallback'));
@@ -125,11 +127,51 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
+     const queryClient = new QueryClient({
+          defaultOptions: {
+               queries: {
+                    staleTime: 60 * 1000, // 1 minutes
+               },
+          },
+     });
+
      return (
           <>
-               <AsideContextProvider>
-                    <RouterProvider router={router} />
-               </AsideContextProvider>
+               <QueryClientProvider client={queryClient}>
+                    <AsideContextProvider>
+                         <RouterProvider router={router} />
+                    </AsideContextProvider>
+               </QueryClientProvider>
+
+               <Toaster
+                    position='top-left'
+                    gutter={8}
+                    toastOptions={{
+                         // Define default options
+                         style: {
+                              background: '#282828',
+                              color: '#fff',
+                              fontSize: '12px',
+                         },
+
+                         // Default options for specific types
+                         success: {
+                              duration: 2000,
+                              theme: {
+                                   primary: 'green',
+                                   secondary: 'black',
+                              },
+                         },
+
+                         error: {
+                              duration: 2500,
+                              theme: {
+                                   primary: 'red',
+                                   secondary: 'orangered',
+                              },
+                         },
+                    }}
+               />
           </>
      );
 };

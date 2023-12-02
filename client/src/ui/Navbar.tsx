@@ -5,7 +5,7 @@ import { FaRegUserCircle } from 'react-icons/fa';
 /**
  * Manual components
  */
-import { useAsideContext } from '../helpers/utils';
+import { useAsideContext } from '../hooks/useAsideContext';
 import Modal from '../context/ModalContext';
 import AuthSlider from './AuthSlider';
 import Logo from './Logo';

@@ -1,14 +1,6 @@
-import { useContext } from 'react';
 import { format, getMonth } from 'date-fns';
-import { AsideContext } from '../context/AsideContext';
 
-const useAsideContext = () => {
-     const context = useContext(AsideContext);
-
-     if (!context) throw new Error('Context was placed in the wrong place');
-
-     return context;
-};
+const SERVER_DOMAIN = 'http://localhost:4545';
 
 // DATE MANIPULATION
 const dayOfWeek = (date: Date): string => {
@@ -27,4 +19,4 @@ const dayOfTomorrow = (date: Date): string => {
      return format(date, 'EEEE').slice(0, 3);
 };
 
-export { useAsideContext, dayOfTomorrow, dayOfWeek, month, today };
+export { SERVER_DOMAIN, dayOfTomorrow, dayOfWeek, month, today };
