@@ -29,6 +29,10 @@ const StyledOTPConfirmation = styled.div`
           display: flex;
           justify-content: center;
      }
+
+     footer {
+          font-size: 12px;
+     }
 `;
 
 const OTPConfirmation = () => {
@@ -65,7 +69,7 @@ const OTPConfirmation = () => {
                          value={otp}
                          onChange={setOtp}
                          numInputs={4}
-                         renderSeparator={<span> </span>}
+                         renderSeparator={<span></span>}
                          renderInput={(props) => <input {...props} />}
                          containerStyle={{
                               display: 'flex',
@@ -78,6 +82,10 @@ const OTPConfirmation = () => {
                               outline: 'none',
                               borderRadius: 'var(--border-radius)',
                               fontSize: '17px',
+                              background:
+                                   status === 'pending'
+                                        ? 'var(--secondary-gray-600)'
+                                        : 'none',
                          }}
                     />
                </div>

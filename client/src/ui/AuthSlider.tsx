@@ -1,5 +1,4 @@
 import { LiaTimesSolid } from 'react-icons/lia';
-// import { FaAngleLeft } from 'react-icons/fa6';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -11,7 +10,6 @@ import RegisterOrLoginHome from './RegisterOrLoginHome';
 import OTPConfirmation from '../features/authentication/OTPConfirmation';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-// import { useNavigate } from 'react-router-dom';
 
 const Overlay = styled.div`
      position: fixed;
@@ -30,7 +28,7 @@ const Slider = styled.div`
      border-radius: var(--border-radius);
      height: 100%;
      margin: 0 auto;
-     margin-top: 140px;
+     margin-top: 150px;
 
      display: flex;
      flex-direction: column;
@@ -38,7 +36,6 @@ const Slider = styled.div`
      padding: 30px 17px;
 
      @media screen and (max-width: 1024px) {
-          height: 70vh;
           width: 60%;
           gap: 20px;
           padding: 20px 17px;
@@ -59,7 +56,7 @@ const Slider = styled.div`
 
           span {
                cursor: pointer;
-               font-size: 20px;
+               font-size: 16px;
                font-weight: 600;
           }
      }

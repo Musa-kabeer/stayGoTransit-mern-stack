@@ -34,10 +34,6 @@ const StyledWrapper = styled.div`
                font-size: 17px;
                color: var(--tertiary-gray-900);
                font-weight: 600;
-
-               @media screen and (max-width: 764px) {
-                    /* font-size: var(--small-text); */
-               }
           }
 
           p {
@@ -45,7 +41,6 @@ const StyledWrapper = styled.div`
                line-height: 1.2rem;
 
                @media screen and (max-width: 764px) {
-                    /* font-size: var(--extra-small-text); */
                     line-height: 1rem;
                }
           }
@@ -54,15 +49,10 @@ const StyledWrapper = styled.div`
                border-radius: var(--border-radius);
                padding: 10px 0;
                border: 1.5px solid var(--primary-gray-300);
-               /* font-size: var(--small-text); */
                cursor: pointer;
 
                &:hover {
                     background: var(--primary-gray-300);
-               }
-
-               @media screen and (max-width: 1024px) {
-                    /* font-size: 12px; */
                }
           }
      }
@@ -90,7 +80,6 @@ const StyledWrapper = styled.div`
           button {
                width: 100%;
                border: 1.5px solid var(--primary-gray-300);
-               /* font-size: 11px; */
                padding: 10px;
                border-radius: var(--border-radius);
                cursor: pointer;
@@ -98,22 +87,14 @@ const StyledWrapper = styled.div`
                &:hover {
                     background: var(--primary-gray-300);
                }
-
-               @media screen and (max-width: 1024px) {
-                    /* font-size: 12px; */
-               }
           }
      }
 
      footer {
-          /* font-size: var(--extra-small-text); */
           color: var(--secondary-gray-500);
           letter-spacing: 1px;
           line-height: 18px;
-
-          @media screen and (max-width: 764px) {
-               /* font-size: 10px; */
-          }
+          font-size: 11px;
 
           .link {
                color: var(--secondary-gray-500);
