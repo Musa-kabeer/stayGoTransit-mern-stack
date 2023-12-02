@@ -1,7 +1,7 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 import { SERVER_DOMAIN } from '../../helpers/utils';
 import { toast } from 'react-hot-toast';
-import { useNavigate, useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface IOTPData {
      otp: string;
@@ -49,9 +49,13 @@ export const useOTPVerification = (): UseContinueWithEmailResult => {
 
                          window.location.reload();
                     }
-               } catch (err: any) {
-                    console.log(err);
-                    toast.error(err.message);
+               } catch (err: unknown) {
+                    if (err instanceof Error) {
+                         console.log(err);
+                         toast.error(err.message);
+                    } else {
+                         console.error('Non-Error exception caught:', err);
+                    }
                }
           },
      });

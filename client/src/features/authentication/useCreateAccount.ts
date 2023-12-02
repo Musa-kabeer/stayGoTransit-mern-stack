@@ -43,9 +43,13 @@ export const useCreateAccount = (): UseContinueWithEmailResult => {
                     if (data.status === 'success') {
                          setCurrentPage('verify-otp');
                     }
-               } catch (err: any) {
-                    console.log(err);
-                    toast.error(err.message);
+               } catch (err: unknown) {
+                    if (err instanceof Error) {
+                         console.log(err);
+                         toast.error(err.message);
+                    } else {
+                         console.error('Non-Error exception caught:', err);
+                    }
                }
           },
      });
