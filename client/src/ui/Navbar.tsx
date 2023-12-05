@@ -11,7 +11,6 @@ import AuthSlider from './AuthSlider';
 import Logo from './Logo';
 import SearchComponent from './SearchComponent';
 import { useSearchContext } from '../hooks/useSearchContext';
-// import NavForm from './NavForm';
 
 const NavWrapper = styled.nav`
      height: 10vh;
@@ -23,6 +22,7 @@ const NavWrapper = styled.nav`
 
      .left_section {
           display: flex;
+          justify-content: center;
           align-items: center;
           gap: 10px;
      }

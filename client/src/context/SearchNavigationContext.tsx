@@ -21,8 +21,6 @@ export const SearchContext = createContext<ISearch | undefined>(undefined);
 export const SearchNavigationProvider: FC<IProvider> = ({ children }) => {
      const [isIntersecting, setIsIntersecting] = useState<boolean>(false);
 
-     console.log(isIntersecting);
-
      return (
           <SearchContext.Provider value={{ isIntersecting, setIsIntersecting }}>
                {children}

@@ -12,10 +12,6 @@
      text-decoration: none;
 }
 
-::selection {
-     background: transparent;
-}
-
 a {
      text-decoration: none;
 }
@@ -76,7 +72,7 @@ html {
 }
 
 body {
-     overflow-y: hidden;
+     /* overflow-y: hidden; */
      background: var(--tertiary-blue-900) !important;
      color: var(--black);
      font-family: 'Poppins', sans-serif;
@@ -91,9 +87,8 @@ h4,
 h5 {
      font-weight: 400;
      line-height: 1;
-     /* text-transform: capitalize; */
      letter-spacing: var(--letter-spacing);
-     color: var(--secondary-gray-600);
+     color: var(--primary-gray-100);
 }
 
 h1 {
@@ -118,29 +113,4 @@ h5 {
 
 button {
      background: none;
-}
-
-/* REACT DATE PICKER STYLING */
-.react-datepicker {
-     border: none !important;
-     font-family: inherit, helvetica, arial, sans-serif !important;
-}
-
-.react-datepicker__month-container {
-     width: 300px;
-}
-
-/* ARROW BTNS */
-.react-datepicker__navigation {
-     background-color: var(--tertiary-blue-900) !important;
-     color: green !important;
-}
-
-.react-datepicker__navigation i {
-     font-size: 2rem;
-     color: yellow;
-}
-
-.react-datepicker__day-names {
-     margin-top: 15px !important;
 }

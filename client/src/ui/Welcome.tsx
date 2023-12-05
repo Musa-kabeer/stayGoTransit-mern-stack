@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import Header from '../ui/Header';
 import OfferBox from '../ui/OfferBox';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import SearchComponent from './SearchComponent';
-import { useSearchContext } from '../hooks/useSearchContext';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
 interface IOffer {
      image: string;
@@ -57,31 +57,8 @@ const StyledWelcome = styled.section`
 `;
 
 const Welcome: FC<IWelcome> = ({ welcome, data }) => {
-     const { setIsIntersecting } = useSearchContext();
-
-     useEffect(() => {
-          const observeEl = document.querySelector('.offers')!; // observer element
-
-          const observerOptions: IntersectionObserverInit = {
-               root: null,
-               threshold: 0.1,
-          };
-
-          const callback: IntersectionObserverCallback = (entries) => {
-               entries.forEach((entry) => {
-                    if (!entry.isIntersecting) {
-                         return setIsIntersecting(true);
-                    }
-
-                    return setIsIntersecting(false);
-               });
-          };
-
-          // create observer instance
-          const observer = new IntersectionObserver(callback, observerOptions);
-
-          observer.observe(observeEl);
-     }, [setIsIntersecting]);
+     // execute intersection observer
+     useIntersectionObserver('offers');
 
      return (
           <StyledWelcome className='offers'>

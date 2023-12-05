@@ -4,6 +4,11 @@ const StyledLogo = styled.h1`
      font-size: 1.2rem;
      font-weight: 800;
      text-transform: uppercase;
+     height: 32px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     margin: auto;
 
      .stay {
           background: linear-gradient(

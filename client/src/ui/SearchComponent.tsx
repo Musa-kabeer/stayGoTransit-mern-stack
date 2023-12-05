@@ -94,12 +94,15 @@ const SearchComponent = () => {
                     )}
 
                     <span></span>
+
                     <input
                          type='text'
                          placeholder={
                               pathname === '/stays'
-                                   ? 'Enter name of hotel or country you wanted!'
-                                   : ''
+                                   ? 'Enter name of hotel or cities you wanted!'
+                                   : pathname === '/car-rental'
+                                   ? 'Enter name of cars or cities you wanted!'
+                                   : 'Enter name of trains or cities you wanted!'
                          }
                     />
                </div>

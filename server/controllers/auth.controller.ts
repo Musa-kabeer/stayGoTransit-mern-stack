@@ -105,7 +105,9 @@ export const signupAndLogin = async (
           // if there is user that means that user want to login
           if (user) {
                if (!user.isVerified) {
-                    return;
+                    return next(
+                         new AppError('Please validate your email! 😡', 400)
+                    );
                }
 
                // create user login otp

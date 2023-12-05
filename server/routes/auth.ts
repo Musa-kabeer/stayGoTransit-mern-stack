@@ -8,7 +8,7 @@ import {
 import { protect } from '../middleware/protected';
 
 // Authentications
-router.post('/', signupAndLogin);
+router.post('/login', signupAndLogin);
 router.post('/signup', signup);
 router.post('/otp-verification', protect, otpVerification);
 
