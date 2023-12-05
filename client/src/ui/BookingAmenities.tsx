@@ -1,79 +1,75 @@
 import { styled } from 'styled-components';
-import { CiWifiOn } from 'react-icons/ci';
+import { GiCheckMark } from 'react-icons/gi';
 
 const StyledBookingAmenities = styled.div`
      display: flex;
      flex-direction: column;
-     width: 40%;
      gap: 20px;
 
      h2 {
-          font-size: 2rem;
-          font-weight: 600;
+          font-size: 17px;
           color: var(--tertiary-gray-800);
      }
 
-     ul {
+     .amenities_lists {
+          width: 100%;
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-          row-gap: 20px;
-          column-gap: 10px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 20px;
           padding-left: 0;
+     }
+
+     .amenities_list {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-weight: 400;
+     }
+
+     .amenities_list svg {
+          font-size: 20px;
+          font-weight: 900;
      }
 `;
 
 const BookingAmenities = () => {
      return (
           <StyledBookingAmenities>
-               <h2>Featured Amenities</h2>
+               <h2>Amenities</h2>
 
-               <ul>
-                    <li>
-                         <span>
-                              <CiWifiOn />
-                         </span>{' '}
+               <ul className='amenities_lists'>
+                    <li className='amenities_list'>
+                         <GiCheckMark />
                          Free WiFi
                     </li>
 
-                    <li>
-                         <span>
-                              <CiWifiOn />
-                         </span>{' '}
+                    <li className='amenities_list'>
+                         <GiCheckMark />
                          Free WiFi
                     </li>
 
-                    <li>
-                         <span>
-                              <CiWifiOn />
-                         </span>{' '}
+                    <li className='amenities_list'>
+                         <GiCheckMark />
                          Free WiFi
                     </li>
 
-                    <li>
-                         <span>
-                              <CiWifiOn />
-                         </span>{' '}
+                    <li className='amenities_list'>
+                         <GiCheckMark />
                          Free WiFi
                     </li>
 
-                    <li>
-                         <span>
-                              <CiWifiOn />
-                         </span>{' '}
+                    <li className='amenities_list'>
+                         <GiCheckMark />
                          Free WiFi
                     </li>
 
-                    <li>
-                         <span>
-                              <CiWifiOn />
-                         </span>{' '}
+                    <li className='amenities_list'>
+                         <GiCheckMark />
                          Free WiFi
                     </li>
 
-                    <li>
-                         <span>
-                              <CiWifiOn />
-                         </span>{' '}
+                    <li className='amenities_list'>
+                         <GiCheckMark />
                          Free WiFi
                     </li>
                </ul>

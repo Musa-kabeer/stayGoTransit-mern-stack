@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-const StyledBookingImages = styled.div`
+const StyledBookingImages = styled.section`
      display: grid;
      grid-template-columns: repeat(4, 1fr);
      justify-content: center;

@@ -5,7 +5,7 @@ const StyledHeader = styled.section`
      display: flex;
      justify-content: space-between;
      align-items: center;
-     padding: 3rem 0;
+     padding: 1.5rem 0;
 
      .left_content {
           h1 {
