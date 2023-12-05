@@ -7,6 +7,7 @@ import {
 import { AsideContextProvider } from './context/AsideContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
+import { SearchNavigationProvider } from './context/SearchNavigationContext';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const SuspenseFallback = lazy(() => import('./ui/SuspenseFallback'));
@@ -139,7 +140,9 @@ const App = () => {
           <>
                <QueryClientProvider client={queryClient}>
                     <AsideContextProvider>
-                         <RouterProvider router={router} />
+                         <SearchNavigationProvider>
+                              <RouterProvider router={router} />
+                         </SearchNavigationProvider>
                     </AsideContextProvider>
                </QueryClientProvider>
 
@@ -155,21 +158,13 @@ const App = () => {
                          },
 
                          // Default options for specific types
-                         success: {
-                              duration: 2000,
-                              theme: {
-                                   primary: 'green',
-                                   secondary: 'black',
-                              },
-                         },
-
-                         error: {
-                              duration: 2500,
-                              theme: {
-                                   primary: 'red',
-                                   secondary: 'orangered',
-                              },
-                         },
+                         // success: {
+                         //      duration: 2000,
+                         //      theme: {
+                         //           primary: 'green',
+                         //           secondary: 'black',
+                         //      },
+                         // },
                     }}
                />
           </>

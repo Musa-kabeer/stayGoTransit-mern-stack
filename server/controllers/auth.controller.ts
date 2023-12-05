@@ -210,7 +210,8 @@ export const otpVerification = async (
                          );
                     }
 
-                    const otpChecked = user.verifyOTPToken(
+                    // added await
+                    const otpChecked = await user.verifyOTPToken(
                          String(req.body.otp),
                          user.otp
                     );

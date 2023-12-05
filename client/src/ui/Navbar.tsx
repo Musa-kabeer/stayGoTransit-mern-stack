@@ -10,6 +10,7 @@ import Modal from '../context/ModalContext';
 import AuthSlider from './AuthSlider';
 import Logo from './Logo';
 import SearchComponent from './SearchComponent';
+import { useSearchContext } from '../hooks/useSearchContext';
 // import NavForm from './NavForm';
 
 const NavWrapper = styled.nav`
@@ -93,6 +94,7 @@ const NavWrapper = styled.nav`
 
 const Navbar = () => {
      const { changeMode } = useAsideContext();
+     const { isIntersecting } = useSearchContext();
 
      function onToggle() {
           changeMode();
@@ -108,9 +110,11 @@ const Navbar = () => {
                     <Logo />
                </div>
 
-               <div className='search_container'>
-                    <SearchComponent />
-               </div>
+               {isIntersecting && (
+                    <div className='search_container'>
+                         <SearchComponent />
+                    </div>
+               )}
 
                <div className='right_section'>
                     <Modal>
