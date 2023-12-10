@@ -1,4 +1,5 @@
 /* ============= GLOBAL CSS =============== */
+@import 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
 
 *,
 ::after,
@@ -6,7 +7,7 @@
      margin: 0;
      padding: 0;
      box-sizing: border-box;
-     transition: all 0.2s ease-in-out;
+     /* transition: all 0.2s ease-in-out; */
      border: none;
      list-style-type: none;
      text-decoration: none;
@@ -73,7 +74,7 @@ html {
 
 body {
      /* overflow-y: hidden; */
-     background: var(--tertiary-blue-900) !important;
+     /* background: var(--tertiary-blue-900) !important; */
      color: var(--black);
      font-family: 'Poppins', sans-serif;
      font-weight: 400;
@@ -113,4 +114,8 @@ h5 {
 
 button {
      background: none;
+}
+
+.map {
+     height: 300px;
 }

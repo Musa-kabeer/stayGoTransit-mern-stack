@@ -1,12 +1,24 @@
 import styled from 'styled-components';
 import BookingGift from './BookingGift';
 import BookingAmenities from './BookingAmenities';
+import BookingDescription from './BookingDescription';
+import BookingMap from './BookingMap';
+import BookingReviews from './BookingReviews';
+import BookingCheckout from './BookingCheckout';
 
 const StyledBookingDetail = styled.section`
      display: flex;
+     gap: 20px;
 
-     .descriptions {
-          flex: 2;
+     .details {
+          flex: 5;
+
+          display: flex;
+          flex-direction: column;
+          gap: 50px;
+     }
+
+     .details_text {
           border: 1px solid #c0c0c0d2;
      }
 
@@ -20,33 +32,40 @@ const StyledBookingDetail = styled.section`
      }
 
      .checkout {
-          flex: 1;
+          flex: 3;
+
+          padding: 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          padding: 2rem;
+          border: 1px solid #c0c0c0d2;
+          height: 100%;
      }
 `;
 
 const BookingDetails = () => {
      return (
           <StyledBookingDetail>
-               <div className='descriptions'>
-                    <div className='amenities_gift'>
-                         <BookingGift />
+               <div className='details'>
+                    <div className='details_text'>
+                         <div className='amenities_gift'>
+                              <BookingGift />
 
-                         <BookingAmenities />
+                              <BookingAmenities />
+                         </div>
+
+                         <BookingDescription />
                     </div>
 
-                    <div className='description_details'>
-                         <h2>Description</h2>
+                    <BookingMap />
 
-                         <p>
-                              Lorem, ipsum dolor sit amet consectetur
-                              adipisicing elit. Dolore provident a repellat
-                              suscipit est reiciendis, dolor deleniti itaque
-                              ipsum veniam.
-                         </p>
-                    </div>
+                    <BookingReviews />
                </div>
 
-               <div className='checkout'></div>
+               <div className='checkout'>
+                    <BookingCheckout />
+               </div>
           </StyledBookingDetail>
      );
 };
