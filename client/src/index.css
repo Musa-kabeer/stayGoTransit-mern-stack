@@ -74,7 +74,7 @@ html {
 
 body {
      /* overflow-y: hidden; */
-     /* background: var(--tertiary-blue-900) !important; */
+     background: var(--tertiary-blue-900) !important;
      color: var(--black);
      font-family: 'Poppins', sans-serif;
      font-weight: 400;

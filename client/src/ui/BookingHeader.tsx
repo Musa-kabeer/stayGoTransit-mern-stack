@@ -31,15 +31,14 @@ const StyledHeader = styled.section`
           }
 
           button {
-               transition: color 0.3s ease-in-out;
                padding: 1rem;
-               background: #020261d6;
-               color: var(--primary-gray-100);
-               border-radius: 4px;
+               background: var(--tertiary-blue-800);
+               color: var(--primary-gray-200);
+               border-radius: 3px;
+               transition: all 0.3s ease-in-out;
 
                &:hover {
-                    background: #010139d5;
-                    color: var(--primary-gray-200);
+                    background: var(--tertiary-blue-950);
                }
           }
      }
