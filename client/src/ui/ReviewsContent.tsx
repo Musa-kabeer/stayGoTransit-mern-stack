@@ -28,6 +28,42 @@ const ReviewsContent = () => {
                          doloremque, corrupti molestias ratione facilis impedit
                          necessitatibus. At sapiente quae vero.'
                     />
+
+                    <ReviewItem
+                         name='commandcodes'
+                         date='2 weeks ago'
+                         stars={3}
+                         content='Lorem ipsum dolor sit amet consectetur, adipisicing
+                         elit. Architecto suscipit officia labore debitis iste
+                         dolorem quis doloremque voluptatibus. Lorem ipsum dolor
+                         sit amet, consectetur adipisicing elit. Quibusdam
+                         doloremque, corrupti molestias ratione facilis impedit
+                         necessitatibus. At sapiente quae vero.'
+                    />
+
+                    <ReviewItem
+                         name='commandcodes'
+                         date='2 weeks ago'
+                         stars={2}
+                         content='Lorem ipsum dolor sit amet consectetur, adipisicing
+                         elit. Architecto suscipit officia labore debitis iste
+                         dolorem quis doloremque voluptatibus. Lorem ipsum dolor
+                         sit amet, consectetur adipisicing elit. Quibusdam
+                         doloremque, corrupti molestias ratione facilis impedit
+                         necessitatibus. At sapiente quae vero.'
+                    />
+
+                    <ReviewItem
+                         name='commandcodes'
+                         date='2 weeks ago'
+                         stars={5}
+                         content='Lorem ipsum dolor sit amet consectetur, adipisicing
+                         elit. Architecto suscipit officia labore debitis iste
+                         dolorem quis doloremque voluptatibus. Lorem ipsum dolor
+                         sit amet, consectetur adipisicing elit. Quibusdam
+                         doloremque, corrupti molestias ratione facilis impedit
+                         necessitatibus. At sapiente quae vero.'
+                    />
                </ul>
           </StyledReviewContent>
      );

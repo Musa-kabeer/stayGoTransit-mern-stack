@@ -1,4 +1,5 @@
 import {
+     FC,
      ReactElement,
      ReactNode,
      cloneElement,
@@ -30,8 +31,8 @@ interface BodyProps {
 
 const AuthContext = createContext<contextValue | undefined>(undefined);
 
-const Modal: React.FC<AuthProviderProps> & {
-     Button: React.FC<ButtonProps>;
+const Modal: FC<AuthProviderProps> & {
+     Button: FC<ButtonProps>;
      Body: React.FC<BodyProps>;
 } = ({ children }) => {
      const [open, setOpen] = useState('');

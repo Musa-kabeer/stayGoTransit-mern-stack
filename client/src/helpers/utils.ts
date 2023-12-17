@@ -19,4 +19,14 @@ const dayOfTomorrow = (date: Date): string => {
      return format(date, 'EEEE').slice(0, 3);
 };
 
-export { SERVER_DOMAIN, dayOfTomorrow, dayOfWeek, month, today };
+const RANGE_MIN = 10;
+const RANGE_MAX = 4;
+export {
+     SERVER_DOMAIN,
+     dayOfTomorrow,
+     dayOfWeek,
+     month,
+     today,
+     RANGE_MIN,
+     RANGE_MAX,
+};

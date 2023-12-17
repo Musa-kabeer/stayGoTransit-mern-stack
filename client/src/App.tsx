@@ -10,6 +10,7 @@ import { Toaster } from 'react-hot-toast';
 import { SearchNavigationProvider } from './context/SearchNavigationContext';
 import Booking from './pages/Booking';
 import Review from './pages/Review';
+import SearchResult from './pages/SearchResult';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const SuspenseFallback = lazy(() => import('./ui/SuspenseFallback'));
@@ -70,60 +71,12 @@ const router = createBrowserRouter([
                },
 
                {
-                    path: 'feedback',
-                    element: (
-                         <Suspense fallback={<SuspenseFallback />}>
-                              <h1>Feedback</h1>,
-                         </Suspense>
-                    ),
-               },
-
-               {
-                    path: 'trips',
-                    element: (
-                         <Suspense fallback={<SuspenseFallback />}>
-                              <h1>Trips</h1>,
-                         </Suspense>
-                    ),
-               },
-
-               {
                     path: 'hotels-search/:searchName',
                     element: (
                          <Suspense fallback={<SuspenseFallback />}>
-                              <h1>Hotel Search</h1>,
+                              <SearchResult />
                          </Suspense>
                     ),
-               },
-
-               {
-                    path: 'hotels/:hotelName',
-                    element: <h1>Hotel Details</h1>,
-               },
-
-               {
-                    path: 'hotels/bookings',
-                    element: <h1>Hotel Details</h1>,
-               },
-
-               {
-                    path: 'about-us',
-                    element: <h1>About Us</h1>,
-               },
-
-               {
-                    path: 'blogs',
-                    element: <h1>BLOG</h1>,
-               },
-
-               {
-                    path: 'faqs',
-                    element: <h1>FAQs</h1>,
-               },
-
-               {
-                    path: 'privacy-policy',
-                    element: <h1>Privacy & Policy </h1>,
                },
           ],
      },
@@ -168,15 +121,6 @@ const App = () => {
                               color: '#fff',
                               fontSize: '12px',
                          },
-
-                         // Default options for specific types
-                         // success: {
-                         //      duration: 2000,
-                         //      theme: {
-                         //           primary: 'green',
-                         //           secondary: 'black',
-                         //      },
-                         // },
                     }}
                />
           </>
