@@ -4,7 +4,7 @@ const BookingMap = () => {
      return (
           <div className='map'>
                <MapContainer
-                    center={[51.505, -0.09]}
+                    center={[4.8472226, 6.974604]}
                     zoom={13}
                     scrollWheelZoom={false}
                     className='map'

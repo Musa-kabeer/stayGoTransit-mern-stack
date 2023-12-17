@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
 import { SearchNavigationProvider } from './context/SearchNavigationContext';
 import Booking from './pages/Booking';
+import Review from './pages/Review';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const SuspenseFallback = lazy(() => import('./ui/SuspenseFallback'));
@@ -126,9 +127,15 @@ const router = createBrowserRouter([
                },
           ],
      },
+
      {
           path: '/booking/:bookingId',
           element: <Booking />,
+     },
+
+     {
+          path: '/stays/reviews/:id',
+          element: <Review />,
      },
 ]);
 
