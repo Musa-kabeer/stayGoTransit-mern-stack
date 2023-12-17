@@ -17,13 +17,17 @@ const ReviewsContent = () => {
      return (
           <StyledReviewContent>
                <ul className='reviews'>
-                    <ReviewItem />
-                    <ReviewItem />
-                    <ReviewItem />
-                    <ReviewItem />
-                    <ReviewItem />
-                    <ReviewItem />
-                    <ReviewItem />
+                    <ReviewItem
+                         name='commandcodes'
+                         date='2 weeks ago'
+                         stars={4}
+                         content='Lorem ipsum dolor sit amet consectetur, adipisicing
+                         elit. Architecto suscipit officia labore debitis iste
+                         dolorem quis doloremque voluptatibus. Lorem ipsum dolor
+                         sit amet, consectetur adipisicing elit. Quibusdam
+                         doloremque, corrupti molestias ratione facilis impedit
+                         necessitatibus. At sapiente quae vero.'
+                    />
                </ul>
           </StyledReviewContent>
      );

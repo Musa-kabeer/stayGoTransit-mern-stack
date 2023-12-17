@@ -1,5 +1,13 @@
+import { FC } from 'react';
 import { FaStar } from 'react-icons/fa';
 import styled from 'styled-components';
+
+interface IReview {
+     name: string;
+     date: string;
+     stars: number;
+     content: string;
+}
 
 const StyledReview = styled.div`
      display: flex;
@@ -55,7 +63,7 @@ const StyledReview = styled.div`
      }
 `;
 
-const ReviewItem = () => {
+const ReviewItem: FC<IReview> = ({ name, date, stars, content }) => {
      return (
           <StyledReview>
                <div className='user_name'>
@@ -64,27 +72,23 @@ const ReviewItem = () => {
 
                <div className='content'>
                     <div className='user_ratings'>
-                         <h2>commandcodes</h2>
+                         <h2>{name}</h2>
 
                          <div className='user_stars'>
-                              <span>2 weeks ago</span>
+                              <span>{date}</span>
 
                               <div className='star_container'>
-                                   <FaStar />
-                                   <FaStar />
-                                   <FaStar />
+                                   {Array.from(
+                                        { length: stars },
+                                        (_, i) => i + 1
+                                   ).map((_, i) => (
+                                        <FaStar key={i + 1} />
+                                   ))}
                               </div>
                          </div>
                     </div>
 
-                    <div className='user_review'>
-                         Lorem ipsum dolor sit amet consectetur, adipisicing
-                         elit. Architecto suscipit officia labore debitis iste
-                         dolorem quis doloremque voluptatibus. Lorem ipsum dolor
-                         sit amet, consectetur adipisicing elit. Quibusdam
-                         doloremque, corrupti molestias ratione facilis impedit
-                         necessitatibus. At sapiente quae vero.
-                    </div>
+                    <div className='user_review'>{content}</div>
                </div>
           </StyledReview>
      );
