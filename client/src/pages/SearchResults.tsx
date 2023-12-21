@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import SearchFilter from '../ui/SearchFilter';
 import SearchResult from '../ui/SearchResult';
+import Footer from '../ui/Footer';
 
 const StyledSearchResult = styled.div`
      display: flex;
@@ -8,19 +9,32 @@ const StyledSearchResult = styled.div`
 
      .searchResults {
           flex: 5;
-          background: #1b011bac;
+          padding: 1.5rem;
+
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          max-height: 100%;
+          overflow-y: auto;
      }
 `;
 
 const SearchResults = () => {
      return (
-          <StyledSearchResult>
-               <SearchFilter />
+          <>
+               <StyledSearchResult>
+                    <SearchFilter />
 
-               <div className='searchResults'>
-                    <SearchResult />
-               </div>
-          </StyledSearchResult>
+                    <div className='searchResults'>
+                         {Array.from({ length: 20 }, (_, i) => i + 1).map(
+                              (_, i) => (
+                                   <SearchResult key={i + 1} />
+                              )
+                         )}
+                    </div>
+               </StyledSearchResult>
+               <Footer />
+          </>
      );
 };
 
