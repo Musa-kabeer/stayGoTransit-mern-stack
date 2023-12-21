@@ -10,7 +10,7 @@ import { Toaster } from 'react-hot-toast';
 import { SearchNavigationProvider } from './context/SearchNavigationContext';
 import Booking from './pages/Booking';
 import Review from './pages/Review';
-import SearchResult from './pages/SearchResult';
+import SearchResults from './pages/SearchResults';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const SuspenseFallback = lazy(() => import('./ui/SuspenseFallback'));
@@ -74,7 +74,7 @@ const router = createBrowserRouter([
                     path: 'hotels-search/:searchName',
                     element: (
                          <Suspense fallback={<SuspenseFallback />}>
-                              <SearchResult />
+                              <SearchResults />
                          </Suspense>
                     ),
                },

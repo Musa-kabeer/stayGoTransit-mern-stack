@@ -20,7 +20,7 @@ const dayOfTomorrow = (date: Date): string => {
 };
 
 const RANGE_MIN = 10;
-const RANGE_MAX = 4;
+const RANGE_MAX = 0;
 export {
      SERVER_DOMAIN,
      dayOfTomorrow,

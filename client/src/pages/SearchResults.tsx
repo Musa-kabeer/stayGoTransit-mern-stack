@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import SearchFilter from '../ui/SearchFilter';
+import SearchResult from '../ui/SearchResult';
 
 const StyledSearchResult = styled.div`
      display: flex;
@@ -11,14 +12,16 @@ const StyledSearchResult = styled.div`
      }
 `;
 
-const SearchResult = () => {
+const SearchResults = () => {
      return (
           <StyledSearchResult>
                <SearchFilter />
 
-               <div className='searchResults'>2</div>
+               <div className='searchResults'>
+                    <SearchResult />
+               </div>
           </StyledSearchResult>
      );
 };
 
-export default SearchResult;
+export default SearchResults;

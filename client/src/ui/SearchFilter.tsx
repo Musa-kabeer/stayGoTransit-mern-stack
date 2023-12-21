@@ -1,34 +1,39 @@
 import styled from 'styled-components';
 import { IoIosStar } from 'react-icons/io';
 import { IoIosArrowDown } from 'react-icons/io';
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
 import Accordion from '../context/AccordionContext';
-import { RANGE_MAX, RANGE_MIN } from '../helpers/utils';
+import InputRange, { Range } from 'react-input-range';
+import 'react-input-range/lib/css/index.css';
+import { FC, useState } from 'react';
+import SearchAmenities from './SearchAmenities';
 
 const StyledSearchFilter = styled.div`
      flex: 1;
      padding: 3rem 1rem;
-     /* background: green; */
+
+     display: flex;
+     flex-direction: column;
 
      .accordion {
           padding: 1rem 0;
-          border-bottom: 1px solid green;
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
 
           .accordion_button {
-               /* padding: 1rem 0; */
                width: 100%;
                display: flex;
                justify-content: space-between;
                align-items: center;
                cursor: pointer;
+               color: var(--primary-blue-300);
 
                h4 {
-                    font-size: 16px;
+                    font-size: 12px;
                }
 
                svg {
-                    font-size: 20px;
+                    font-size: 16px;
                }
           }
 
@@ -44,10 +49,35 @@ const StyledSearchFilter = styled.div`
                     font-size: 2rem;
                }
           }
+
+          .amenities {
+               padding-left: 5px;
+
+               display: flex;
+               flex-direction: column;
+               gap: 15px;
+          }
      }
 `;
 
-const SearchFilter = () => {
+interface RangeState {
+     max: number;
+     min: number;
+}
+
+const SearchFilter: FC = () => {
+     const [value, setValue] = useState<RangeState>({ min: 2, max: 10 });
+
+     const handleRange = (newValue: number | Range) => {
+          if (typeof newValue === 'number') {
+               // Handling the case where newValue is a single number
+               setValue({ ...value, min: newValue });
+          } else {
+               // Handling the case where newValue is a Range
+               setValue(newValue);
+          }
+     };
+
      return (
           <StyledSearchFilter>
                {/* RATINGS */}
@@ -90,7 +120,7 @@ const SearchFilter = () => {
                {/* PRICING */}
                <Accordion>
                     <div className='accordion'>
-                         <Accordion.Button type='hotel-range'>
+                         <Accordion.Button type='range'>
                               <button className='accordion_button'>
                                    <h4>Pricing</h4>
 
@@ -98,14 +128,39 @@ const SearchFilter = () => {
                               </button>
                          </Accordion.Button>
 
-                         <Accordion.Body windowName='hotel-range'>
+                         <Accordion.Body windowName='range'>
                               <div className='accordion_content'>
-                                   <Slider
-                                        range
-                                        max={RANGE_MAX}
-                                        min={RANGE_MIN}
+                                   <InputRange
+                                        maxValue={10}
+                                        minValue={1}
+                                        value={value}
+                                        onChange={handleRange}
                                    />
                               </div>
+                         </Accordion.Body>
+                    </div>
+               </Accordion>
+
+               {/* AMENITIES */}
+               <Accordion>
+                    <div className='accordion'>
+                         <Accordion.Button type='amenities'>
+                              <button className='accordion_button'>
+                                   <h4>Amenities</h4>
+
+                                   <IoIosArrowDown />
+                              </button>
+                         </Accordion.Button>
+
+                         <Accordion.Body windowName='amenities'>
+                              <ul className='amenities'>
+                                   <SearchAmenities amenity='Air-conditioned' />
+                                   <SearchAmenities amenity='Air-conditioned' />
+                                   <SearchAmenities amenity='Air-conditioned' />
+                                   <SearchAmenities amenity='Air-conditioned' />
+                                   <SearchAmenities amenity='Air-conditioned' />
+                                   <SearchAmenities amenity='Air-conditioned' />
+                              </ul>
                          </Accordion.Body>
                     </div>
                </Accordion>
