@@ -3,28 +3,6 @@ import * as argon2 from 'argon2';
 import * as crypto from 'crypto';
 import { nanoid } from 'nanoid';
 
-/**
- * @swagger
- * /api/v1/users:
- *   post:
- *     summary: Get a list of books
- *     description: Returns a list of books
- *     responses:
- *       200:
- *         description: A list of books
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   title:
- *                     type: string
- *                   author:
- *                     type: string
- */
-
 interface IUser extends Document {
      user_id: string;
      email: string;
@@ -59,12 +37,6 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
           timestamps: true,
           toJSON: {
                virtuals: true,
-               versionKey: false,
-               transform: function (doc, ret) {
-                    delete ret.__v;
-                    delete ret.createdAt;
-                    delete ret.updatedAt;
-               },
           },
      }
 );

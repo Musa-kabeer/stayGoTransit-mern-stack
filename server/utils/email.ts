@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as nodemailer from 'nodemailer';
+import { createTransport, Transporter, SendMailOptions } from 'nodemailer';
 import * as handlebar from 'handlebars';
 
 interface ISendEmail {
@@ -15,7 +15,7 @@ export class SendEmail {
      }
 
      transporter() {
-          const transporter = nodemailer.createTransport({
+          const transporter: Transporter = createTransport({
                host: process.env.COMPANY_EMAIL_HOST,
                port: Number(process.env.COMPANY_EMAIL_PORT),
                service: process.env.COMPANY_EMAIL_SERVICE,
@@ -44,7 +44,7 @@ export class SendEmail {
           // Replace template placeholders with actual data
           const htmlContent = template(options);
 
-          const mailOptions: nodemailer.SendMailOptions = {
+          const mailOptions: SendMailOptions = {
                from: `Staygotransit ${process.env.COMPANY_EMAIL}`,
                to: this.email,
                subject: subject,
