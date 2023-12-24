@@ -1,15 +1,25 @@
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const StyledList = styled.div`
+const StyledList = styled(Link)`
      display: flex;
      background: var(--primary-gray-100);
      height: 110px;
      border-radius: var(--border-radius);
      text-decoration: none;
 
+     &:hover {
+          text-decoration: underline;
+     }
+
+     .image_encapsulation {
+          width: 50%;
+     }
+
      img {
-          flex: 1;
           height: 100%;
+          width: 100%;
           object-fit: cover;
           width: 100%;
           border-top-left-radius: var(--border-radius);
@@ -17,14 +27,15 @@ const StyledList = styled.div`
      }
 
      .content {
-          flex: 1;
-          margin: 10px;
+          padding: 10px;
+          width: 50%;
 
           .header {
                font-size: 0.8rem;
                text-align: left;
                line-height: 23px;
                color: black;
+               text-transform: uppercase;
           }
 
           span {
@@ -33,23 +44,28 @@ const StyledList = styled.div`
      }
 `;
 
-const LargeListsItems = () => {
+interface Hotel {
+     image: string;
+     location: string;
+     name: string;
+}
+
+const TrendingItem: FC<Hotel> = ({ image, location, name }) => {
      return (
-          <StyledList>
-               <img
-                    src='https://www.momondo.com/rimg/himg/51/a6/97/ice-136690-71847437_3XL-805582.jpg?width=968&height=968&crop=true'
-                    alt=''
-               />
+          <StyledList to='/'>
+               <div className='image_encapsulation'>
+                    <img src={image} alt={name} />
+               </div>
 
                <div className='content'>
                     <h1 className='header'>
-                         <span>RENTAL IN</span>
+                         <span>rental in</span>
                          <br />
-                         NEW YORK
+                         {location}
                     </h1>
                </div>
           </StyledList>
      );
 };
 
-export default LargeListsItems;
+export default TrendingItem;

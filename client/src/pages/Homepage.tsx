@@ -4,7 +4,7 @@ import { sliderData, stayOfferData } from '../helpers/data';
 import Footer from '../ui/Footer';
 import Welcome from '../ui/Welcome';
 import SliderComponent from '../ui/SliderComponent';
-import TrendingLists from '../ui/TrendingLists';
+import Trending from '../features/hotel/Trending';
 
 const StyledHome = styled.div`
      display: flex;
@@ -30,7 +30,7 @@ const Homepage = () => {
                />
 
                {/* TRENDING */}
-               <TrendingLists
+               <Trending
                     header='Trending hotels in Nigeria'
                     paragraph='The most searched for hotel destinations on staygotransit'
                />

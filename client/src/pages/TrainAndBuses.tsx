@@ -3,7 +3,7 @@ import Footer from '../ui/Footer';
 import Welcome from '../ui/Welcome';
 import { carOfferData, sliderData } from '../helpers/data';
 import SliderComponent from '../ui/SliderComponent';
-import TrendingLists from '../ui/TrendingLists';
+import TrendingLists from '../ui/TrendingItem';
 
 const StyledTrainAndBuses = styled.div`
      display: flex;

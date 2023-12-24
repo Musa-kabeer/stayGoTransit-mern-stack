@@ -1,12 +1,19 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-
-import LargeListsItems from './LargeListsItems';
 import { FC } from 'react';
+import styled from 'styled-components';
+import TrendingItem from '../../ui/TrendingItem';
+import { useTrending } from './useTrending';
 
-interface ILists {
+interface Trending {
      header: string;
      paragraph: string;
+}
+
+interface Hotel {
+     _id: string;
+     id: string;
+     image: string;
+     location: string;
+     name: string;
 }
 
 const StyledLargeLists = styled.section`
@@ -48,17 +55,30 @@ const StyledLargeLists = styled.section`
      }
 `;
 
-const TrendingLists: FC<ILists> = ({ header, paragraph }) => {
+const TrendingLists: FC<Trending> = ({ header, paragraph }) => {
+     const { status, hotels } = useTrending();
+
+     if (status === 'pending') {
+          return 'Loading...';
+     }
+
+     if (status === 'error') {
+          return 'Connection Error!';
+     }
+
      return (
-          <StyledLargeLists className='trending'>
+          <StyledLargeLists>
                <h1>{header}</h1>
                <p>{paragraph}</p>
 
                <div className='trending_items'>
-                    {Array.from({ length: 21 }, (_, i) => i + 1).map((d) => (
-                         <Link key={d} to='/'>
-                              <LargeListsItems />
-                         </Link>
+                    {hotels.map((hotel: Hotel) => (
+                         <TrendingItem
+                              key={hotel.id}
+                              image={hotel.image}
+                              location={hotel.location}
+                              name={hotel.name}
+                         />
                     ))}
                </div>
           </StyledLargeLists>

@@ -4,20 +4,26 @@ import {
      Navigate,
      RouterProvider,
 } from 'react-router-dom';
-import { AsideContextProvider } from './context/AsideContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
 import { SearchNavigationProvider } from './context/SearchNavigationContext';
-import Booking from './pages/Booking';
-import Review from './pages/Review';
-import SearchResults from './pages/SearchResults';
+import { AsideContextProvider } from './context/AsideContext';
 
+/**
+ *  ---------------------------
+ *  APPLICATION PAGES
+ *  ---------------------------
+ */
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const SuspenseFallback = lazy(() => import('./ui/SuspenseFallback'));
 const Error = lazy(() => import('./pages/Error'));
 const Homepage = lazy(() => import('./pages/Homepage'));
 const CarRental = lazy(() => import('./pages/CarRental'));
 const TrainAndBuses = lazy(() => import('./pages/TrainAndBuses'));
+const SearchResults = lazy(() => import('./pages/SearchResults'));
+const Review = lazy(() => import('./pages/Review'));
+const Booking = lazy(() => import('./pages/Booking'));
 
 const router = createBrowserRouter([
      {
@@ -109,6 +115,7 @@ const App = () => {
                               <RouterProvider router={router} />
                          </SearchNavigationProvider>
                     </AsideContextProvider>
+                    <ReactQueryDevtools initialIsOpen={false} />
                </QueryClientProvider>
 
                <Toaster

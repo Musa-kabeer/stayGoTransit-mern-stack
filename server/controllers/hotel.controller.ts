@@ -11,7 +11,9 @@ export const getAllHotels = async (
      next: NextFunction
 ) => {
      try {
-          const hotels = await Hotel.find({});
+          const hotels = await Hotel.find({}).select(
+               '-__v -createdAt -updatedAt -id'
+          );
 
           res.status(200).json({
                status: 'success',
