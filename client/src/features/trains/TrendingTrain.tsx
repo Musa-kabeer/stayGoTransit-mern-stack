@@ -2,22 +2,10 @@ import { FC } from 'react';
 import TrendingItem from '../../ui/TrendingItem';
 import { useTrending } from './useTrending';
 import StyledTrending from '../../ui/StyledTrending';
+import { Trending, TrendingProps } from '../../helpers/interfaces';
 
-interface Trending {
-     header: string;
-     paragraph: string;
-}
-
-interface Hotel {
-     _id: string;
-     id: string;
-     image: string;
-     location: string;
-     name: string;
-}
-
-const TrendingLists: FC<Trending> = ({ header, paragraph }) => {
-     const { status, hotels } = useTrending();
+const TrendingLists: FC<TrendingProps> = ({ header, paragraph }) => {
+     const { status, trains } = useTrending();
 
      if (status === 'pending') {
           return 'Loading...';
@@ -33,12 +21,12 @@ const TrendingLists: FC<Trending> = ({ header, paragraph }) => {
                <p>{paragraph}</p>
 
                <div className='trending_items'>
-                    {hotels.map((hotel: Hotel) => (
+                    {trains.map((train: Trending) => (
                          <TrendingItem
-                              key={hotel.id}
-                              image={hotel.image}
-                              location={hotel.location}
-                              name={hotel.name}
+                              key={train.id}
+                              image={train.image}
+                              location={train.location}
+                              name={train.name}
                          />
                     ))}
                </div>

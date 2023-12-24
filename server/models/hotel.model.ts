@@ -20,8 +20,9 @@ const hotelSchema: Schema<Hotel> = new mongoose.Schema(
 
           location: {
                type: String,
-               required: [true, 'A hotel must have location'],
+               required: [true, 'A Hotel must have location'],
           },
+
           // description: {
           //      type: String,
           //      minLength: 40,

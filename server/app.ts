@@ -8,6 +8,7 @@ import { ErrorMiddleware } from './middleware/error';
 import { userRoutes } from './routes/auth.route';
 import { hotelRoutes } from './routes/hotel.route';
 import { carRoutes } from './routes/car.route';
+import { trainRoutes } from './routes/train.route';
 
 const app = express();
 
@@ -62,6 +63,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api/v1/auth', userRoutes);
 app.use('/api/v1/hotels', hotelRoutes);
 app.use('/api/v1/cars', carRoutes);
+app.use('/api/v1/trains', trainRoutes);
 
 // UNKNOWN ROUTE
 app.all('*', (req: Request, res: Response, next: NextFunction) => {

@@ -2,21 +2,9 @@ import { FC } from 'react';
 import TrendingItem from '../../ui/TrendingItem';
 import { useTrending } from './useTrending';
 import StyledTrending from '../../ui/StyledTrending';
+import { Trending, TrendingProps } from '../../helpers/interfaces';
 
-interface Trending {
-     header: string;
-     paragraph: string;
-}
-
-interface Car {
-     _id: string;
-     id: string;
-     image: string;
-     location: string;
-     name: string;
-}
-
-const TrendingLists: FC<Trending> = ({ header, paragraph }) => {
+const TrendingLists: FC<TrendingProps> = ({ header, paragraph }) => {
      const { status, cars } = useTrending();
 
      if (status === 'pending') {
@@ -33,7 +21,7 @@ const TrendingLists: FC<Trending> = ({ header, paragraph }) => {
                <p>{paragraph}</p>
 
                <div className='trending_items'>
-                    {cars.map((car: Car) => (
+                    {cars.map((car: Trending) => (
                          <TrendingItem
                               key={car.id}
                               image={car.image}

@@ -1,26 +1,26 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-interface Car extends Document {
+interface Train extends Document {
      name: string;
      image: string;
      location: string;
 }
 
-const carSchema: Schema<Car> = new mongoose.Schema(
+const trainSchema: Schema<Train> = new mongoose.Schema(
      {
           name: {
                type: String,
-               required: [true, 'A Car must have a name!'],
+               required: [true, 'A Train must have a name!'],
           },
 
           image: {
                type: String,
-               required: [true, 'A Car must have at least one image!'],
+               required: [true, 'A Train must have at least one image!'],
           },
 
           location: {
                type: String,
-               required: [true, 'A Car must have location'],
+               required: [true, 'A Train must have location'],
           },
      },
      {
@@ -31,4 +31,4 @@ const carSchema: Schema<Car> = new mongoose.Schema(
      }
 );
 
-export const Car = mongoose.model<Car>('car', carSchema);
+export const Train = mongoose.model<Train>('train', trainSchema);

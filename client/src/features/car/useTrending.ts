@@ -3,7 +3,7 @@ import { SERVER_DOMAIN } from '../../helpers/utils';
 
 export const useTrending = () => {
      const { status, data: cars } = useQuery({
-          queryKey: ['trending_hotel'],
+          queryKey: ['trending_cars'],
           queryFn: async () => {
                try {
                     const response = await fetch(
@@ -11,8 +11,6 @@ export const useTrending = () => {
                     );
 
                     const data = await response.json();
-
-                    console.log(data);
 
                     return data.cars;
                } catch (err: unknown) {
