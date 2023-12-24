@@ -3,7 +3,7 @@ import Footer from '../ui/Footer';
 import Welcome from '../ui/Welcome';
 import { carOfferData, sliderData } from '../helpers/data';
 import SliderComponent from '../ui/SliderComponent';
-import TrendingLists from '../ui/TrendingItem';
+import Trending from '../features/trains/TrendingTrain';
 
 const StyledTrainAndBuses = styled.div`
      display: flex;
@@ -27,13 +27,7 @@ const TrainAndBuses = () => {
                />
 
                {/* TRENDING */}
-               <TrendingLists
-                    header='Trending Cities'
-                    paragraph='The most searched cities on staygotransit'
-               />
-
-               {/* TRENDING */}
-               <TrendingLists
+               <Trending
                     header='Trending States'
                     paragraph='The most searched states on staygotransit'
                />

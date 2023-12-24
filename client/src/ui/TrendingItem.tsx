@@ -44,13 +44,13 @@ const StyledList = styled(Link)`
      }
 `;
 
-interface Hotel {
+interface Item {
      image: string;
      location: string;
      name: string;
 }
 
-const TrendingItem: FC<Hotel> = ({ image, location, name }) => {
+const TrendingItem: FC<Item> = ({ image, location, name }) => {
      return (
           <StyledList to='/'>
                <div className='image_encapsulation'>

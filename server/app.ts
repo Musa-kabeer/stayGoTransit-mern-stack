@@ -7,6 +7,7 @@ import cloudinary from 'cloudinary';
 import { ErrorMiddleware } from './middleware/error';
 import { userRoutes } from './routes/auth.route';
 import { hotelRoutes } from './routes/hotel.route';
+import { carRoutes } from './routes/car.route';
 
 const app = express();
 
@@ -55,11 +56,12 @@ app.get('/', (req: Request, res: Response) => {
 
 /**
  * ------------------
- * focused routes a specified below
+ * focused routes are specified below
  * ------------------
  */
 app.use('/api/v1/auth', userRoutes);
 app.use('/api/v1/hotels', hotelRoutes);
+app.use('/api/v1/cars', carRoutes);
 
 // UNKNOWN ROUTE
 app.all('*', (req: Request, res: Response, next: NextFunction) => {

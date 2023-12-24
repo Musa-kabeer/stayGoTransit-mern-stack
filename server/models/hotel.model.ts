@@ -10,7 +10,7 @@ const hotelSchema: Schema<Hotel> = new mongoose.Schema(
      {
           name: {
                type: String,
-               required: [true, 'Hotel must have a name!'],
+               required: [true, 'A Hotel must have a name!'],
           },
 
           image: {

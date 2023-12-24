@@ -4,7 +4,7 @@ import { sliderData, stayOfferData } from '../helpers/data';
 import Footer from '../ui/Footer';
 import Welcome from '../ui/Welcome';
 import SliderComponent from '../ui/SliderComponent';
-import Trending from '../features/hotel/Trending';
+import Trending from '../features/hotel/TrendingHotel';
 
 const StyledHome = styled.div`
      display: flex;
