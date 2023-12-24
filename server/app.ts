@@ -3,16 +3,21 @@ import cookieParser from 'cookie-parser';
 import cors, { CorsOptions } from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
+import cloudinary from 'cloudinary';
 import { ErrorMiddleware } from './middleware/error';
-import swaggerJsDoc from 'swagger-jsdoc';
-import swaggerUI from 'swagger-ui-express';
 import { userRoutes } from './routes/auth.route';
 import { hotelRoutes } from './routes/hotel.route';
 
 const app = express();
 
+cloudinary.v2.config({
+     cloud_name: process.env.CLOUD_NAME,
+     api_key: process.env.CLOUD_API_KEY,
+     api_secret: process.env.CLOUD_SECRET_KEY,
+});
+
 /**
- *
+ * ------------------
  * LISTS OF MIDDLEWARES
  *
  */
