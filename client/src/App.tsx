@@ -77,7 +77,7 @@ const router = createBrowserRouter([
                },
 
                {
-                    path: 'hotels-search/:searchName',
+                    path: 's/:type/:name/:location',
                     element: (
                          <Suspense fallback={<SuspenseFallback />}>
                               <SearchResults />

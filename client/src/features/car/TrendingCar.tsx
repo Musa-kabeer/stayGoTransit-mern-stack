@@ -27,6 +27,7 @@ const TrendingLists: FC<TrendingProps> = ({ header, paragraph }) => {
                               image={car.image}
                               location={car.location}
                               name={car.name}
+                              link={`/s/car-rental/${car.name}/${car.location}`}
                          />
                     ))}
                </div>

@@ -27,6 +27,7 @@ const TrendingLists: FC<TrendingProps> = ({ header, paragraph }) => {
                               image={train.image}
                               location={train.location}
                               name={train.name}
+                              link={`/s/trains/${train.name}/${train.location}`}
                          />
                     ))}
                </div>
