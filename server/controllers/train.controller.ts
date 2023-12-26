@@ -31,7 +31,6 @@ export const createTrain = async (
      next: NextFunction
 ) => {
      try {
-          console.log('Hello');
           if (req.file) {
                const response = await cloudinary.v2.uploader.upload(
                     req.file.path

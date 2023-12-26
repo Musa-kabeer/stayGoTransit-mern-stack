@@ -2,8 +2,9 @@ import multer from 'multer';
 
 const storage = multer.diskStorage({
      destination: (req, file, cb) => {
-          cb(null, 'public/hotels');
+          cb(null, 'public/');
      },
+
      filename: (req, file, cb) => {
           const filename = file.originalname.split('.');
           // generating unique name
@@ -15,4 +16,13 @@ const storage = multer.diskStorage({
      },
 });
 
-export const upload = multer({ storage });
+const fileFilter = (req, file, cb) => {
+     // Filter to accept only image files
+     if (file.mimetype.startsWith('image/')) {
+          cb(null, true);
+     } else {
+          cb(new Error('Not an image! Please upload only images.'), false);
+     }
+};
+
+export const upload = multer({ storage, fileFilter });

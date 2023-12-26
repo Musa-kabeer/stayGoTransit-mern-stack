@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import cloudinary from 'cloudinary';
 import { promises as fs } from 'fs';
+import { v4 as uuidv4 } from 'uuid';
+
 import { AppError } from '../utils/errorHandler';
 import { Hotel } from '../models/hotel.model';
 
@@ -41,7 +43,8 @@ export const createHotel = async (
                const hotel = await Hotel.create({
                     ...req.body,
                     location: req.body.location.toLowerCase(),
-                    image: response.secure_url /* or response.url */,
+                    image: response.secure_url,
+                    hotelId: uuidv4(),
                });
 
                res.status(201).json({

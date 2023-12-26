@@ -9,8 +9,12 @@ import { userRoutes } from './routes/auth.route';
 import { hotelRoutes } from './routes/hotel.route';
 import { carRoutes } from './routes/car.route';
 import { trainRoutes } from './routes/train.route';
+import { roomRoutes } from './routes/room.route';
+// import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
+
+// console.log(uuidv4());
 
 cloudinary.v2.config({
      cloud_name: process.env.CLOUD_NAME,
@@ -64,6 +68,7 @@ app.use('/api/v1/auth', userRoutes);
 app.use('/api/v1/hotels', hotelRoutes);
 app.use('/api/v1/cars', carRoutes);
 app.use('/api/v1/trains', trainRoutes);
+app.use('/api/v1/rooms', roomRoutes);
 
 // UNKNOWN ROUTE
 app.all('*', (req: Request, res: Response, next: NextFunction) => {
