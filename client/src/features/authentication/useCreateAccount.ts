@@ -13,13 +13,20 @@ interface UseContinueWithEmailResult {
 
 export const useCreateAccount = (): UseContinueWithEmailResult => {
      const { setCurrentPage } = useAuthContext();
+     /**
+      *  importing .env neccessary variables
+      */
+     const { MODE, VITE_DEV_BACKEND_URL, VITE_PROD_BACKEND_URL } = import.meta
+          .env;
 
      const { status, mutate: createAccount } = useMutation({
           mutationFn: async (email: EmailData) => {
                try {
                     const response = await fetch(
                          `${
-                              import.meta.env.VITE_BACKEND_URL
+                              MODE === 'production'
+                                   ? VITE_PROD_BACKEND_URL
+                                   : VITE_DEV_BACKEND_URL
                          }/api/v1/auth/signup`,
                          {
                               method: 'POST',

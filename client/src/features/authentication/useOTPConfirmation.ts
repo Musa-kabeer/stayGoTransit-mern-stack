@@ -13,13 +13,20 @@ interface UseContinueWithEmailResult {
 
 export const useOTPVerification = (): UseContinueWithEmailResult => {
      const navigate = useNavigate();
+     /**
+      *  importing .env neccessary variables
+      */
+     const { MODE, VITE_DEV_BACKEND_URL, VITE_PROD_BACKEND_URL } = import.meta
+          .env;
 
      const { status, mutate: verifyOTP } = useMutation({
           mutationFn: async (otp: IOTPData) => {
                try {
                     const response = await fetch(
                          `${
-                              import.meta.env.VITE_BACKEND_URL
+                              MODE === 'production'
+                                   ? VITE_PROD_BACKEND_URL
+                                   : VITE_DEV_BACKEND_URL
                          }/api/v1/auth/otp-verification`,
                          {
                               method: 'POST',

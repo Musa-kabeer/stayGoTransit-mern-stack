@@ -13,12 +13,21 @@ interface UseContinueWithEmailResult {
 
 export const useContinueWithEmail = (): UseContinueWithEmailResult => {
      const { setCurrentPage } = useAuthContext();
+     /**
+      *  importing .env neccessary variables
+      */
+     const { MODE, VITE_DEV_BACKEND_URL, VITE_PROD_BACKEND_URL } = import.meta
+          .env;
 
      const { status, mutate: continueWithEmail } = useMutation({
           mutationFn: async (email: EmailData) => {
                try {
                     const response = await fetch(
-                         `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth`,
+                         `${
+                              MODE === 'production'
+                                   ? VITE_PROD_BACKEND_URL
+                                   : VITE_DEV_BACKEND_URL
+                         }/api/v1/auth`,
                          {
                               method: 'POST',
 
