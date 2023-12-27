@@ -1,5 +1,4 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
-import { SERVER_DOMAIN } from '../../helpers/utils';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,7 +18,9 @@ export const useOTPVerification = (): UseContinueWithEmailResult => {
           mutationFn: async (otp: IOTPData) => {
                try {
                     const response = await fetch(
-                         `${SERVER_DOMAIN}/api/v1/auth/otp-verification`,
+                         `${
+                              import.meta.env.VITE_BACKEND_URL
+                         }/api/v1/auth/otp-verification`,
                          {
                               method: 'POST',
 

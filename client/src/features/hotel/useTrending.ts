@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { SERVER_DOMAIN } from '../../helpers/utils';
 
 export const useTrending = () => {
      const { status, data: hotels } = useQuery({
@@ -7,7 +6,7 @@ export const useTrending = () => {
           queryFn: async () => {
                try {
                     const response = await fetch(
-                         `${SERVER_DOMAIN}/api/v1/hotels`
+                         `${import.meta.env.VITE_BACKEND_URL}/api/v1/hotels`
                     );
 
                     const data = await response.json();

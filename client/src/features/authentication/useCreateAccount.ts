@@ -1,5 +1,4 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
-import { SERVER_DOMAIN } from '../../helpers/utils';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { toast } from 'react-hot-toast';
 
@@ -19,7 +18,9 @@ export const useCreateAccount = (): UseContinueWithEmailResult => {
           mutationFn: async (email: EmailData) => {
                try {
                     const response = await fetch(
-                         `${SERVER_DOMAIN}/api/v1/auth/signup`,
+                         `${
+                              import.meta.env.VITE_BACKEND_URL
+                         }/api/v1/auth/signup`,
                          {
                               method: 'POST',
 
