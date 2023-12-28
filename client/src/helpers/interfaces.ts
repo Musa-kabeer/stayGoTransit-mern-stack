@@ -4,6 +4,7 @@ export interface Trending {
      image: string;
      location: string;
      name: string;
+     uniqueId: string;
 }
 
 export interface TrendingProps {
@@ -16,4 +17,21 @@ export interface TrendingItem {
      location: string;
      name: string;
      link: string;
+}
+
+export interface Room {
+     address: string;
+     amenities: string[];
+     description: string;
+     hotelId: string;
+     hotelName: string;
+     id: string;
+     images: string[];
+     location: [number, number];
+     price: number;
+     roomId: string;
+     shortDescription: string;
+     state: string;
+     town: string;
+     _id: string;
 }

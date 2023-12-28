@@ -1,9 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { CiHeart } from 'react-icons/ci';
-// import { FaHeart } from 'react-icons/fa6';
 
-const StyledResult = styled.div`
+const StyledResult = styled(Link)`
      width: 100%;
      border-radius: 8px;
      background: var(--primary-gray-200);
@@ -74,18 +72,13 @@ const StyledResult = styled.div`
                     }
 
                     .provision {
-                         display: flex;
-                         gap: 10px;
-
-                         span {
-                              font-size: 1rem;
-                         }
+                         font-size: 12px;
                     }
                }
 
                &_bottom {
                     display: flex;
-                    gap: 20px;
+                    gap: 6px;
                }
           }
      }
@@ -123,51 +116,4 @@ const StyledResult = styled.div`
      }
 `;
 
-const SearchResult = () => {
-     return (
-          <Link to='/'>
-               <StyledResult>
-                    <div className='left_result'>
-                         <div className='image_container'>
-                              <img
-                                   src='/eko-hotels-suites.jpeg'
-                                   alt='Eko Hotel'
-                              />
-
-                              <div>
-                                   <CiHeart />
-                              </div>
-                         </div>
-
-                         <div className='content'>
-                              <div className='content_top'>
-                                   <Link to='/'>
-                                        Your private cottage in the wood at the
-                                        Trailhead
-                                   </Link>
-
-                                   <div className='provision'>
-                                        <span>2 Bathrooms</span>
-                                        <span>1 Bath</span>
-                                        <span>4 Sleeps</span>
-                                   </div>
-                              </div>
-
-                              <div className='content_bottom'>
-                                   <span>No reviews yet</span>
-                                   <span>Free wifi</span>
-                              </div>
-                         </div>
-                    </div>
-
-                    <div className='right_result'>
-                         <h2>$250</h2>
-                         <span>vrbo</span>
-                         <button>View Deal</button>
-                    </div>
-               </StyledResult>
-          </Link>
-     );
-};
-
-export default SearchResult;
+export default StyledResult;

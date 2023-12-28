@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response, response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import cloudinary from 'cloudinary';
 import { promises as fs } from 'fs';
 import { v4 as uuidv4 } from 'uuid';
@@ -26,14 +26,16 @@ export const getAllRoom = async (
      try {
           const { hotelName, town, uniqueId, state } = req.query;
 
-          const rooms = await Room.find({
+          let query = Room.find({
                $or: [
                     { hotelName: { $regex: new RegExp(hotelName, 'i') } },
-                    { town: { $regex: town, $options: 'i' } },
-                    { hotelId: { $in: uniqueId } },
-                    { state },
+                    { town: { $regex: new RegExp(town, 'i') } },
+                    { uniqueId: { $regex: new RegExp(uniqueId, 'i') } },
+                    { state: { $regex: new RegExp(state, 'i') } },
                ],
-          })
+          });
+
+          const rooms = await query
                .sort('-price')
                .select('-__v -createdAt -updatedAt -id');
 
@@ -95,5 +97,22 @@ export const createRoom = async (
           }
      } catch (err: any) {
           return next(new AppError(err, 500));
+     }
+};
+
+export const getRoom = async (
+     req: Request,
+     res: Response,
+     next: NextFunction
+) => {
+     try {
+          const room = await Room.findOne({ roomId: req.params.id });
+
+          res.status(200).json({
+               status: 'success',
+               room,
+          });
+     } catch (err: any) {
+          return next(new AppError(err.message, 500));
      }
 };

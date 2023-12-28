@@ -44,7 +44,7 @@ export const createHotel = async (
                     ...req.body,
                     location: req.body.location.toLowerCase(),
                     image: response.secure_url,
-                    hotelId: uuidv4(),
+                    uniqueId: uuidv4(),
                });
 
                res.status(201).json({

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import BookingGift from './BookingGift';
 import BookingAmenities from './BookingAmenities';
 import BookingDescription from './BookingDescription';
 import BookingMap from './BookingMap';
@@ -50,7 +49,7 @@ const BookingDetails = () => {
                <div className='details'>
                     <div className='details_text'>
                          <div className='amenities_gift'>
-                              <BookingGift />
+                              {/* <BookingGift /> */}
 
                               <BookingAmenities />
                          </div>

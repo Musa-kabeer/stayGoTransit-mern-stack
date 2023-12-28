@@ -4,7 +4,7 @@ interface Hotel extends Document {
      name: string;
      image: string;
      location: string;
-     hotelId: string;
+     uniqueId: string;
 }
 
 const hotelSchema: Schema<Hotel> = new mongoose.Schema(
@@ -24,7 +24,7 @@ const hotelSchema: Schema<Hotel> = new mongoose.Schema(
                required: [true, 'A Hotel must have location'],
           },
 
-          hotelId: String,
+          uniqueId: String,
      },
      {
           timestamps: true,

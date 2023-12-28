@@ -77,7 +77,7 @@ const router = createBrowserRouter([
                },
 
                {
-                    path: 's/:type/:name/:town/:uniqueId',
+                    path: 's/:type/:name/:uniqueId/:town',
                     element: (
                          <Suspense fallback={<SuspenseFallback />}>
                               <SearchResults />
@@ -88,7 +88,7 @@ const router = createBrowserRouter([
      },
 
      {
-          path: '/booking/:bookingId',
+          path: '/:type/booking/:bookingId',
           element: <Booking />,
      },
 

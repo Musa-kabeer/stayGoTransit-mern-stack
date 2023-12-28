@@ -1,6 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 interface Room extends Document {
+     name: string;
      hotelName: string;
      shortDescription: string;
      description: string;
@@ -18,6 +19,12 @@ interface Room extends Document {
 
 const roomSchema: Schema<Room> = new mongoose.Schema(
      {
+          name: {
+               type: String,
+               trim: true,
+               required: [true, 'A Room must have a name!'],
+          },
+
           hotelName: {
                type: String,
                trim: true,
