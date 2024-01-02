@@ -35,3 +35,26 @@ export interface Room {
      town: string;
      _id: string;
 }
+
+export interface Booking {
+     address?: string;
+     amenities?: string[];
+     description?: string;
+     hotelId?: string;
+     hotelName?: string;
+     id?: string;
+     images?: string[];
+     location?: number[];
+     name?: string;
+     price?: number;
+     roomId?: string;
+     shortDescription?: string;
+     state?: string;
+     town?: string;
+     _id?: string;
+}
+
+export interface MySelectOption {
+     label: string;
+     value: string;
+}

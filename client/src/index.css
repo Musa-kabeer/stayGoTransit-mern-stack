@@ -118,3 +118,26 @@ button {
 .map {
      height: 300px;
 }
+
+.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root {
+     border: none !important;
+     border-radius: 0;
+}
+
+.css-4xgw5l-IndicatorsContainer2 {
+     display: none !important;
+}
+
+.css-art2ul-ValueContainer2 {
+     padding: 0;
+     line-height: 14px;
+}
+
+.css-w9q2zk-Input2 {
+     border: none !important;
+     text-align: center;
+}
+
+.css-1jqq78o-placeholder {
+     font-size: 11px !important;
+}

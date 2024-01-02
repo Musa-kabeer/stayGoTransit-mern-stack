@@ -12,7 +12,7 @@ interface Room extends Document {
      averageRatings?: number;
      address: string;
      images: string[];
-     location: [number, number];
+     location: number[];
      hotelId: string;
      roomId: string;
 }
@@ -39,7 +39,7 @@ const roomSchema: Schema<Room> = new mongoose.Schema(
                     'Short description must be at least 10 characters',
                ],
                maxLength: [
-                    200,
+                    120,
                     'Short description must not exceed 60 characters',
                ],
                required: [true, 'A Room must have short description'],
@@ -49,7 +49,6 @@ const roomSchema: Schema<Room> = new mongoose.Schema(
                type: String,
                trim: true,
                minLength: [40, 'Description must be at least 40 characters'],
-               maxLength: [400, 'Description must not exceed 200 characters'],
                required: [true, 'A Hotel must have a nice description!'],
           },
 
@@ -75,8 +74,9 @@ const roomSchema: Schema<Room> = new mongoose.Schema(
           },
 
           location: {
-               type: [Number, Number],
-               required: [true, 'A Room must have location coordinates!'],
+               type: [Number],
+               required: true,
+               index: '2dsphere',
           },
 
           town: {

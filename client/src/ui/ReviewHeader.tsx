@@ -1,6 +1,8 @@
+import { FC } from 'react';
 import { styled } from 'styled-components';
 import { FaStar } from 'react-icons/fa';
 import SelectComponent from './SelectComponent';
+import { MySelectOption } from '../helpers/interfaces';
 
 const StyleReviewHeader = styled.div`
      display: flex;
@@ -46,7 +48,13 @@ const StyleReviewHeader = styled.div`
      }
 `;
 
-const ReviewHeader = () => {
+const optionValues: MySelectOption[] = [
+     { value: 'chocolate', label: 'Chocolate' },
+     { value: 'strawberry', label: 'Strawberry' },
+     { value: 'vanilla', label: 'Vanilla' },
+];
+
+const ReviewHeader: FC = () => {
      return (
           <StyleReviewHeader>
                <div className='left_hand_side'>
@@ -70,7 +78,10 @@ const ReviewHeader = () => {
                </div>
 
                <div className='right_hand_side'>
-                    <SelectComponent />
+                    <SelectComponent
+                         options={optionValues}
+                         placeholder='Filter by ratings...'
+                    />
                </div>
           </StyleReviewHeader>
      );

@@ -10,11 +10,8 @@ import { hotelRoutes } from './routes/hotel.route';
 import { carRoutes } from './routes/car.route';
 import { trainRoutes } from './routes/train.route';
 import { roomRoutes } from './routes/room.route';
-// import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
-
-// console.log(uuidv4());
 
 cloudinary.v2.config({
      cloud_name: process.env.CLOUD_NAME,

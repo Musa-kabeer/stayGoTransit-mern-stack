@@ -1,13 +1,8 @@
 import { FC } from 'react';
 import { FaStar } from 'react-icons/fa';
+import { Booking } from '../helpers/interfaces';
 
-interface Header {
-     name: string;
-     shortDescription: string;
-     price: number;
-}
-
-const BookingHeader: FC<Header> = ({ name, shortDescription, price }) => {
+const BookingHeader: FC<Booking> = ({ name, shortDescription, price }) => {
      return (
           <section className='booking_header'>
                <div className='left_content'>

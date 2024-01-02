@@ -1,28 +1,38 @@
 import { FC, useState } from 'react';
-import Select, { OptionTypeBase } from 'react-select';
+import Select from 'react-select';
+import { MySelectOption } from '../helpers/interfaces';
 
-interface MyOptionType extends OptionTypeBase {
-     label: string;
-     value: string;
+interface SelectComponentProps {
+     options: MySelectOption[];
+     placeholder?: string;
+     width?: string;
 }
 
-const options: MyOptionType[] = [
-     { value: 'chocolate', label: 'Chocolate' },
-     { value: 'strawberry', label: 'Strawberry' },
-     { value: 'vanilla', label: 'Vanilla' },
-];
-
-const SelectComponent: FC = () => {
-     const [selectedOption, setSelectedOption] = useState<MyOptionType | null>(
-          null
-     );
+const SelectComponent: FC<SelectComponentProps> = ({
+     options,
+     placeholder,
+     width,
+}) => {
+     const [selectedOption, setSelectedOption] =
+          useState<MySelectOption | null>(null);
 
      return (
           <Select
                defaultValue={selectedOption}
                onChange={setSelectedOption}
                options={options}
-               placeholder='Filter by ratings...'
+               placeholder={placeholder}
+               styles={{
+                    control: (baseStyles) => ({
+                         ...baseStyles,
+                         width: width ? width : '',
+                         textAlign: 'center',
+                         cursor: 'pointer',
+                         borderTop: 'none',
+                         borderBottom: 'none',
+                         borderRadius: '0px',
+                    }),
+               }}
           />
      );
 };

@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { IoIosStar } from 'react-icons/io';
 import { IoIosArrowDown } from 'react-icons/io';
 import Accordion from '../context/AccordionContext';
-import InputRange, { Range } from 'react-input-range';
-import 'react-input-range/lib/css/index.css';
+// import InputRange, { Range } from 'react-input-range';
+// import 'react-input-range/lib/css/index.css';
 import { FC, useState } from 'react';
 import SearchAmenities from './SearchAmenities';
 
@@ -68,15 +68,15 @@ interface RangeState {
 const SearchFilter: FC = () => {
      const [value, setValue] = useState<RangeState>({ min: 2, max: 10 });
 
-     const handleRange = (newValue: number | Range) => {
-          if (typeof newValue === 'number') {
-               // Handling the case where newValue is a single number
-               setValue({ ...value, min: newValue });
-          } else {
-               // Handling the case where newValue is a Range
-               setValue(newValue);
-          }
-     };
+     // const handleRange = (newValue: number | Range) => {
+     //      if (typeof newValue === 'number') {
+     //           // Handling the case where newValue is a single number
+     //           setValue({ ...value, min: newValue });
+     //      } else {
+     //           // Handling the case where newValue is a Range
+     //           setValue(newValue);
+     //      }
+     // };
 
      return (
           <StyledSearchFilter>
@@ -130,12 +130,12 @@ const SearchFilter: FC = () => {
 
                          <Accordion.Body windowName='range'>
                               <div className='accordion_content'>
-                                   <InputRange
+                                   {/* <InputRange
                                         maxValue={10}
                                         minValue={1}
                                         value={value}
                                         onChange={handleRange}
-                                   />
+                                   /> */}
                               </div>
                          </Accordion.Body>
                     </div>

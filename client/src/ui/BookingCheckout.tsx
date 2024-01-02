@@ -1,8 +1,14 @@
-import { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-
+import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import dayjs, { Dayjs } from 'dayjs';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateRange } from '@mui/x-date-pickers-pro';
+import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
+
+import { Booking, MySelectOption } from '../helpers/interfaces';
+import SelectComponent from './SelectComponent';
 
 const StyledCheckout = styled.div`
      display: flex;
@@ -25,21 +31,12 @@ const StyledCheckout = styled.div`
 
           .content {
                height: 40px;
-               /* background-color: red; */
-               display: grid;
-               grid-template-columns: 1fr 1fr 1fr;
-               justify-content: center;
+               display: flex;
                align-items: center;
+               justify-content: space-between;
+               gap: 8px;
                border: 1px solid #c0c0c0d2;
-
-               .content_container {
-                    padding: 0.7rem 0.5rem;
-               }
-
-               div:nth-child(2) {
-                    border-left: 1px solid #c0c0c0d2;
-                    border-right: 1px solid #c0c0c0d2;
-               }
+               padding: 3px;
           }
      }
 
@@ -51,6 +48,11 @@ const StyledCheckout = styled.div`
                display: flex;
                flex-direction: column;
                gap: 10px;
+
+               .date {
+                    display: flex;
+                    align-items: center;
+               }
           }
 
           .amount {
@@ -65,6 +67,7 @@ const StyledCheckout = styled.div`
           color: var(--primary-gray-200);
           border-radius: 3px;
           transition: all 0.3s ease-in-out;
+          cursor: pointer;
 
           &:hover {
                background: var(--tertiary-blue-950);
@@ -72,9 +75,26 @@ const StyledCheckout = styled.div`
      }
 `;
 
-const BookingCheckout = () => {
-     const [startDate, setStartDate] = useState(new Date());
-     const [endDate, setEndDate] = useState(new Date());
+const AdultOrChildOptions: MySelectOption[] = [
+     { label: '1', value: '1' },
+     { label: '2', value: '2' },
+     { label: '3', value: '3' },
+     { label: '4', value: '4' },
+];
+
+const BookingCheckout: FC<Booking> = ({ price }) => {
+     const [value, setValue] = useState<DateRange<Dayjs>>([
+          dayjs(new Date()) /** today */,
+          dayjs(
+               new Date().getTime() + 2 * 24 * 60 * 60 * 1000
+          ) /** after 2 days */,
+     ]);
+
+     // useEffect(() => {
+     const fromDate = dayjs(value.at(0).$d).format('DD/MM/YYYY');
+
+     const toDate = dayjs(value.at(1).$d).format('DD/MM/YYYY');
+     // }, []);
 
      return (
           <StyledCheckout>
@@ -83,41 +103,68 @@ const BookingCheckout = () => {
                <div className='checkout_header'>
                     <div className='header'>
                          <div>Check-out</div>
-                         <div>Check-in</div>
                          <div>Room & Guest</div>
                     </div>
 
                     <div className='content'>
-                         <div className='content_container'>
-                              <DatePicker
-                                   selected={startDate}
-                                   onChange={(date) =>
-                                        date !== null && setStartDate(date)
-                                   }
+                         <div>
+                              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                   <DemoContainer
+                                        components={[
+                                             'DateRangePicker',
+                                             'DateRangePicker',
+                                        ]}
+                                   >
+                                        <DemoItem
+                                             label=''
+                                             component='DateRangePicker'
+                                        >
+                                             <DateRangePicker
+                                                  value={value}
+                                                  onChange={(newValue) =>
+                                                       setValue(newValue)
+                                                  }
+                                                  sx={{
+                                                       '& fieldset': {
+                                                            border: 'none',
+                                                       },
+                                                  }}
+                                             />
+                                        </DemoItem>
+                                   </DemoContainer>
+                              </LocalizationProvider>
+                         </div>
+
+                         <div>
+                              <SelectComponent
+                                   options={AdultOrChildOptions}
+                                   placeholder='No of Adults'
+                                   width='60px'
                               />
                          </div>
-                         <div className='content_container'>
-                              <DatePicker
-                                   selected={endDate}
-                                   onChange={(date) =>
-                                        date !== null && setEndDate(date)
-                                   }
+
+                         <div>
+                              <SelectComponent
+                                   options={AdultOrChildOptions}
+                                   placeholder='No of Child'
+                                   width='60px'
                               />
-                         </div>
-                         <div className='content_container'>
-                              <span>1</span> room, <span>1</span> guest
                          </div>
                     </div>
                </div>
 
                <div className='checkout_detail'>
                     <div className='checkout_detail_lists'>
-                         <div className='guest'>No of Guests &rarr;</div>
-                         <div className='rooms'>No of Rooms &rarr;</div>
-                         <div className='date'>Date &rarr;</div>
+                         <div className='guest'>
+                              No of Guests &rarr; 0 Number of Guests
+                         </div>
+                         <div className='date'>
+                              Date &rarr; &nbsp; <span>{fromDate}</span> &nbsp;
+                              to &nbsp; <span>{toDate}</span>
+                         </div>
                     </div>
 
-                    <div className='amount'>$2000</div>
+                    <div className='amount'>₦{price}</div>
                </div>
 
                <button>Check out</button>

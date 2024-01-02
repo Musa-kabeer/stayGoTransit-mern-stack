@@ -1,5 +1,7 @@
 import { styled } from 'styled-components';
 import { GiCheckMark } from 'react-icons/gi';
+import { FC } from 'react';
+import { Booking } from '../helpers/interfaces';
 
 const StyledBookingAmenities = styled.div`
      display: flex;
@@ -32,46 +34,18 @@ const StyledBookingAmenities = styled.div`
      }
 `;
 
-const BookingAmenities = () => {
+const BookingAmenities: FC<Booking> = ({ amenities }) => {
      return (
           <StyledBookingAmenities>
                <h2>Amenities</h2>
 
                <ul className='amenities_lists'>
-                    <li className='amenities_list'>
-                         <GiCheckMark />
-                         Free WiFi
-                    </li>
-
-                    <li className='amenities_list'>
-                         <GiCheckMark />
-                         Free WiFi
-                    </li>
-
-                    <li className='amenities_list'>
-                         <GiCheckMark />
-                         Free WiFi
-                    </li>
-
-                    <li className='amenities_list'>
-                         <GiCheckMark />
-                         Free WiFi
-                    </li>
-
-                    <li className='amenities_list'>
-                         <GiCheckMark />
-                         Free WiFi
-                    </li>
-
-                    <li className='amenities_list'>
-                         <GiCheckMark />
-                         Free WiFi
-                    </li>
-
-                    <li className='amenities_list'>
-                         <GiCheckMark />
-                         Free WiFi
-                    </li>
+                    {amenities?.map((amenity, i) => (
+                         <li className='amenities_list' key={i + 1}>
+                              <GiCheckMark />
+                              {amenity}
+                         </li>
+                    ))}
                </ul>
           </StyledBookingAmenities>
      );

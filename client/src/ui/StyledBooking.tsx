@@ -67,6 +67,44 @@ const StyledBooking = styled.div`
                cursor: pointer;
           }
      }
+
+     .booking_detail {
+          display: flex;
+          gap: 20px;
+
+          .details {
+               flex: 5;
+
+               display: flex;
+               flex-direction: column;
+               gap: 50px;
+          }
+
+          .details_text {
+               border: 1px solid #c0c0c0d2;
+          }
+
+          .amenities_gift {
+               padding: 1rem;
+               display: flex;
+               flex-direction: column;
+               gap: 20px;
+               padding: 2rem;
+               border-bottom: 1px solid #c0c0c0d2;
+          }
+
+          .checkout {
+               flex: 3;
+
+               padding: 1rem;
+               display: flex;
+               flex-direction: column;
+               gap: 20px;
+               padding: 2rem;
+               border: 1px solid #c0c0c0d2;
+               height: 100%;
+          }
+     }
 `;
 
 export default StyledBooking;

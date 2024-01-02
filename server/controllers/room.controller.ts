@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { AppError } from '../utils/errorHandler';
 import { Room } from '../models/room.model';
+import mongoose from 'mongoose';
 
 interface File {
      fieldname: string;
@@ -37,7 +38,7 @@ export const getAllRoom = async (
 
           const rooms = await query
                .sort('-price')
-               .select('-__v -createdAt -updatedAt -id');
+               .select('-__v -createdAt -updatedAt');
 
           res.status(200).json({
                status: 'success',
@@ -68,16 +69,9 @@ export const createRoom = async (
 
                               return response.url;
                          } catch (err: any) {
-                              try {
-                                   await cloudinary.v2.uploader.destroy(
-                                        response.avatarPublicId
-                                   );
-                              } catch (deletionError) {
-                                   console.error(
-                                        'Error deleting file from Cloudinary:',
-                                        deletionError
-                                   );
-                              }
+                              console.error(
+                                   'Error deleting file from Cloudinary:'
+                              );
 
                               throw new AppError(err, 500);
                          }
@@ -88,6 +82,19 @@ export const createRoom = async (
                     ...req.body,
                     images,
                     roomId: uuidv4(),
+                    location: {
+                         type: {
+                              type: 'Point',
+                         },
+                         coordinates: [
+                              mongoose.Types.Decimal128.fromString(
+                                   req.body.location[0]
+                              ),
+                              mongoose.Types.Decimal128.fromString(
+                                   req.body.location[1]
+                              ),
+                         ],
+                    },
                });
 
                res.status(201).json({
@@ -106,7 +113,9 @@ export const getRoom = async (
      next: NextFunction
 ) => {
      try {
-          const room = await Room.findOne({ roomId: req.params.id });
+          const room = await Room.findOne({ roomId: req.params.id }).select(
+               '-__v -createdAt -updatedAt'
+          );
 
           res.status(200).json({
                status: 'success',

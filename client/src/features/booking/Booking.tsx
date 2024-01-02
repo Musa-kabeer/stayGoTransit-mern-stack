@@ -25,7 +25,12 @@ export const Booking = () => {
                <BookingImages images={booking.images} />
 
                {/* BOOKING DETAILS */}
-               <BookingDetails />
+               <BookingDetails
+                    amenities={booking.amenities}
+                    description={booking.description}
+                    location={booking.location}
+                    price={booking.price}
+               />
 
                {/* FOOTER */}
                <Footer />

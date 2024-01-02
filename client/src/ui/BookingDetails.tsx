@@ -1,71 +1,37 @@
-import styled from 'styled-components';
+import { FC } from 'react';
 import BookingAmenities from './BookingAmenities';
 import BookingDescription from './BookingDescription';
 import BookingMap from './BookingMap';
 import BookingReviews from './BookingReviews';
 import BookingCheckout from './BookingCheckout';
+import { Booking } from '../helpers/interfaces';
 
-const StyledBookingDetail = styled.section`
-     display: flex;
-     gap: 20px;
-
-     .details {
-          flex: 5;
-
-          display: flex;
-          flex-direction: column;
-          gap: 50px;
-     }
-
-     .details_text {
-          border: 1px solid #c0c0c0d2;
-     }
-
-     .amenities_gift {
-          padding: 1rem;
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-          padding: 2rem;
-          border-bottom: 1px solid #c0c0c0d2;
-     }
-
-     .checkout {
-          flex: 3;
-
-          padding: 1rem;
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-          padding: 2rem;
-          border: 1px solid #c0c0c0d2;
-          height: 100%;
-     }
-`;
-
-const BookingDetails = () => {
+const BookingDetails: FC<Booking> = ({
+     amenities,
+     description,
+     location,
+     price,
+}) => {
      return (
-          <StyledBookingDetail>
+          <section className='booking_detail'>
                <div className='details'>
                     <div className='details_text'>
                          <div className='amenities_gift'>
-                              {/* <BookingGift /> */}
-
-                              <BookingAmenities />
+                              <BookingAmenities amenities={amenities} />
                          </div>
 
-                         <BookingDescription />
+                         <BookingDescription description={description} />
                     </div>
 
-                    <BookingMap />
+                    <BookingMap location={location} />
 
                     <BookingReviews />
                </div>
 
                <div className='checkout'>
-                    <BookingCheckout />
+                    <BookingCheckout price={price} />
                </div>
-          </StyledBookingDetail>
+          </section>
      );
 };
 
