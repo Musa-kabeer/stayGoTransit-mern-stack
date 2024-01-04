@@ -82,19 +82,7 @@ export const createRoom = async (
                     ...req.body,
                     images,
                     roomId: uuidv4(),
-                    location: {
-                         type: {
-                              type: 'Point',
-                         },
-                         coordinates: [
-                              mongoose.Types.Decimal128.fromString(
-                                   req.body.location[0]
-                              ),
-                              mongoose.Types.Decimal128.fromString(
-                                   req.body.location[1]
-                              ),
-                         ],
-                    },
+                    location: req.body.location,
                });
 
                res.status(201).json({

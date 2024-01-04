@@ -34,18 +34,6 @@ const StyledBooking = styled.div`
                font-size: 25px;
                font-weight: 500;
           }
-
-          /* button {
-               padding: 1rem;
-               background: var(--tertiary-blue-800);
-               color: var(--primary-gray-200);
-               border-radius: 3px;
-               transition: all 0.3s ease-in-out;
-
-               &:hover {
-                    background: var(--tertiary-blue-950);
-               }
-          } */
      }
 
      .images {

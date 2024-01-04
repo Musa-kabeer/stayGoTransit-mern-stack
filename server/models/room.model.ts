@@ -67,9 +67,9 @@ const roomSchema: Schema<Room> = new mongoose.Schema(
                required: [true, 'A Room must have images'],
                validate: {
                     validator: (val: string[]) => {
-                         return val.length <= 5;
+                         return val.length <= 6;
                     },
-                    message: 'image cannot exceed four images',
+                    message: 'image cannot exceed six images',
                },
           },
 
