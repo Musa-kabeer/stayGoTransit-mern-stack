@@ -60,6 +60,7 @@ const roomSchema: Schema<Room> = new mongoose.Schema(
 
           state: {
                type: String,
+               trim: true,
           },
 
           images: {
@@ -86,6 +87,7 @@ const roomSchema: Schema<Room> = new mongoose.Schema(
 
           price: {
                type: Number,
+               trim: true,
           },
 
           amenities: {
