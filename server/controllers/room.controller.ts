@@ -1,22 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
-import cloudinary from 'cloudinary';
+import cloudinary, { UploadApiResponse } from 'cloudinary';
 import { promises as fs } from 'fs';
 import { v4 as uuidv4 } from 'uuid';
 
 import { AppError } from '../utils/errorHandler';
 import { Room } from '../models/room.model';
 import mongoose from 'mongoose';
-
-interface File {
-     fieldname: string;
-     originalname: string;
-     encoding: string;
-     mimetype: string;
-     destination: string;
-     filename: string;
-     path: string;
-     size: number;
-}
 
 // Get  all hotels
 export const getAllRoom = async (
@@ -29,10 +18,21 @@ export const getAllRoom = async (
 
           let query = Room.find({
                $or: [
-                    { hotelName: { $regex: new RegExp(hotelName, 'i') } },
-                    { town: { $regex: new RegExp(town, 'i') } },
-                    { uniqueId: { $regex: new RegExp(uniqueId, 'i') } },
-                    { state: { $regex: new RegExp(state, 'i') } },
+                    {
+                         hotelName: {
+                              $regex: new RegExp(hotelName as string, 'i'), // making use of type assertion, to tell typescript that i am actually parsing a string
+                         },
+                    },
+
+                    { town: { $regex: new RegExp(town as string, 'i') } }, // making use of type assertion, to tell typescript that i am actually parsing a string
+
+                    {
+                         uniqueId: {
+                              $regex: new RegExp(uniqueId as string, 'i'), // making use of type assertion, to tell typescript that i am actually parsing a string
+                         },
+                    },
+
+                    { state: { $regex: new RegExp(state as string, 'i') } }, // making use of type assertion, to tell typescript that i am actually parsing a string
                ],
           });
 
@@ -57,26 +57,35 @@ export const createRoom = async (
 ) => {
      try {
           if (req.files) {
+               let response: UploadApiResponse | undefined = undefined;
+
                const images = await Promise.all(
-                    req.files.map(async (file: File) => {
+                    (req.files as Express.Multer.File[]).map(async (file) => {
                          try {
-                              const response =
-                                   await cloudinary.v2.uploader.upload(
-                                        file.path
-                                   );
+                              response = await cloudinary.v2.uploader.upload(
+                                   file.path
+                              );
 
                               await fs.unlink(file.path);
 
                               return response.url;
                          } catch (err: any) {
+                              if (response && response.public_id) {
+                                   await cloudinary.v2.uploader.destroy(
+                                        response.public_id
+                                   );
+                              }
+
                               console.error(
-                                   'Error deleting file from Cloudinary:'
+                                   'Error uploading file to Cloudinary:'
                               );
 
-                              throw new AppError(err, 500);
+                              throw new Error(err); // Rethrow or handle the error further
                          }
                     })
                );
+
+               console.log(response);
 
                const room = await Room.create({
                     ...req.body,
